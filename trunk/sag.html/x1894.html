@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Co robi login?</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Logowanie siê"
+HREF="log-in-and-out.html"><LINK
+REL="PREVIOUS"
+TITLE="Logowanie siê poprzez sieæ"
+HREF="x1882.html"><LINK
+REL="NEXT"
+TITLE="X i xdm"
+HREF="x1922.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1882.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 8. Logowanie siê</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1922.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1894"
+>8.3. Co robi <TT
+CLASS="command"
+>login</TT
+>?</A
+></H1
+><P
+> Program jest odpowiedzialny za autoryzacjê u¿ytkownika
+    (upewnia siê, ¿e nazwa i has³o pasuj±), oraz 
+    inicjalizacjê jego ¶rodowiska - ustawienie odpowiednich
+    praw dostêpu do ³±cza szeregowego, uruchomienie pow³oki.
+	</P
+><P
+> Czê¶ci± inicjalizacji ¶rodowiska jest wy¶wietlenie
+	pliku <TT
+CLASS="filename"
+>/etc/motd</TT
+> ( plik <TT
+CLASS="filename"
+>.hushlogin</TT
+>
+    w katalogu domowym wy³±cza takie dzia³anie ).  </P
+><P
+> Plik <TT
+CLASS="filename"
+>/etc/nologin</TT
+>
+    blokuje wszelkie próby zalogowania siê ( jest zazwyczaj tworzony
+    przez <TT
+CLASS="command"
+>shutdown</TT
+> ).
+	<TT
+CLASS="command"
+>login</TT
+> odmawiaj±c wy¶wietli zawarto¶æ tego¿ pliku.
+	</P
+><P
+>  <TT
+CLASS="command"
+>login</TT
+> loguje wszelkie niepoprawne próby zalogowania
+    siê poprzez <TT
+CLASS="command"
+>sysloga</TT
+>. Loguje równie¿ wszelkie logowania
+    dokonane przez roota, umo¿liwiaj±c w ten sposób wytropienie w³amywaczy.</P
+><P
+>  Aktualnie zalogowani u¿ytkownicy umieszczani s± w
+	<TT
+CLASS="filename"
+>/var/run/utmp</TT
+>. Plik ten przy ka¿dym restarcie
+    systemu jest usuwany. Polecenia takie jak: <TT
+CLASS="command"
+>who</TT
+>, <TT
+CLASS="command"
+>w</TT
+>
+    opieraj± siê na jego zawarto¶ci.
+	</P
+><P
+>  Wszelkie poprawne logowania siê zapisywane s± w 
+	<TT
+CLASS="filename"
+>/var/log/wtmp</TT
+>. Co jaki¶ czas powiniene¶ go
+    usun±æ - nie istniej± ¿adne ograniczenia co do jego rozmiaru.
+	
+		<A
+NAME="AEN1914"
+HREF="#FTN.AEN1914"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	Program <TT
+CLASS="command"
+>last</TT
+> przegl±da <TT
+CLASS="filename"
+>wtmp</TT
+>.
+    </P
+><P
+> <TT
+CLASS="filename"
+>utmp</TT
+> i <TT
+CLASS="filename"
+>wtmp</TT
+> s± w formacie
+    binarnym (zobacz stronê podrêcznika o <TT
+CLASS="filename"
+>utmp</TT
+>) przez
+    co przegl±danie ich zawarto¶ci wymaga specjalnych programów.
+	</P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1914"
+HREF="x1894.html#AEN1914"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Porz±dne dystrybucje robi± to 'po rozpakowaniu'.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1882.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1922.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Logowanie siê poprzez sieæ</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="log-in-and-out.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>X i xdm</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

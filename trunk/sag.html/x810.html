@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>CD-ROM-y</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Korzystanie z ró¿nych medii przechowuj±cych dane"
+HREF="c712.html"><LINK
+REL="PREVIOUS"
+TITLE="Dyskietki"
+HREF="x795.html"><LINK
+REL="NEXT"
+TITLE="Ta¶my"
+HREF="x820.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x795.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Korzystanie z ró¿nych medii przechowuj±cych dane</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x820.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN810"
+>4.4. CD-ROM-y</A
+></H1
+><P
+> Napêd CD-ROM opiera siê na optycznym odczytywaniu no¶nika,
+    który najczê¶ciej utworzony jest z plastyku,
+	
+		<A
+NAME="AEN813"
+HREF="#FTN.AEN813"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	w którym znajduj± siê ma³e zag³êbienia, s± one umieszczone na spirali
+    zaczynaj±cej siê w ¶rodku p³yty. Promieñ lasera trafiaj±c na zag³êbienie
+    zostaje odbity w innym kierunku - w ten sposób rozpoznaje siê bity.
+	Reszta jest ³atwa - zwyk³a mechanika.
+    </P
+><P
+> Napêdy CD-ROM w porównaniu z dyskami twardymi s± wolne.
+    Przeciêtny dysk twardy ma czas przeszukiwania wynosz±cy oko³o 15
+    ms, szybki CD-ROM mo¿e potrzebowaæ dziesi±tych czê¶ci sekundy aby
+    odnale¼æ informacje. Transfer jest na ca³kiem przyzwoitym poziomie,
+    przy czym aktualnie spotyka siê napêdy z podan± maxymaln± prêdko¶ci±
+    odczytu - np. 50x nie oznacza, ¿e napêd uzyskuje taki wynik, jest to
+    maxymalna wydajno¶æ napêdu w sprzyjaj±cych warunkach - w okre¶lonej
+    strefie p³yty i przez okre¶lony czas. Powolno¶æ napêdu oznacza, ¿e
+    zasadniczo nie mo¿e on zast±piæ dysku twardego, jednak¿e jako medium
+    instalacyjne ze 'startowalnym' systemem plików spisuj± siê bardzo
+    dobrze.
+	</P
+><P
+> Istnieje kilka sposobów organizacji danych na CD-ROM-ie.
+    Najbardziej popularnym jest miêdzynarodowy standard ISO 9660.
+    Standard ten opisuje system plików z ograniczeniami wiêkszymi
+    ni¿ w systemie FAT, z drugiej strony dziêki swej prostocie mo¿e
+    byæ u¿yty przez ka¿dy system operacyjny i przemapowany na dowolny
+    system plików.
+	</P
+><P
+> Dla normalnego Unixowego wykorzystania ISO 9660 nie nadaje
+    siê, dlatego powsta³o rozszerzenie nazywane Rock Ridge.
+    Format ten zezwala tworzyæ pliki o d³ugich nazwach, ³±cza symboliczne,
+    i inne elementy spotykane na innych systemach plików u¿ywanych w Uniksie.
+    Do tego Rock Ridge jest zgodny w dó³ - zawiera on poprawn± strukturê
+    ISO 9660. Linux obs³uguje oba formaty, rozpoznaje je automatycznie.
+    </P
+><P
+> System plików to dopiero po³owa sukcesu. Wiêkszo¶æ CD-ROM-ów
+    zawiera dane wymagaj±ce specjalnych programów, przy czym wiêkszo¶æ
+    z takich programów nie posiada odpowiedników Linuxowych - pozostaje
+    dosemu (emulator DOS-a).
+	</P
+><P
+> Napêd CD-ROM posiada odpowiedni plik urz±dzenia, jego nazwa
+    zale¿y od sposobu pod³±czenia np. via SCSI, kartê muzyczn± czy EIDE.
+	Wiêcej informacji znajduje siê w li¶cie sterowników</P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN813"
+HREF="x810.html#AEN813"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Wewn±trz plastyku znajduje siê metalowy dysk.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x795.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x820.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Dyskietki</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c712.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Ta¶my</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

@@ -1,0 +1,306 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Tworzenie obszaru wymiany</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Zarz±dzanie pamiêci±"
+HREF="memory-management.html"><LINK
+REL="PREVIOUS"
+TITLE="Zarz±dzanie pamiêci±"
+HREF="memory-management.html"><LINK
+REL="NEXT"
+TITLE="U¿ywanie obszaru wymiany"
+HREF="x1483.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="memory-management.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 5. Zarz±dzanie pamiêci±</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1483.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1454"
+>5.2. Tworzenie obszaru wymiany</A
+></H1
+><P
+> J±dro postrzega swap jako normalny plik, liczy siê jedynie
+    brak dziur i specjalna sygnatura utworzona za pomoc± 
+	<TT
+CLASS="command"
+>mkswap</TT
+>. Plik musi znajdowaæ siê na lokalnym
+    systemie plików, NFS nie wchodzi w grê.
+	</P
+><P
+> Informacja o dziurach jest wa¿na. Plik wymiany powinien
+    mieæ zarezerwowan± objêto¶æ, tak aby j±dro zapisuj±c dane nie musia³o
+    allokowaæ sektorów dla pliku. Dziura w pliku oznacza, ¿e nie ma
+    zaallokowanych sektorów, a to powoduje drastyczny spadek wydajno¶ci.
+	</P
+><P
+> Dobrym sposobem na utworzenie odpowiedniego pliku wymiany
+    jest nastêpuj±ce polecenie:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>dd if=/dev/zero of=/extra-swap bs=1024 count=1024</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>1024+0 records in
+1024+0 records out</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+    gdzie <TT
+CLASS="filename"
+>/extra-swap</TT
+> jest nazw± pliku wymiany,
+    rozmiar pliku podawany jest za pomoc± opcji <VAR
+CLASS="literal"
+>count=</VAR
+>.
+	Rozmiar powinien byæ podzielny przez 4 - j±dro zapisuje 
+	<I
+CLASS="glossterm"
+>strony pamiêci</I
+> w blokach po 4 kB.
+	</P
+><P
+> Partycja wymiany nie jest niczym specjalnym. Tworzysz
+    j± jak normaln± partycjê, jedyn± ró¿nic± jest to, ¿e
+    nie zawiera systemu plików. Dobrym pomys³em jest ustawienie typu
+    partycji na 82 (Linux Swap), dziêki temu lista partycji stanie siê
+    czytelniejsza.
+	</P
+><P
+> Po stworzeniu pliku lub partycji musisz stworzyæ odpowiedni±
+    sygnaturê. S³u¿y do tego <TT
+CLASS="command"
+>mkswap</TT
+>, np.:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>mkswap /extra-swap 1024</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>Setting up swapspace, size = 1044480 bytes</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Zauwa¿, ¿e taki obszar wymiany nie zostanie u¿yty - instnieje, jednak
+    j±dro o nim nic nie wie.
+	</P
+><P
+> Pos³uguj±c siê <TT
+CLASS="command"
+>mkswap</TT
+> powiniene¶ byæ
+    ostro¿ny - program nie wykonuje ¿adnych testów przed stworzeniem
+    sygnatury.
+	<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>Mo¿e ³atwo nadpisaæ wa¿ne dane za pomoc± 
+	<TT
+CLASS="command"
+>mkswap</TT
+>!</I
+></SPAN
+></P
+><P
+> Mechanizm zarz±dzania pamiêci± limituje rozmiar pojedynczego
+    obszaru wymiany do 127 MB, oraz mo¿e ich byæ maxymalnie 8 (co daje 1 GB).
+    (przyp. t³um.: w której¶ wersji j±dra usuniêto ten limit, nie pamiêtam w której).
+
+		<A
+NAME="AEN1481"
+HREF="#FTN.AEN1481"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+
+	</P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1481"
+HREF="x1454.html#AEN1481"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Gigabajt w t±, gigabajt we wt±, nied³ugo rzeczywista
+        pamiêæ bêdzie mia³a tak± pojemno¶æ.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="memory-management.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1483.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Zarz±dzanie pamiêci±</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="memory-management.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>U¿ywanie obszaru wymiany</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

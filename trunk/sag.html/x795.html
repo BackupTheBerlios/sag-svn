@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Dyskietki</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Korzystanie z ró¿nych medii przechowuj±cych dane"
+HREF="c712.html"><LINK
+REL="PREVIOUS"
+TITLE="Dyski twarde"
+HREF="x756.html"><LINK
+REL="NEXT"
+TITLE="CD-ROM-y"
+HREF="x810.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x756.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Korzystanie z ró¿nych medii przechowuj±cych dane</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x810.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN795"
+>4.3. Dyskietki</A
+></H1
+><P
+> Dyskietka sk³ada siê z elastycznej membrany pokrytej
+    z jednej lub obu stron materia³em magnetycznie aktywnym.
+    Dyskietka nie zawiera ¿adnych mechanizmów - wszystko to znajduje siê
+    w odpowiednim napêdzie. Dyskietka odpowiada jednemu talerzowi dysku,
+    twardego, przy czym jest wymienna - jeden napêd mo¿e odczytywaæ kilka
+    dyskietek po kolei, dysk twardy jest niepodzielny.
+    </P
+><P
+> Tak jak dysk twardy dyskietka podzielona jest na ¶cie¿ki, sektory
+    (dwie odpowiadaj±ce sobie ¶cie¿ki po dwóch stronach tworz± cylinder),
+    przy czym jest ich znacznie mniej ni¿ na dysku twardym.
+	</P
+><P
+> Napêd dyskietek mo¿e odczytywaæ kilka ró¿nych formatów; dla 
+    przyk³adu: istniej± 3,5 calowe dyskietki 720 kB i 1,44 MB.
+	Do prawid³owego obs³u¿enia napêdu system operacyjny musi znaæ
+    rozmiar dyskietki; istnieje kilka plików dyskietek:
+	<TT
+CLASS="filename"
+>/dev/fd0H1440</TT
+> jest pierwszym napêdem zawieraj±cym
+    3,5 calow±, podwójn± (D) dyskietkê o wysokiej gêsto¶ci (H), o pojemno¶ci
+    1440 kB, innymi s³owy normalna dyskietka 3.5 calowa HD.
+	Aby dowiedzieæ siê wiêcej o nazewnictwie zajrzyj do listy urz±dzeñ.
+	</P
+><P
+> Nazewnictwo napêdu dyskietek jest skomplikowane, jednak
+    istnieje w Linuksie specjalne urz±dzenie wykrywaj±ce
+    typ dyskietki. Dzia³a na zasadzie odczytu pierwszego sektora
+    i wyszukiwania pasuj±cego wzorca. Wymaga to preformatowanie
+    dyskietki.
+	Urz±dzenia takie nazywaj± siê: <TT
+CLASS="filename"
+>/dev/fd0</TT
+>,
+	<TT
+CLASS="filename"
+>/dev/fd1</TT
+>, itd.</P
+><P
+> Parametry u¿ywane do sprawdzenia formatu dyskietki mog±
+    zostaæ ustawione za pomoc± <TT
+CLASS="command"
+>setfdprm</TT
+>.  
+    Dziêki temu programowi mo¿na u¿ywaæ dyskietek o niestandardowym
+    rozmiarze (mo¿na sobie tworzyæ takie dyskietki :-).
+	</P
+><P
+> Linux mo¿e odczytywaæ niestandardowe formaty dyskietek,
+    niektóre z nich wymagaj± specjalnych programów formatuj±cych.
+    Ominiemy je na razie, aby¶ w miêdzyczasie zd±¿y³ zajrzeæ do
+    pliku <TT
+CLASS="filename"
+>/etc/fdprm</TT
+>, który to zawiera
+    ustawienia programu <TT
+CLASS="command"
+>setfdprm</TT
+>.</P
+><P
+> System operacyjny musi wiedzieæ czy dyskietka zosta³a 
+    zmieniona, np. aby unikn±æ u¿ywania zbuforowanych danych w przypadku
+    zamiany dyskietek. Niestety linia sygna³u, która jest do 
+    tego u¿ywana, w niektórych napêdach jest zepsuta - nie 
+    mo¿na tego zauwa¿yæ pod MS-DOS, jednak pod Linuxem staje siê to
+    wa¿ne. W takim wypadku niezbêdna jest naprawa napêdu.
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x756.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x810.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Dyski twarde</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c712.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>CD-ROM-y</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Wa¿ne czê¶ci j±dra</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Wprowadzenie do Linuxa"
+HREF="c89.html"><LINK
+REL="PREVIOUS"
+TITLE="Wprowadzenie do Linuxa"
+HREF="c89.html"><LINK
+REL="NEXT"
+TITLE="Podstawowe us³ugi w systemie UNIX"
+HREF="x119.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c89.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Wprowadzenie do Linuxa</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x119.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN108"
+>2.2. Wa¿ne czê¶ci j±dra</A
+></H1
+><P
+> J±dro Linuksa zawiera kilka podstawowych czê¶ci: zarz±dzanie
+    procesami, pamiêci±, sterowniki urz±dzeñ, obs³uga systemu plików,
+    zarz±dzanie sieci± i wiele innych.
+	<A
+HREF="x108.html#kerneloverview"
+>Figure 2-1</A
+>
+	pokazuje je.</P
+><DIV
+CLASS="figure"
+><A
+NAME="kerneloverview"
+></A
+><P
+><B
+>Figure 2-1. Kilka z najwa¿niejszych czê¶ci Linuksa</B
+></P
+><P
+><IMG
+SRC="overview-kernel.png"></P
+></DIV
+><P
+> Najprawdopodobniej najwa¿niejszymi czê¶ciami j±dra (bez nich
+    nie dzia³a nic) s± modu³y zarz±dzania pamiêci± i procesami.
+	Zarz±dzanie pamiêci± polega na przypisywaniu obszarów pamiêci
+    fizycznej i swapu procesom, czê¶ciom j±dra, oraz cache'owi urz±dzeñ
+    blokowych. Zarz±dzanie procesami polega na ich tworzeniu i implementacji
+    wielozadaniowo¶ci poprzez zmianê aktywnie wykonywanego.
+	</P
+><P
+> Na najni¿szym poziomie j±dro zawiera sterowniki obs³ugiwanych 
+    urz±dzeñ. Poniewa¿ ¶wiat jest pe³ny ró¿norakiego sprzêtu jest ich
+    wiele. Istnieje wiele podobnych do siebie urz±dzeñ ró¿ni±cych siê
+    w warstwie programowej. Te podobieñstwo pozwala pogrupowaæ sterowniki;
+    w ten sposób cz³onek danej klasy ma ustalony interfejs programowy,
+    ró¿ni siê natomiast wewnêtrzn± komunikacj± miêdzy sprzêtem a j±drem.
+    Np. wszystkie sterowniki dysków posiadaj± funkcje do: inicjalizacji,
+    odczytania, lub zapisania podanego sektora.
+	</P
+><P
+> Niektóre us³ugi oferowane przez j±dro maj± podobne w³a¶ciwo¶ci,
+    dziêki temu mog± zostaæ podzielone w abstrakcyjne klasy.
+	Dla przyk³adu, ró¿ne protoko³y sieciowe zosta³y po³±czone w jednym
+    interfejsie programistycznym, bibliotece gniazd BSD. Innym przyk³adem
+    jest <I
+CLASS="glossterm"
+>wirtualny system plików</I
+> (VFS),
+    który obs³uguje operacje plikowe niezale¿nie od systemu plików.
+    Je¿eli jaki¶ proces chce skorzystaæ z systemu plików wszelkie ¿±dania
+    kierowane s± do VFS, który nastêpnie przekierowuje je do odpowiedniego
+    sterownika.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c89.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x119.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Wprowadzenie do Linuxa</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c89.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Podstawowe us³ugi w systemie UNIX</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

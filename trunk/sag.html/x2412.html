@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Kiedy czas jest niepoprawny</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Utrzymywanie aktualnego czasu"
+HREF="c2341.html"><LINK
+REL="PREVIOUS"
+TITLE="Wy¶wietlanie i zmienianie czasu"
+HREF="x2366.html"><LINK
+REL="NEXT"
+TITLE="S³owniczek (DRAFT)"
+HREF="g2424.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x2366.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 11. Utrzymywanie aktualnego czasu</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="g2424.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN2412"
+>11.4. Kiedy czas jest niepoprawny</A
+></H1
+><P
+>  Zegar systemowy utrzymywany jest za pomoc± okresowego
+	<I
+CLASS="glossterm"
+>przerwania zegarowego</I
+> PC. Je¿eli
+    system operacyjny wykonuje zbyt wiele zadañ obs³u¿enie przerwania
+    mo¿e mu zaj±æ zbyt du¿o czasu (zegar zaczyna siê pó¼niæ).
+    Zegar sprzêtowy dzia³a niezale¿nie, dlatego zazwyczaj
+    wskazuje poprawniejszy czas. Je¿eli czêsto uruchamiasz komputer
+    (co dotyczy wiêkszo¶ci komputerów nie bêd±cych serwerami) nie masz
+    po co siê martwiæ poprawno¶ci± zegara systemowego.
+	</P
+><P
+>  Je¿eli musisz zmieniæ zegar sprzêtowy mo¿esz:
+	zrestartowaæ komputer i zmieniæ ustawienia BIOS-u (w ten
+    sposób unikniesz wszystkich k³opotów zwi±zanych z nag³± zmian± czasu),
+    zrobiæ to za pomoc± <TT
+CLASS="command"
+>date</TT
+> i <TT
+CLASS="command"
+>clock</TT
+>
+    (w tej kolejno¶ci), w tym wypadku powiniene¶ byæ gotowy do restartu je¿eli
+    co¶ zacznie siê dziwnie zachowywaæ.
+	</P
+><P
+>  Sieciowy komputer (nawet w przypadku modemu) mo¿e porównywaæ
+    swój zegar z zegarem komputera utrzymuj±cego bardzo aktualny czasu.
+    Mo¿na to osi±gn±æ przy u¿yciu <TT
+CLASS="command"
+>rdate</TT
+>, lub
+	<TT
+CLASS="command"
+>netdate</TT
+>. Oba programy sprawdzaj± czas
+    zdalnego komputera (<TT
+CLASS="command"
+>netdate</TT
+> mo¿e sprawdzaæ czas na
+    kilku z nich) i ustawiaj± odpowiednio czas lokalny. U¿ywaj±c regularnie
+    jednego z tych poleceñ zapewnisz sobie aktualny czas.
+	</P
+><P
+>  XXX napisz co¶ m±drego o NTP. </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x2366.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="g2424.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Wy¶wietlanie i zmienianie czasu</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c2341.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>S³owniczek (DRAFT)</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

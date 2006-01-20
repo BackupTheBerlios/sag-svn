@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Logowanie siê</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Startowanie w trybie jednego u¿ytkownika"
+HREF="x1825.html"><LINK
+REL="NEXT"
+TITLE="Logowanie siê poprzez sieæ"
+HREF="x1882.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1825.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1882.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="log-in-and-out"
+></A
+>Chapter 8. Logowanie siê</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>8.1. <A
+HREF="log-in-and-out.html#AEN1850"
+>Logowanie siê via terminal</A
+></DT
+><DT
+>8.2. <A
+HREF="x1882.html"
+>Logowanie siê poprzez sieæ</A
+></DT
+><DT
+>8.3. <A
+HREF="x1894.html"
+>Co robi <TT
+CLASS="command"
+>login</TT
+>?</A
+></DT
+><DT
+>8.4. <A
+HREF="x1922.html"
+>X i xdm</A
+></DT
+><DT
+>8.5. <A
+HREF="x1925.html"
+>Kontrola dostêpu</A
+></DT
+><DT
+>8.6. <A
+HREF="x1940.html"
+>Start pow³oki</A
+></DT
+></DL
+></DIV
+><A
+NAME="AEN1846"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+> <SPAN
+CLASS="QUOTE"
+>"Nie zale¿y mi na cz³onkowstwie w klubie,
+    który akceptuje jako cz³onków takich ludzi jak ja.
+	"</SPAN
+>
+	(Groucho Marx)</P
+></BLOCKQUOTE
+><P
+> 
+	Sekcja opisuje niuanse logowania siê do systemu.
+	</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1850"
+>8.1. Logowanie siê via terminal</A
+></H1
+><P
+> <A
+HREF="log-in-and-out.html#terminal-logins"
+>Figure 8-1</A
+> obrazuje zachodz±ce procesy.
+    Najpierw <TT
+CLASS="command"
+>init</TT
+> uruchamia dla odpowiedniego
+    terminala program <TT
+CLASS="command"
+>getty</TT
+>. <TT
+CLASS="command"
+>getty</TT
+> 
+    oczekuje powiadomienia od u¿ytkownika (oznacza to, ¿e u¿ytkownik
+    musi co¶ napisaæ). Je¿eli po drugiej stronie jest u¿ytkownik
+	<TT
+CLASS="command"
+>getty</TT
+> wy¶wietli przywitanie 
+	(zawarto¶æ pliku <TT
+CLASS="filename"
+>/etc/issue</TT
+>) i poprosi
+    o nazwê u¿ytkownika, po czym uruchomi program <TT
+CLASS="command"
+>login</TT
+>.
+	<TT
+CLASS="command"
+>login</TT
+> odbiera nazwê u¿ytkownika jako parametr
+    i prosi o has³o. Je¿eli siê zgadzaj± program uruchamia wybran± przez
+    u¿ytkownika pow³okê; w innym wypadku program koñczy dzia³anie
+    (zazwyczaj najpierw daje u¿ytkownikowi kilka prób wprowadzenia
+    has³a).
+    
+	<TT
+CLASS="command"
+>init</TT
+> zauwa¿y, ¿e proces zosta³ zakoñczony i
+    uruchomi nowe <TT
+CLASS="command"
+>getty</TT
+> dla terminala.
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="terminal-logins"
+></A
+><P
+><B
+>Figure 8-1. Logowanie siê poprzez terminale: interakcja pomiêdzy: <TT
+CLASS="command"
+>init</TT
+>, <TT
+CLASS="command"
+>getty</TT
+>, <TT
+CLASS="command"
+>login</TT
+> i pow³ok±.</B
+></P
+><P
+><IMG
+SRC="logins-via-terminals.png"></P
+></DIV
+><P
+> Zauwa¿, ¿e tylko <TT
+CLASS="command"
+>init</TT
+> tworzy nowy proces
+    (korzystaj± z wywo³ania systemowego <CODE
+CLASS="function"
+>fork</CODE
+>); <TT
+CLASS="command"
+>getty</TT
+>,
+	<TT
+CLASS="command"
+>login</TT
+> zamieniaj± program, z którego zosta³y
+    wywo³ane (za pomoc± wywo³ania systemowego <CODE
+CLASS="function"
+>exec</CODE
+>).
+	</P
+><P
+> W przypadku ³±cz szeregowych potrzebny jest osobny program
+    do oczekiwania na u¿ytkownika - sprawdzenie jego obecno¶ci
+    mo¿e byæ (i tradycyjnie by³o) trudne.
+	<TT
+CLASS="command"
+>getty</TT
+> obs³uguje równie¿ ustawienia takie jak prêdko¶æ,
+    co czyni go programem przydatnym przy tworzeniu po³±czeñ dial-in,
+    w przypadku których ustawienia te zmieniaj± siê dynamicznie.
+	</P
+><P
+> Istnieje kilka wersji programów <TT
+CLASS="command"
+>getty</TT
+> i
+	<TT
+CLASS="command"
+>init</TT
+>, ka¿da z nich ma swoje wady i zalety.
+    Powiniene¶ zapoznaæ siê ze wszystkimi udostêpnianymi przez
+    swoj± dystrybucjê, oraz o innych (aby znale¼æ je mo¿esz skorzystaæ
+    z Mapy Oprogramowania Linuxowego).
+	Je¿eli nie tworzysz po³±czeñ dial-in prawdopodobnie nie musisz
+    siê zajmowaæ <TT
+CLASS="command"
+>getty</TT
+>, jednak <TT
+CLASS="command"
+>init</TT
+> 
+    jest nadal wa¿ny.  </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1825.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1882.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Startowanie w trybie jednego u¿ytkownika</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Logowanie siê poprzez sieæ</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

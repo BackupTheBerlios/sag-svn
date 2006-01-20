@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>G³ówny system plików</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Przegl±d struktury katalogów"
+HREF="dir-tree-overview.html"><LINK
+REL="PREVIOUS"
+TITLE="Przegl±d struktury katalogów"
+HREF="dir-tree-overview.html"><LINK
+REL="NEXT"
+TITLE="Katalog /etc"
+HREF="x355.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="dir-tree-overview.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Przegl±d struktury katalogów</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x355.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN286"
+>3.2. G³ówny system plików</A
+></H1
+><P
+> Generalnie g³ówny system plików powinien byæ ma³y -
+    zawiera krytyczne dane, a ma³y, rzadko zmieniany system ma wiêksze
+    szanse przetrwania. Zniszczenie tego systemu plików najczê¶ciej
+    oznacza, ¿e systemu nie mo¿na uruchomiæ - trzeba pos³u¿yæ
+    siê dyskietk± lub innym dodatkowym medium.
+	</P
+><P
+> G³ówny katalog nie powinien zawieraæ ¿adnych plików, oprócz
+    j±dra (chocia¿ powinno siê je umieszczaæ w /boot). 
+	Wszelkie inne pliki powinny znajdowaæ siê w odpowiednich katalogach:
+	<DIV
+CLASS="glosslist"
+><DL
+><DT
+><B
+><TT
+CLASS="filename"
+>/bin</TT
+></B
+></DT
+><DD
+><P
+> Polecenia potrzebne do uruchomienia systemu,
+        pracy w trybie jednego u¿ytkownika.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/sbin</TT
+></B
+></DT
+><DD
+><P
+> Podobnie jak <TT
+CLASS="filename"
+>/bin</TT
+>,
+		przy czym polecenia te nie s± przeznaczone dla zwyk³ych u¿ytkowników.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/etc</TT
+></B
+></DT
+><DD
+><P
+> Pliki konfiguracyjne specyficzne dla danego
+        komputera.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/root</TT
+></B
+></DT
+><DD
+><P
+> Katalog domowy u¿ytkownika root.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/lib</TT
+></B
+></DT
+><DD
+><P
+> Biblioteki dzielone wymagane przez programy znajduj±ce
+        siê na g³ównym systemie plików.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/lib/modules</TT
+></B
+></DT
+><DD
+><P
+> £adowalne modu³u j±dra, te wymagane do startu systemu i
+        pracy po padzie systemu (sterowniki sieciowe, itd. )
+		.</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/dev</TT
+></B
+></DT
+><DD
+><P
+> Pliki urz±dzeñ.</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/tmp</TT
+></B
+></DT
+><DD
+><P
+> Pliki tymczasowe. Programy dzia³aj±ce
+        po starcie systemu powinny u¿ywaæ katalog <TT
+CLASS="filename"
+>/var/tmp</TT
+>, nie
+        <TT
+CLASS="filename"
+>/tmp</TT
+>, poniewa¿ zapewne jest na nim wiêcej miejsca.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/boot</TT
+></B
+></DT
+><DD
+><P
+> Pliki u¿ywane przez program bootuj±cy (np. LILO)
+		Czêsto zawiera obraz j±dra. Powinien znajdowaæ siê poni¿ej
+        1024 cylindra dysku IDE.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/mnt</TT
+></B
+></DT
+><DD
+><P
+> Punkt tymczasowego montowania systemu plików.
+        Nie powinno siê montowaæ ¿adnego systemu plików automatycznie w
+        tym katalogu.
+		<TT
+CLASS="filename"
+>/mnt</TT
+> mo¿e zawieraæ podkatalogi
+        (np.: <TT
+CLASS="filename"
+>/mnt/dosa</TT
+> mo¿e oznaczaæ dyskietkê DOS-a,
+		<TT
+CLASS="filename"
+>/mnt/exta</TT
+> dyskietkê z systemem plików 
+		ext2).</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc</TT
+>, <TT
+CLASS="filename"
+>/usr</TT
+>, <TT
+CLASS="filename"
+>/var</TT
+>, <TT
+CLASS="filename"
+>/home</TT
+></B
+></DT
+><DD
+><P
+> Punkty montowañ innych systemów plików.
+		</P
+></DD
+></DL
+></DIV
+>
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="dir-tree-overview.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x355.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Przegl±d struktury katalogów</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="dir-tree-overview.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Katalog <TT
+CLASS="filename"
+>/etc</TT
+></TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

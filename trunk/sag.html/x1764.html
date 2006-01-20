@@ -1,0 +1,286 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Poziomy pracy</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="init"
+HREF="init.html"><LINK
+REL="PREVIOUS"
+TITLE="Plik /etc/inittab"
+HREF="x1712.html"><LINK
+REL="NEXT"
+TITLE="Specjalna konfiguracja w /etc/inittab"
+HREF="x1799.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1712.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 7. <TT
+CLASS="command"
+>init</TT
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1799.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1764"
+>7.3. Poziomy pracy</A
+></H1
+><P
+> <I
+CLASS="glossterm"
+>Poziom pracy</I
+> to stan programu
+	<TT
+CLASS="command"
+>init</TT
+>, oraz ca³ego systemu definiuj±cy
+    dzia³aj±ce us³ugi. Poziomy pracy identyfikowane s± poprzez liczby,
+    zobacz <A
+HREF="x1764.html#run-levels"
+>Table 7-1</A
+>. Nie istniej± definicje
+    poziomów pracy konfigurowalnych przez u¿ytkownika (2-5).
+    Niektórzy administratorzy systemów u¿ywaj± ich do definiowania
+    dzia³aj±cych podsystemów, np.: dzia³aj±ca sieæ, X, itd.
+    Inni w razie potrzeby uruchamiaj± je rêcznie. Musisz sam zdecydowaæ,
+    choæ ³atwiej bêdzie podporz±dkowaæ siê podej¶ciu twojej dystrybucji.
+	</P
+><DIV
+CLASS="table"
+><A
+NAME="run-levels"
+></A
+><P
+><B
+>Table 7-1. Poziomy pracy w liczbach</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><TBODY
+><TR
+><TD
+>0</TD
+><TD
+>Zatrzymanie systemu.</TD
+></TR
+><TR
+><TD
+>1</TD
+><TD
+>Tryb jednego u¿ytkownika (dla specjalnej administracji).</TD
+></TR
+><TR
+><TD
+>2-5</TD
+><TD
+>Normalne dzia³anie (zdefiniowane przez u¿ytkownika).</TD
+></TR
+><TR
+><TD
+>6</TD
+><TD
+>Restart systemu.</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+> Poziomy pracy zdefiniowane s± w <TT
+CLASS="filename"
+>/etc/inittab</TT
+> poprzez
+    nastêpuj±ce linie:
+
+</P><PRE
+CLASS="screen"
+>&#13;l2:2:wait:/etc/init.d/rc 2
+</PRE
+><P>
+
+    Pierwsze pole jest identyfikatorem, drugie oznacza 2 poziom pracy.
+    Nastêpne pole oznacza, ¿e 
+	<TT
+CLASS="command"
+>init</TT
+> powinien uruchomiæ program raz i czekaæ
+    na jego zakoñczenie.
+	<TT
+CLASS="filename"
+>/etc/init.d/rc</TT
+> jest skryptem odpowiedzialnym
+    za uruchomienie i zatrzymanie us³ug, które umo¿liwiaj± przej¶cie
+    na poziom 2.
+	</P
+><P
+> Polecenie z czwartego pola robi ca³± czarn± robotê zwi±zan±
+    ze zmian± poziomu pracy. Uruchamia us³ugi zdefiniowane dla poziomu
+    2 i zatrzymuje programy, które nie powinny na tym poziomie dzia³aæ.
+    Dzia³anie tego skryptu zale¿ne jest od dystrybucji i administratora.
+	</P
+><P
+> Podczas startu, <TT
+CLASS="command"
+>init</TT
+> szuka linijki definiuj±cej
+    domy¶lny tryb pracy:
+
+</P><PRE
+CLASS="screen"
+>&#13;id:2:initdefault:
+</PRE
+><P>
+
+	W czasie startu systemu (np. za pomoc± LILO)
+    mo¿na przekazaæ j±dru argument ustanawiaj±cy inny pocz±tkowy
+    poziom pracy, np.: 
+	<VAR
+CLASS="literal"
+>single</VAR
+>, lub <VAR
+CLASS="literal"
+>emergency</VAR
+>
+    umo¿liwiaj±c start systemy w trybie jednego u¿ytkownika.
+    </P
+><P
+> W czasie pracy systemu poziom dzia³ania mo¿na zmieniæ
+    za pomoc± programu <TT
+CLASS="command"
+>telinit</TT
+>.
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1712.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1799.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Plik <TT
+CLASS="filename"
+>/etc/inittab</TT
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="init.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Specjalna konfiguracja w <TT
+CLASS="filename"
+>/etc/inittab</TT
+></TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

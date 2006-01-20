@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Kontrola dostêpu</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Logowanie siê"
+HREF="log-in-and-out.html"><LINK
+REL="PREVIOUS"
+TITLE="X i xdm"
+HREF="x1922.html"><LINK
+REL="NEXT"
+TITLE="Start pow³oki"
+HREF="x1940.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1922.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 8. Logowanie siê</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1940.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1925"
+>8.5. Kontrola dostêpu</A
+></H1
+><P
+> Baz± u¿ytkowników jest zazwyczaj plik 
+	<TT
+CLASS="filename"
+>/etc/passwd</TT
+>. Niektóre systemy posiadaj± dodatkowy
+    plik <TT
+CLASS="filename"
+>/etc/shadow</TT
+>, który zawiera has³a.
+	Istniej± równie¿ inne metody przechowywania informacji o u¿ytkownikach,
+    dla przyk³adu: NIS.
+	</P
+><P
+> Baza u¿ytkowników zawiera nie tylko has³a, np.:
+    imiona i nazwiska, katalogi domowe, pow³oki logowania. 
+    Poniewa¿ dostêp to takiej bazy wymagany jest przez wszystkich u¿ytkowników,
+    has³a przechowywane s± w postaci zakodowanej. Aby zapobiec
+    brutalnym atakom maj±cym na celu z³amanie hase³, z czasem zosta³y one
+    przeniesione do innego pliku, który tylko root mo¿e czytaæ (choæ kodowanie
+    nadal pozosta³o).
+	</P
+><P
+>  Wa¿ne jest aby w systemie nie by³o ¿adnych s³abych hase³,
+    aby takie wy³apaæ mo¿na pos³u¿yæ siê programem <TT
+CLASS="command"
+>crack</TT
+>.
+    Jest to dwusieczny miecz - je¿eli agresor bêdzie pierwszy uda mu siê w³amaæ
+    do systemu. Mo¿na tak skonfigurowaæ <TT
+CLASS="command"
+>passwd</TT
+> aby 
+    odrzuca³ proste has³a - dziêki czemu oszczêdzisz wiele cykli CPU -
+    ³amanie wymaga znacznie wiêcej mocy obliczeniowej.
+	</P
+><P
+> Baza grup u¿ytkowników standardowo przechowywana jest w 
+    pliku <TT
+CLASS="filename"
+>/etc/group</TT
+>; 'ukrywane has³a' znajduj± siê w
+    <TT
+CLASS="filename"
+>/etc/shadow.group</TT
+>.
+	</P
+><P
+> Zazwyczaj root mo¿e zalogowaæ siê tylko poprzez terminale
+	wymienione w <TT
+CLASS="filename"
+>/etc/securetty</TT
+>. W ten sposób
+    bezpo¶rednie zalogowanie siê jako superu¿ytkownik wymaga fizycznego 
+    dostêpu. Jednocze¶nie, zwyk³y u¿ytkownik, mo¿e zalogowaæ siê
+    jako root za pomoc± programu <TT
+CLASS="command"
+>su</TT
+> (trzeba znaæ dwa has³a).  </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1922.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1940.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>X i xdm</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="log-in-and-out.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Start pow³oki</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

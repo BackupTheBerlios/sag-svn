@@ -1,0 +1,398 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Proces startowania - szczegó³y</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Start i stop"
+HREF="boots-and-shutdowns.html"><LINK
+REL="PREVIOUS"
+TITLE="Start i stop"
+HREF="boots-and-shutdowns.html"><LINK
+REL="NEXT"
+TITLE="Wiêcej o zamykaniu systemu"
+HREF="x1633.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="boots-and-shutdowns.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 6. Start i stop</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1633.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1587"
+>6.2. Proces startowania - szczegó³y</A
+></H1
+><P
+> Linuxa mo¿esz uruchomiæ z kilku ró¿nych urz±dzeñ.
+    Podrêcznik "Installation and Getting Started" omawia
+    sposoby startowania z ró¿nych urz±dzeñ. 
+	</P
+><P
+> Po w³±czeniu komputera BIOS przeprowadza ró¿ne testy
+	
+		<A
+NAME="AEN1591"
+HREF="#FTN.AEN1591"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+    po czym przechodzi do uruchamiania systemu. Wybiera odpowiedni
+    dysk (wybór mo¿na skonfigurowaæ) i odczytuje jego pierwszy sektor.
+    (<I
+CLASS="glossterm"
+>sektor ³aduj±cy</I
+>; lub w przypadku dysków 
+    twardych <I
+CLASS="glossterm"
+>g³ówny rekord ³aduj±cy</I
+> - ka¿da
+    z partycji zawiera swój sektor ³aduj±cy)</P
+><P
+> Sektor ³aduj±cy zawiera niewielki program (na tyle ma³y
+    aby zmie¶ci³ siê w jednym sektorze), którego zadaniem jest
+    za³adowanie systemu operacyjnego z dysku. Podczas startowania
+    z dyskietki zadaniem tego kodu jest wczytanie kilku bloków
+    (zale¿nie od rozmiaru j±dra) pod odpowiedni adres w pamiêci.
+    Zazwyczaj na dyskietce znajduje siê tylko j±dro, bez ¿adnego
+    systemu plików, co upraszcza proces startowania; je¿eli na
+    dyskietce znajduje siê systemem plików nale¿y u¿yæ LILO.
+	</P
+><P
+> Kod zawarty w g³ównym rekordzie ³aduj±cym ma utrudnione zadanie -
+    musi sprawdziæ tablicê partycji i wybraæ aktywn±, odczytaæ jej
+    sektor ³aduj±cy i przekazaæ mu sterowanie. Kod zawarty w sektorze
+    ³aduj±cym robi to samo co odpowiednik z dyskietki. Jednak w szczegó³ach
+    oba programy siê ró¿ni± - zazwyczaj nie tworzy siê osobnej partycji
+    zawieraj±cej tylko j±dro, wiêc trzeba je znale¼æ na systemie
+    plików. Istnieje kilka sposobów aby to zrobiæ, najpopularniejszym
+    jest u¿ycie LILO.
+	(Dok³adne rozwi±zanie problemu jest, w naszej dyskusji, niepotrzebne,
+    gdyby¶ chcia³ poznaæ szczegó³y siêgnij do dokumentacji LILO)
+	</P
+><P
+> LILO najczê¶ciej odczytuje domy¶lne j±dro i uruchamia je, mo¿na
+    program skonfigurowaæ tak, aby umo¿liwiæ wybór jednego z kilku,
+    lub nawet innego systemu operacyjnego.
+    LILO mo¿na skonfigurowaæ tak, aby reagowa³o na klawisze:
+	<B
+CLASS="keycap"
+>alt</B
+>, <B
+CLASS="keycap"
+>shift</B
+>, lub
+	<B
+CLASS="keycap"
+>ctrl</B
+> podczas swego ³adowania, co umo¿liwi
+    wybór systemu, mo¿na je równie¿ skonfigurowaæ aby domy¶lnie
+    czeka³o na wybranie systemu, dodatkowo mo¿na ustaliæ okres oczekiwania,
+    po którym zostanie u¿yte domy¶lne ustawienie.
+	</P
+><P
+> Za pomoc± LILO mo¿na przekazaæ j±dru argumenty.</P
+><P
+> Startowanie z ka¿dego z urz±dzeñ ma swoje zalety, jak i wady,
+    zasadniczo startowanie z dysku jest przyjemniejsze, poniewa¿
+    nie trzeba siê bawiæ dyskietkami, a do tego jest szybsze.
+    W przypadku k³opotów warto mieæ jednak dyskietkê startow± pod rêk± -
+    umo¿liwi ona uruchomienie systemu po zmianie MBR, lub innym wypadku.
+	</P
+><P
+> Po wczytaniu j±dra Linuxa do pamiêci i uruchomieniu go dziej±
+    siê nastêpuj±ce rzeczy:
+	
+	<P
+></P
+></P><UL
+><LI
+><P
+> 
+    J±dro dekompresuje siê - najczê¶ciej instalowane jest w postaci 
+    skompresowanej. Pocz±tek j±dra zawiera ma³y dekompresor, który
+    tego dokonuje.
+	</P
+></LI
+><LI
+><P
+> 
+    Je¿eli masz kartê super-VGA, któr± Linux rozpoznaje i która
+    ma mo¿liwo¶æ zmiany trybu textowego Linux pyta siê, który z nich
+    wybraæ. Podczas kompilacji j±dra ustala siê domy¶lny tryb,
+	mo¿na go równie¿ ustawiæ za pomoc± LILO, lub <TT
+CLASS="command"
+>rdev</TT
+>.
+	</P
+></LI
+><LI
+><P
+> 
+	J±dro sprawdza zainstalowany sprzêt (dyski, napêdy dyskietek, karty
+    sieciowe, itd.) i odpowiednio go konfiguruje; w miêdzy czasie
+    wy¶wietlane s± odpowiednie informacje. Np.:
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="computeroutput"
+>&#13;LILO boot:
+Loading linux.
+Console: colour EGA+ 80x25, 8 virtual consoles
+Serial driver version 3.94 with no serial options enabled
+tty00 at 0x03f8 (irq = 4) is a 16450
+tty01 at 0x02f8 (irq = 3) is a 16450
+lp_init: lp1 exists (0), using polling driver
+Memory: 7332k/8192k available (300k kernel code, 384k reserved, 176k data)
+Floppy drive(s): fd0 is 1.44M, fd1 is 1.2M
+Loopback device init
+Warning WD8013 board not found at i/o = 280.
+Math coprocessor using irq13 error reporting.
+Partition check:
+  hda: hda1 hda2 hda3
+VFS: Mounted root (ext filesystem).
+Linux version 0.99.pl9-1 (root@haven) 05/01/93 14:12:20
+</SAMP
+>
+</PRE
+><P>
+
+	Dok³adne informacje zale¿± od j±dra i jego ustawieñ.
+	</P
+></LI
+><LI
+><P
+>  J±dro spróbuje zamontowaæ g³ówny system plików.
+    Jego po³o¿enie jest konfigurowalne w czasie kompilacji; równie¿
+	za pomoc± <TT
+CLASS="command"
+>rdev</TT
+>, lub LILO. Je¿eli nie mo¿na
+    tego dokonaæ j±dro panikuje i zatrzymuje system (zbyt du¿o w takiej
+    sytuacji nie da siê zrobiæ).
+	</P
+><P
+> G³ówny system plików jest zazwyczaj montowany wy³±cznie-do-odczytu
+    (mo¿na to zmieniæ tak samo jak jego po³o¿enie). Umo¿liwi to sprawdzenie
+    systemu plików po jego zamontowaniu; nierozs±dnie jest sprawdzaæ
+    zamontowany system plików.
+	</P
+></LI
+><LI
+><P
+> Nastêpnie j±dro uruchamia proces
+	<TT
+CLASS="command"
+>init</TT
+> (domy¶lnie z katalogu 
+	<TT
+CLASS="filename"
+>/sbin/init</TT
+>) w tle (proces zawsze ma id = 1 ).
+	<TT
+CLASS="command"
+>init</TT
+> odpowiedzialny jest za wiele rzeczy,
+    czê¶æ z nich podlega kontroli administratora; zobacz
+	<A
+HREF="init.html"
+>Chapter 7</A
+>. 
+	</P
+></LI
+><LI
+><P
+> <TT
+CLASS="command"
+>init</TT
+> odpowiedzialny jest za uruchamianie
+    programów na poszczególnych poziomach pracy, w trybach wielou¿ytkownikowych
+    uruchamia <TT
+CLASS="command"
+>getty</TT
+> na terminalach wirtualnych.
+	<TT
+CLASS="command"
+>getty</TT
+> pozwala u¿ytkownikom zalogowaæ siê do
+    systemu.
+	<TT
+CLASS="command"
+>init</TT
+> zgodnie z konfiguracj± mo¿e uruchomiæ inne
+    programy.
+	</P
+></LI
+><LI
+><P
+>  Proces startowania jest kompletny.
+	</P
+></LI
+></UL
+><P>
+    	</P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1591"
+HREF="x1587.html#AEN1591"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Testy te nazywane s±
+		<I
+CLASS="glossterm"
+>power on self test (POST)</I
+>, co oznacza
+        samotestowanie siê po w³±czeniu zasilania.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="boots-and-shutdowns.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1633.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Start i stop</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="boots-and-shutdowns.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Wiêcej o zamykaniu systemu</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

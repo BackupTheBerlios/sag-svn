@@ -1,0 +1,963 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>The Linux System Administrators' Guide</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="NEXT"
+TITLE="Dedykacja"
+HREF="f30.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="book"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="BOOK"
+><A
+NAME="AEN1"
+></A
+><DIV
+CLASS="TITLEPAGE"
+><H1
+CLASS="title"
+><A
+NAME="AEN2"
+>The Linux System Administrators' Guide</A
+></H1
+><H2
+CLASS="subtitle"
+>Wersja 0.6.2</H2
+><IMG
+SRC="gwiazda.png"
+ALT=""><H3
+CLASS="author"
+><A
+NAME="AEN7"
+></A
+>Lars Wirzenius</H3
+><DIV
+CLASS="affiliation"
+><DIV
+CLASS="address"
+><P
+CLASS="address"
+><br>
+		<CODE
+CLASS="email"
+>&#60;<A
+HREF="mailto:liw@iki.fi"
+>liw@iki.fi</A
+>&#62;</CODE
+><br>
+		</P
+></DIV
+></DIV
+><H3
+CLASS="author"
+><A
+NAME="AEN13"
+></A
+>Joanna Oja</H3
+><DIV
+CLASS="affiliation"
+><DIV
+CLASS="address"
+><P
+CLASS="address"
+><br>
+		<CODE
+CLASS="email"
+>&#60;<A
+HREF="mailto:viu@iki.fi"
+>viu@iki.fi</A
+>&#62;</CODE
+><br>
+		</P
+></DIV
+></DIV
+><DIV
+><DIV
+CLASS="abstract"
+><P
+></P
+><A
+NAME="AEN19"
+></A
+><P
+>  Wstêp do administracji systemem Linux.</P
+><P
+></P
+></DIV
+></DIV
+><A
+HREF="ln21.html"
+>Legal Notice</A
+><HR></DIV
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+><A
+HREF="f30.html"
+>Dedykacja</A
+></DT
+><DT
+><A
+HREF="f33.html"
+>Od t³umacza, linki do plików</A
+></DT
+><DT
+><A
+HREF="f52.html"
+>Wersje: ¼rod³owa i preformatowane</A
+></DT
+><DT
+>1. <A
+HREF="c58.html"
+>Wstêp</A
+></DT
+><DD
+><DL
+><DT
+>1.1. <A
+HREF="c58.html#AEN82"
+>The Linux Documentation Project</A
+></DT
+></DL
+></DD
+><DT
+>2. <A
+HREF="c89.html"
+>Wprowadzenie do Linuxa</A
+></DT
+><DD
+><DL
+><DT
+>2.1. <A
+HREF="c89.html#AEN95"
+>Ró¿ne czê¶ci systemu operacyjnego</A
+></DT
+><DT
+>2.2. <A
+HREF="x108.html"
+>Wa¿ne czê¶ci j±dra</A
+></DT
+><DT
+>2.3. <A
+HREF="x119.html"
+>Podstawowe us³ugi w systemie UNIX</A
+></DT
+><DD
+><DL
+><DT
+>2.3.1. <A
+HREF="x119.html#AEN122"
+><TT
+CLASS="command"
+>init</TT
+></A
+></DT
+><DT
+>2.3.2. <A
+HREF="x119.html#AEN142"
+>Logowanie z terminala</A
+></DT
+><DT
+>2.3.3. <A
+HREF="x119.html#AEN153"
+>Syslog</A
+></DT
+><DT
+>2.3.4. <A
+HREF="x119.html#AEN157"
+>Okresowe wykonywanie poleceñ: <TT
+CLASS="command"
+>cron</TT
+> i
+<TT
+CLASS="command"
+>at</TT
+></A
+></DT
+><DT
+>2.3.5. <A
+HREF="x119.html#AEN171"
+>Graficzny interfejs u¿ytkownika</A
+></DT
+><DT
+>2.3.6. <A
+HREF="x119.html#AEN176"
+>Sieæ</A
+></DT
+><DT
+>2.3.7. <A
+HREF="x119.html#AEN182"
+>Zdalne logowanie siê</A
+></DT
+><DT
+>2.3.8. <A
+HREF="x119.html#AEN195"
+>Sieciowe systemy plików</A
+></DT
+><DT
+>2.3.9. <A
+HREF="x119.html#AEN200"
+>Poczta</A
+></DT
+><DT
+>2.3.10. <A
+HREF="x119.html#AEN215"
+>Drukowanie</A
+></DT
+><DT
+>2.3.11. <A
+HREF="x119.html#AEN224"
+>Struktura systemu plików</A
+></DT
+></DL
+></DD
+></DL
+></DD
+><DT
+>3. <A
+HREF="dir-tree-overview.html"
+>Przegl±d struktury katalogów</A
+></DT
+><DD
+><DL
+><DT
+>3.1. <A
+HREF="dir-tree-overview.html#AEN242"
+>Wstêp</A
+></DT
+><DT
+>3.2. <A
+HREF="x286.html"
+>G³ówny system plików</A
+></DT
+><DT
+>3.3. <A
+HREF="x355.html"
+>Katalog <TT
+CLASS="filename"
+>/etc</TT
+></A
+></DT
+><DT
+>3.4. <A
+HREF="x478.html"
+>Katalog <TT
+CLASS="filename"
+>/dev</TT
+></A
+></DT
+><DT
+>3.5. <A
+HREF="x488.html"
+>System plików <TT
+CLASS="filename"
+>/usr</TT
+></A
+></DT
+><DT
+>3.6. <A
+HREF="x547.html"
+>System plików <TT
+CLASS="filename"
+>/var</TT
+></A
+></DT
+><DT
+>3.7. <A
+HREF="x608.html"
+>System plików <TT
+CLASS="filename"
+>/proc</TT
+></A
+></DT
+></DL
+></DD
+><DT
+>4. <A
+HREF="c712.html"
+>Korzystanie z ró¿nych medii przechowuj±cych dane</A
+></DT
+><DD
+><DL
+><DT
+>4.1. <A
+HREF="c712.html#AEN731"
+>Dwa typy urz±dzeñ</A
+></DT
+><DT
+>4.2. <A
+HREF="x756.html"
+>Dyski twarde</A
+></DT
+><DT
+>4.3. <A
+HREF="x795.html"
+>Dyskietki</A
+></DT
+><DT
+>4.4. <A
+HREF="x810.html"
+>CD-ROM-y</A
+></DT
+><DT
+>4.5. <A
+HREF="x820.html"
+>Ta¶my</A
+></DT
+><DT
+>4.6. <A
+HREF="x826.html"
+>Formatowanie</A
+></DT
+><DT
+>4.7. <A
+HREF="x883.html"
+>Partycje</A
+></DT
+><DD
+><DL
+><DT
+>4.7.1. <A
+HREF="x883.html#AEN888"
+>MBR, sektory ³aduj±ce i tablica partycji</A
+></DT
+><DT
+>4.7.2. <A
+HREF="x883.html#AEN912"
+>Partycje rozszerzone i logiczne</A
+></DT
+><DT
+>4.7.3. <A
+HREF="x883.html#AEN927"
+>Typ partycji</A
+></DT
+><DT
+>4.7.4. <A
+HREF="x883.html#AEN1015"
+>Dzielenie dysku twardego</A
+></DT
+><DT
+>4.7.5. <A
+HREF="x883.html#AEN1029"
+>Pliki urz±dzeñ i partycje</A
+></DT
+></DL
+></DD
+><DT
+>4.8. <A
+HREF="x1034.html"
+>System plików</A
+></DT
+><DD
+><DL
+><DT
+>4.8.1. <A
+HREF="x1034.html#AEN1036"
+>Czym jest system plików?</A
+></DT
+><DT
+>4.8.2. <A
+HREF="x1034.html#AEN1053"
+>Paleta systemów plików</A
+></DT
+><DT
+>4.8.3. <A
+HREF="x1034.html#AEN1112"
+>Które systemy plików powinnych byæ u¿ywane?</A
+></DT
+><DT
+>4.8.4. <A
+HREF="x1034.html#AEN1115"
+>Tworzenie systemu plików</A
+></DT
+><DT
+>4.8.5. <A
+HREF="x1034.html#mount-and-umount"
+>Montowanie i odmontowywanie</A
+></DT
+><DT
+>4.8.6. <A
+HREF="x1034.html#AEN1273"
+>Sprawdzanie integralno¶ci systemu plików za pomoc± <TT
+CLASS="command"
+>fsck</TT
+></A
+></DT
+><DT
+>4.8.7. <A
+HREF="x1034.html#AEN1292"
+>Sprawdzanie b³êdów dysku za pomoc± <TT
+CLASS="command"
+>badblocks</TT
+></A
+></DT
+><DT
+>4.8.8. <A
+HREF="x1034.html#AEN1306"
+>Zwalczanie fragmentacji</A
+></DT
+><DT
+>4.8.9. <A
+HREF="x1034.html#AEN1313"
+>Inne programy dla wszystkich systemów plików</A
+></DT
+><DT
+>4.8.10. <A
+HREF="x1034.html#AEN1326"
+>Inne narzêdzia dla ext2</A
+></DT
+></DL
+></DD
+><DT
+>4.9. <A
+HREF="x1355.html"
+>Dyski bez systemu plików</A
+></DT
+><DT
+>4.10. <A
+HREF="x1372.html"
+>Allokowanie przestrzeni dyskowej</A
+></DT
+><DD
+><DL
+><DT
+>4.10.1. <A
+HREF="x1372.html#AEN1374"
+>Schemat partycjonowania</A
+></DT
+><DT
+>4.10.2. <A
+HREF="x1372.html#AEN1389"
+>Wymagana przestrzeñ</A
+></DT
+><DT
+>4.10.3. <A
+HREF="x1372.html#AEN1398"
+>Przyk³adowe konfiguracje</A
+></DT
+><DT
+>4.10.4. <A
+HREF="x1372.html#AEN1426"
+>Dodawanie nowych dysków</A
+></DT
+><DT
+>4.10.5. <A
+HREF="x1372.html#AEN1430"
+>Jak oszczêdaæ powierzchniê dysków</A
+></DT
+></DL
+></DD
+></DL
+></DD
+><DT
+>5. <A
+HREF="memory-management.html"
+>Zarz±dzanie pamiêci±</A
+></DT
+><DD
+><DL
+><DT
+>5.1. <A
+HREF="memory-management.html#AEN1444"
+>Czym jest pamiêæ wirtualna?</A
+></DT
+><DT
+>5.2. <A
+HREF="x1454.html"
+>Tworzenie obszaru wymiany</A
+></DT
+><DT
+>5.3. <A
+HREF="x1483.html"
+>U¿ywanie obszaru wymiany</A
+></DT
+><DT
+>5.4. <A
+HREF="x1516.html"
+>Dzielenie obszaru wymiany miêdzy systemami operacyjnymi</A
+></DT
+><DT
+>5.5. <A
+HREF="swap-allocation.html"
+>Allokowanie obszaru wymiany</A
+></DT
+><DT
+>5.6. <A
+HREF="buffer-cache.html"
+>Bufor</A
+></DT
+></DL
+></DD
+><DT
+>6. <A
+HREF="boots-and-shutdowns.html"
+>Start i stop</A
+></DT
+><DD
+><DL
+><DT
+>6.1. <A
+HREF="boots-and-shutdowns.html#AEN1573"
+>Ogólne informacje</A
+></DT
+><DT
+>6.2. <A
+HREF="x1587.html"
+>Proces startowania - szczegó³y</A
+></DT
+><DT
+>6.3. <A
+HREF="x1633.html"
+>Wiêcej o zamykaniu systemu</A
+></DT
+><DT
+>6.4. <A
+HREF="x1660.html"
+>Restartowanie</A
+></DT
+><DT
+>6.5. <A
+HREF="x1667.html"
+>Tryb jednego u¿ytkownika</A
+></DT
+><DT
+>6.6. <A
+HREF="x1671.html"
+>Dyskietki ratunkowe</A
+></DT
+></DL
+></DD
+><DT
+>7. <A
+HREF="init.html"
+><TT
+CLASS="command"
+>init</TT
+></A
+></DT
+><DD
+><DL
+><DT
+>7.1. <A
+HREF="init.html#AEN1685"
+><TT
+CLASS="command"
+>init</TT
+> jest pierwszy</A
+></DT
+><DT
+>7.2. <A
+HREF="x1712.html"
+>Plik <TT
+CLASS="filename"
+>/etc/inittab</TT
+></A
+></DT
+><DT
+>7.3. <A
+HREF="x1764.html"
+>Poziomy pracy</A
+></DT
+><DT
+>7.4. <A
+HREF="x1799.html"
+>Specjalna konfiguracja w <TT
+CLASS="filename"
+>/etc/inittab</TT
+></A
+></DT
+><DT
+>7.5. <A
+HREF="x1825.html"
+>Startowanie w trybie jednego u¿ytkownika</A
+></DT
+></DL
+></DD
+><DT
+>8. <A
+HREF="log-in-and-out.html"
+>Logowanie siê</A
+></DT
+><DD
+><DL
+><DT
+>8.1. <A
+HREF="log-in-and-out.html#AEN1850"
+>Logowanie siê via terminal</A
+></DT
+><DT
+>8.2. <A
+HREF="x1882.html"
+>Logowanie siê poprzez sieæ</A
+></DT
+><DT
+>8.3. <A
+HREF="x1894.html"
+>Co robi <TT
+CLASS="command"
+>login</TT
+>?</A
+></DT
+><DT
+>8.4. <A
+HREF="x1922.html"
+>X i xdm</A
+></DT
+><DT
+>8.5. <A
+HREF="x1925.html"
+>Kontrola dostêpu</A
+></DT
+><DT
+>8.6. <A
+HREF="x1940.html"
+>Start pow³oki</A
+></DT
+></DL
+></DD
+><DT
+>9. <A
+HREF="c1946.html"
+>Zarz±dzanie kontami u¿ytkowników</A
+></DT
+><DD
+><DL
+><DT
+>9.1. <A
+HREF="c1946.html#AEN1952"
+>Konto - co to?</A
+></DT
+><DT
+>9.2. <A
+HREF="x1959.html"
+>Tworzenie u¿ytkownika</A
+></DT
+><DD
+><DL
+><DT
+>9.2.1. <A
+HREF="x1959.html#AEN1970"
+><TT
+CLASS="filename"
+>/etc/passwd</TT
+> i inne pliki</A
+></DT
+><DT
+>9.2.2. <A
+HREF="x1959.html#AEN2000"
+>U¿ywanie numerycznych identyfikatorów</A
+></DT
+><DT
+>9.2.3. <A
+HREF="x1959.html#AEN2005"
+>Zarz±dzanie grupami</A
+></DT
+><DT
+>9.2.4. <A
+HREF="x1959.html#AEN2010"
+>Domy¶lne ¶rodowisko: <TT
+CLASS="filename"
+>/etc/skel</TT
+></A
+></DT
+><DT
+>9.2.5. <A
+HREF="x1959.html#manual-adduser"
+>Rêczne tworzenie u¿ytkownika</A
+></DT
+></DL
+></DD
+><DT
+>9.3. <A
+HREF="x2049.html"
+>Zmiana ustawieñ u¿ytkownika</A
+></DT
+><DT
+>9.4. <A
+HREF="x2073.html"
+>Usuwanie u¿ytkownika</A
+></DT
+><DT
+>9.5. <A
+HREF="x2087.html"
+>Tymczasowe blokowanie u¿ytkownika</A
+></DT
+></DL
+></DD
+><DT
+>10. <A
+HREF="backups.html"
+>Kopie zapasowe</A
+></DT
+><DD
+><DL
+><DT
+>10.1. <A
+HREF="backups.html#AEN2113"
+>Potrzeba kopii zapasowych</A
+></DT
+><DT
+>10.2. <A
+HREF="x2126.html"
+>Wybór medium na kopiê zapasow±</A
+></DT
+><DT
+>10.3. <A
+HREF="x2135.html"
+>Wybór programu</A
+></DT
+><DT
+>10.4. <A
+HREF="x2159.html"
+>Proste kopie zapasowe</A
+></DT
+><DD
+><DL
+><DT
+>10.4.1. <A
+HREF="x2159.html#AEN2166"
+>Tworzenie kopii za pomoc± <TT
+CLASS="command"
+>tara</TT
+></A
+></DT
+><DT
+>10.4.2. <A
+HREF="x2159.html#AEN2201"
+>Odtwarzanie plików za pomoc± <TT
+CLASS="command"
+>tara</TT
+></A
+></DT
+></DL
+></DD
+><DT
+>10.5. <A
+HREF="x2227.html"
+>Kopie wielopoziomowe</A
+></DT
+><DT
+>10.6. <A
+HREF="x2316.html"
+>Co zachowywaæ</A
+></DT
+><DT
+>10.7. <A
+HREF="x2327.html"
+>Skompresowane kopie zapasowe</A
+></DT
+></DL
+></DD
+><DT
+>11. <A
+HREF="c2341.html"
+>Utrzymywanie aktualnego czasu</A
+></DT
+><DD
+><DL
+><DT
+>11.1. <A
+HREF="c2341.html#AEN2347"
+>Strefy czasowe</A
+></DT
+><DT
+>11.2. <A
+HREF="x2360.html"
+>Zegary sprzêtowe i programowe</A
+></DT
+><DT
+>11.3. <A
+HREF="x2366.html"
+>Wy¶wietlanie i zmienianie czasu</A
+></DT
+><DT
+>11.4. <A
+HREF="x2412.html"
+>Kiedy czas jest niepoprawny</A
+></DT
+></DL
+></DD
+><DT
+><A
+HREF="g2424.html"
+>S³owniczek (DRAFT)</A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="LOT"
+><DL
+CLASS="LOT"
+><DT
+><B
+>List of Tables</B
+></DT
+><DT
+>4-1. <A
+HREF="x883.html#partition-ids"
+>Typy partycji (z Linuksowego programu <TT
+CLASS="command"
+>fdisk</TT
+>).</A
+></DT
+><DT
+>7-1. <A
+HREF="x1764.html#run-levels"
+>Poziomy pracy w liczbach</A
+></DT
+><DT
+>10-1. <A
+HREF="x2227.html#efficient-backup-levels"
+>Efektywny schemat tworzenia wielopoziomowych kopii zapasowych</A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="LOT"
+><DL
+CLASS="LOT"
+><DT
+><B
+>List of Figures</B
+></DT
+><DT
+>2-1. <A
+HREF="x108.html#kerneloverview"
+>Kilka z najwa¿niejszych czê¶ci Linuksa</A
+></DT
+><DT
+>3-1. <A
+HREF="dir-tree-overview.html#fstree"
+>Czê¶ci drzewa katalogów Unixa. Linie oznaczaj± limity partycji.</A
+></DT
+><DT
+>4-1. <A
+HREF="x756.html#hd-schematic"
+>Schematyczny obraz dysku twardego.</A
+></DT
+><DT
+>4-2. <A
+HREF="x883.html#hard-disk-layout"
+>Przyk³adowy podzia³ dysku.</A
+></DT
+><DT
+>4-3. <A
+HREF="x1034.html#hd-mount-root"
+>Trzy osobne systemy plików.</A
+></DT
+><DT
+>4-4. <A
+HREF="x1034.html#hd-mount-all"
+><TT
+CLASS="filename"
+>/home</TT
+> i <TT
+CLASS="filename"
+>/usr</TT
+> zosta³y zamontowane.</A
+></DT
+><DT
+>4-5. <A
+HREF="x1034.html#dumpe2fs-output"
+>Przyk³adowe wyj¶cie programu <TT
+CLASS="command"
+>dumpe2fs</TT
+></A
+></DT
+><DT
+>8-1. <A
+HREF="log-in-and-out.html#terminal-logins"
+>Logowanie siê poprzez terminale: interakcja pomiêdzy: <TT
+CLASS="command"
+>init</TT
+>, <TT
+CLASS="command"
+>getty</TT
+>, <TT
+CLASS="command"
+>login</TT
+> i pow³ok±.</A
+></DT
+><DT
+>10-1. <A
+HREF="x2227.html#backup-history-timeline"
+>Przyk³adowy wielopoziomowy schemat tworzenia kopii zapasowych.</A
+></DT
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="f30.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Dedykacja</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

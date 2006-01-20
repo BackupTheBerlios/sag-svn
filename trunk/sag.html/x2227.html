@@ -1,0 +1,391 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Kopie wielopoziomowe</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Kopie zapasowe"
+HREF="backups.html"><LINK
+REL="PREVIOUS"
+TITLE="Proste kopie zapasowe"
+HREF="x2159.html"><LINK
+REL="NEXT"
+TITLE="Co zachowywaæ"
+HREF="x2316.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x2159.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 10. Kopie zapasowe</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x2316.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN2227"
+>10.5. Kopie wielopoziomowe</A
+></H1
+><P
+>  Prosta metoda tworzenia kopii zapasowych jest
+    dobra dla osobistych komputerów i ma³ych serwerów. Przy du¿ej
+    ilo¶ci danych nale¿y zastosowaæ inne metody.
+	</P
+><P
+>  Prosta metoda ma dwa poziomy: pe³ny i ró¿nicowa kopia.
+	Mo¿na to uogólniæ do kilku poziomów. Pe³na kopia to poziom 0,
+    kopie ró¿nicowe to: 1, 2, 3, ... Na poszczególnym poziomie
+    zachowujesz dane, które s± zmienione wzglêdem ni¿szego, lub
+    równorzêdnego poziomu.
+	</P
+><P
+>  W ten sposób uzyskujemy d³u¿sz± ¿ywotno¶æ danej kopii danych,
+    umo¿liwiaj±c w ten sposób dostêp do kilku wersji plików, lub danych,
+    które zosta³y usuniête dawno temu.
+	</P
+><P
+>  Dla przyk³adu: posiadaj±c 10 ta¶m, mo¿emy 1 i 2 wykorzystywaæ
+    na miesiêczne kopie (robione w pierwszy pi±tek miesi±ca),
+    ta¶my 3 - 6 bêd± zawieraæ tygodniowe kopie (inne pi±tki, pamiêtaj,
+    ¿e w miesi±cu mo¿e byæ 5 pi±tków, wiêc potrzebujemy 4 ta¶my),
+    ta¶my 7 - 10 bêd± kopiami dziennymi (poniedzia³ek do czwartku).
+    Za pomoc± dodatkowych 4 ta¶m wyd³u¿yli¶my sesjê z 2 tygodni do
+    dwóch miesiêcy. Prawd± jest, i¿ nie mo¿emy odzyskaæ wszystkich wersji
+    wszystkich plików, jednak to co mo¿emy odzyskaæ jest czêsto wystarczaj±ce.
+	</P
+><P
+> <A
+HREF="x2227.html#backup-history-timeline"
+>Figure 10-1</A
+> pokazuje, który
+    poziom powinien byæ u¿yty w danym dniu, oraz z których kopii mo¿na
+    odzyskaæ dane pod koniec miesi±ca.
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="backup-history-timeline"
+></A
+><P
+><B
+>Figure 10-1. Przyk³adowy wielopoziomowy schemat tworzenia kopii zapasowych.
+        </B
+></P
+><P
+><IMG
+SRC="backup-timeline.png"></P
+></DIV
+><P
+>  Poziomy kopii mog± byæ równie¿ u¿ywane do utrzymywania czasu 
+    odzyskiwania danych do minimum. Je¿eli posiadasz wiele kopii ró¿nicowych
+    o coraz rosn±cym jednostajnie poziomie, aby odzyskaæ wszystkie dane 
+    musisz je wszystkie odczytaæ. Mo¿esz jednak tworzyæ kopie o 
+    niekolejnych poziomach ograniczaj±c liczbê ta¶m niezbêdnych 
+    do odtworzenia systemu.
+	</P
+><P
+>  Aby uzyskaæ taki efekt, mo¿esz u¿ywaæ ni¿szego poziomu dla
+    ka¿dej nastêpnej kopii ró¿nicowej. Jednak¿e, w ten sposób wyd³u¿asz
+    równie¿ czas tworzenia kopii (ka¿da kopia zawiera wszystko od
+    poprzedniej pe³nej kopii). Lepszy schemat jest sugerowany
+    przez podrêcznik programu <TT
+CLASS="command"
+>dump</TT
+>. W skrócie
+    wykonuj kolejno kopie o poziomach: 3, 2, 5, 4, 7, 6, 9, 8, 9, itd.
+	W ten sposób tworzenie kopii i odzyskiwanie danych trwa krótko.
+    Liczba niezbêdnych ta¶m zale¿y od tego jak d³ugie przerwy bêdziesz
+    czyni³ miêdzy pe³nymi kopiami, jednak i tak bêdzie ni¿sza ni¿ w przypadku
+    prostego schematu.
+	</P
+><DIV
+CLASS="table"
+><A
+NAME="efficient-backup-levels"
+></A
+><P
+><B
+>Table 10-1. Efektywny schemat tworzenia wielopoziomowych kopii zapasowych</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><COL><COL><THEAD
+><TR
+><TH
+>Ta¶ma</TH
+><TH
+>Poziom</TH
+><TH
+>Kopiowanie (dni)</TH
+><TH
+>Ilo¶æ ta¶m niezbêdnych do odtworzenia</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+>1</TD
+><TD
+>0</TD
+><TD
+>n/a</TD
+><TD
+>1</TD
+></TR
+><TR
+><TD
+>2</TD
+><TD
+>3</TD
+><TD
+>1</TD
+><TD
+>1, 2</TD
+></TR
+><TR
+><TD
+>3</TD
+><TD
+>2</TD
+><TD
+>2</TD
+><TD
+>1, 3</TD
+></TR
+><TR
+><TD
+>4</TD
+><TD
+>5</TD
+><TD
+>1</TD
+><TD
+>1, 2, 4</TD
+></TR
+><TR
+><TD
+>5</TD
+><TD
+>4</TD
+><TD
+>2</TD
+><TD
+>1, 2, 5</TD
+></TR
+><TR
+><TD
+>6</TD
+><TD
+>7</TD
+><TD
+>1</TD
+><TD
+>1, 2, 5, 6</TD
+></TR
+><TR
+><TD
+>7</TD
+><TD
+>6</TD
+><TD
+>2</TD
+><TD
+>1, 2, 5, 7</TD
+></TR
+><TR
+><TD
+>8</TD
+><TD
+>9</TD
+><TD
+>1</TD
+><TD
+>1, 2, 5, 7, 8</TD
+></TR
+><TR
+><TD
+>9</TD
+><TD
+>8</TD
+><TD
+>2</TD
+><TD
+>1, 2, 5, 7, 9</TD
+></TR
+><TR
+><TD
+>10</TD
+><TD
+>9</TD
+><TD
+>1</TD
+><TD
+>1, 2, 5, 7, 9, 10</TD
+></TR
+><TR
+><TD
+>11</TD
+><TD
+>9</TD
+><TD
+>1</TD
+><TD
+>1, 2, 5, 7, 9, 10, 11</TD
+></TR
+><TR
+><TD
+>...</TD
+><TD
+>9</TD
+><TD
+>1</TD
+><TD
+>1, 2, 5, 7, 9, 10, 11, ...</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+><P
+>  Wymy¶lny schemat mo¿e zredukowaæ liczbê pracy, jednak mo¿e
+    zwiêkszyæ ilo¶æ czynników, na które trzeba zwracaæ uwagê.
+    Musisz zadecydowaæ czy warto.
+	</P
+><P
+>  <TT
+CLASS="command"
+>dump</TT
+> ma wbudowan± obs³ugê poziomów,
+	dla <TT
+CLASS="command"
+>tara</TT
+> i <TT
+CLASS="command"
+>cpio</TT
+> musisz to
+    zaimplementowaæ za pomoc± odpowiednich skryptów.
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x2159.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x2316.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Proste kopie zapasowe</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="backups.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Co zachowywaæ</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

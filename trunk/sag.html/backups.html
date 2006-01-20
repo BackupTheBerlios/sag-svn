@@ -1,0 +1,378 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Kopie zapasowe</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Tymczasowe blokowanie u¿ytkownika"
+HREF="x2087.html"><LINK
+REL="NEXT"
+TITLE="Wybór medium na kopiê zapasow±"
+HREF="x2126.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x2087.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x2126.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="backups"
+></A
+>Chapter 10. Kopie zapasowe</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>10.1. <A
+HREF="backups.html#AEN2113"
+>Potrzeba kopii zapasowych</A
+></DT
+><DT
+>10.2. <A
+HREF="x2126.html"
+>Wybór medium na kopiê zapasow±</A
+></DT
+><DT
+>10.3. <A
+HREF="x2135.html"
+>Wybór programu</A
+></DT
+><DT
+>10.4. <A
+HREF="x2159.html"
+>Proste kopie zapasowe</A
+></DT
+><DD
+><DL
+><DT
+>10.4.1. <A
+HREF="x2159.html#AEN2166"
+>Tworzenie kopii za pomoc± <TT
+CLASS="command"
+>tara</TT
+></A
+></DT
+><DT
+>10.4.2. <A
+HREF="x2159.html#AEN2201"
+>Odtwarzanie plików za pomoc± <TT
+CLASS="command"
+>tara</TT
+></A
+></DT
+></DL
+></DD
+><DT
+>10.5. <A
+HREF="x2227.html"
+>Kopie wielopoziomowe</A
+></DT
+><DT
+>10.6. <A
+HREF="x2316.html"
+>Co zachowywaæ</A
+></DT
+><DT
+>10.7. <A
+HREF="x2327.html"
+>Skompresowane kopie zapasowe</A
+></DT
+></DL
+></DIV
+><A
+NAME="AEN2109"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+> <P
+CLASS="literallayout"
+><br>
+Sprzêt&nbsp;jest&nbsp;nieokre¶lenie&nbsp;pewny.<br>
+Oprogramowanie&nbsp;jest&nbsp;okre¶lenie&nbsp;zawodne.<br>
+Ludzie&nbsp;s±&nbsp;nieokre¶lenie&nbsp;zawodni.<br>
+Natura&nbsp;jest&nbsp;okre¶lenie&nbsp;pewna.<br>
+</P
+></P
+></BLOCKQUOTE
+><P
+>  Rozdzia³ t³umaczy dlaczego, jak i kiedy tworzyæ kopie
+    zapasowe, oraz jak z nich skorzystaæ.
+	</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN2113"
+>10.1. Potrzeba kopii zapasowych</A
+></H1
+><P
+>  Twoje dane s± cenne. Odtwarzanie ich wymaga czasu
+    i wysi³ku, a to kosztuje Ciê zdrowie i pieni±dze; niektórych
+    danych nie da siê odtworzyæ. Dlatego powiniene¶ chroniæ swoje dane.
+	</P
+><P
+>  Zasadniczo istniej± cztery powody, z których mo¿esz straciæ
+    dane: usterka sprzêtu, pluskwa w oprogramowaniu, cz³owiek, naturalne
+    katastrofy.
+	
+		<A
+NAME="AEN2117"
+HREF="#FTN.AEN2117"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	Pomimo tego, ¿e sprzêt staje siê coraz bardziej niezawodny, zdarzaj±
+    siê usterki (czasami bardzo niespodziewanie). Najbardziej krytycznym
+    medium przechowuj±cym dane jest dysk twardy, jego zasada dzia³ania
+    opiera siê na malutkich polach magnetycznych stykaj±cych siê z szumem
+    magnetycznym ¶wiata. Nowoczesne oprogramowanie nie stara siê byæ
+    niezawodne; twardy jak ska³a program jest wyj±tkiem, nie zasad±.
+    Ludzie s± zawodni, pope³niaj± b³êdy, lub umy¶lnie niszcz± dane.
+    Natura p³ata figle. Wszystko wszystkim ale ma³ym cudem jest
+    dzia³anie wszystkiego.
+	</P
+><P
+>  Kopie zapasowe s± sposobem chronienia twoich danych.
+Posiadanie kilku kopii danych zapobiega przed ich utrat±, do tego
+    jest znacznie tañsze ni¿ ich odtwarzanie.
+	</P
+><P
+>  Kopie zapasowe musz± byæ tworzone w³a¶ciwie. Jak wszystko
+    co fizyczne kopie z czasem zepsuj± siê. Czê¶ci± tworzenia kopii
+    zapasowej jest upewnienie siê czy dzia³a; nie chcia³by¶ siê
+    o tym dowiedzieæ w razie potrzeby.
+    
+		<A
+NAME="AEN2121"
+HREF="#FTN.AEN2121"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>
+		
+	Pamiêtaj, ¿e w czasie tworzenia kopii równie¿ co¶ siê mo¿e zdarzyæ;
+    wtedy zostaniesz z rêk± w nocniku.
+    
+		<A
+NAME="AEN2123"
+HREF="#FTN.AEN2123"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+>
+		
+	Mo¿e siê zdarzyæ, ¿e odtwarzaj±c kopiê zauwa¿ysz, ¿e co¶ pomin±³e¶,
+    np. bazê u¿ytkowników zawieraj±c± 15000 wpisów. Oczywi¶cie, mo¿e
+    siê zdarzyæ, ¿e wszystko dzia³a wspaniale, jednak twojemu ostatniemu
+    streamerowi co¶ siê przydarzy³o.
+	</P
+><P
+>  Paranoja pomaga przy tworzeniu kopii zapasowych.
+	</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN2117"
+HREF="backups.html#AEN2117"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Pi±tym powodem jest "co¶ innego".</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN2121"
+HREF="backups.html#AEN2121"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Nie ¶miej siê. Przydarzy³o siê to wielu ludziom.
+		</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN2123"
+HREF="backups.html#AEN2123"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> By³em, zrobi³em...</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x2087.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x2126.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Tymczasowe blokowanie u¿ytkownika</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Wybór medium na kopiê zapasow±</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

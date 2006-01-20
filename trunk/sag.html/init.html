@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>init</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Dyskietki ratunkowe"
+HREF="x1671.html"><LINK
+REL="NEXT"
+TITLE="Plik /etc/inittab"
+HREF="x1712.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1671.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1712.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="init"
+></A
+>Chapter 7. <TT
+CLASS="command"
+>init</TT
+></H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>7.1. <A
+HREF="init.html#AEN1685"
+><TT
+CLASS="command"
+>init</TT
+> jest pierwszy</A
+></DT
+><DT
+>7.2. <A
+HREF="x1712.html"
+>Plik <TT
+CLASS="filename"
+>/etc/inittab</TT
+></A
+></DT
+><DT
+>7.3. <A
+HREF="x1764.html"
+>Poziomy pracy</A
+></DT
+><DT
+>7.4. <A
+HREF="x1799.html"
+>Specjalna konfiguracja w <TT
+CLASS="filename"
+>/etc/inittab</TT
+></A
+></DT
+><DT
+>7.5. <A
+HREF="x1825.html"
+>Startowanie w trybie jednego u¿ytkownika</A
+></DT
+></DL
+></DIV
+><P
+> 
+
+	<A
+NAME="AEN1680"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+> <SPAN
+CLASS="QUOTE"
+>"Uuno on numero yksi"</SPAN
+>
+	(slogan serii fiñskich filmów.)</P
+></BLOCKQUOTE
+>
+
+	</P
+><P
+> Rozdzia³ opisuje dzia³anie procesu <TT
+CLASS="command"
+>init</TT
+>,
+    który jest jedynym programem uruchamianym automatycznie przez
+    j±dro i na którym ci±¿y wiele obowi±zków.
+	</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1685"
+>7.1. <TT
+CLASS="command"
+>init</TT
+> jest pierwszy</A
+></H1
+><P
+> <TT
+CLASS="command"
+>init</TT
+> jest niezbêdny do dzia³ania Linuxa.
+    Wiêkszo¶æ dystrybucji przychodzi z dobrze skonfigurowanym programem
+	<TT
+CLASS="command"
+>init</TT
+>, którym nie musisz siê martwiæ.
+	Zazwyczaj z <TT
+CLASS="command"
+>initem</TT
+> spotkasz siê chc±c
+    utworzyæ dodatkowe terminale, zmieniæ domy¶lny poziom pracy.
+	</P
+><P
+> J±dro po wszelkich czynno¶ciach zwi±zanych z w³asn± inicjalizacj±
+    uruchamia program <TT
+CLASS="command"
+>init</TT
+>. 
+    Dlatego <TT
+CLASS="command"
+>init</TT
+> ma zawsze id = 1.</P
+><P
+> Linux szuka programu w kilku miejscach, jednak standardow±
+    lokacj± jest <TT
+CLASS="filename"
+>/sbin/init</TT
+>. 
+    Je¿eli j±dro nie znajdzie programu spróbuje uruchomiæ
+    <TT
+CLASS="filename"
+>/bin/sh</TT
+>, je¿eli to równie¿ siê nie uda
+    system przestaje dzia³aæ.
+	</P
+><P
+> <TT
+CLASS="command"
+>init</TT
+> uruchamia skrypty administracyjne
+    odpowiedzialne za sprawdzenie i zamontowanie systemów plików,
+    wyczyszczenie <TT
+CLASS="filename"
+>/tmp</TT
+>, uruchomienie
+    demonów oraz <TT
+CLASS="command"
+>getty</TT
+> na odpowiednich terminalach.
+	(zobacz <A
+HREF="log-in-and-out.html"
+>Chapter 8</A
+>).</P
+><P
+> W czasie dzia³ania systemu <TT
+CLASS="command"
+>init</TT
+>
+    restartuje <TT
+CLASS="command"
+>getty</TT
+> na terminalu, z którego u¿ytkownik
+    siê wylogowa³. Program adoptuje wszelkie osierocone procesy
+    (których rodzic umar³ przed zakoñczeniem pracy potomka).
+    Jest to bardzo wa¿ne - proces bez potomka nie mo¿e istnieæ, procesy
+    musz± tworzyæ sk³adne drzewo.
+    
+		<A
+NAME="AEN1706"
+HREF="#FTN.AEN1706"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+	
+	Istnieje kilka odmian <TT
+CLASS="command"
+>inita</TT
+>, wiêkszo¶æ dystrybucji
+    Linuxa rozprowadzana jest z wersj± opart± o 
+	<TT
+CLASS="command"
+>sysvinit</TT
+> (napisany przez Miquela
+	van Smoorenburga), który oryginalnie pojawi³ siê w Systemie V.
+	Istnieje równie¿ wersja BSD. G³ówna ró¿nica polega na tym,
+    ¿e System V posiada poziomy pracy, których w BSD brakuje.
+    Informacje odnosz± siê do <TT
+CLASS="command"
+>sysvinit</TT
+>.  </P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1706"
+HREF="init.html#AEN1706"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Sam <TT
+CLASS="command"
+>init</TT
+> nie umiera nigdy.
+        Nie mo¿esz go zabiæ sygna³em SIGKILL.  </P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1671.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1712.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Dyskietki ratunkowe</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Plik <TT
+CLASS="filename"
+>/etc/inittab</TT
+></TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

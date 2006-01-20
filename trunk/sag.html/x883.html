@@ -1,0 +1,687 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Partycje</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Korzystanie z ró¿nych medii przechowuj±cych dane"
+HREF="c712.html"><LINK
+REL="PREVIOUS"
+TITLE="Formatowanie"
+HREF="x826.html"><LINK
+REL="NEXT"
+TITLE="System plików"
+HREF="x1034.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x826.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Korzystanie z ró¿nych medii przechowuj±cych dane</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1034.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN883"
+>4.7. Partycje</A
+></H1
+><P
+> Ka¿dy dysk twardy mo¿e zostaæ podzielony na 
+	<I
+CLASS="glossterm"
+>partycje</I
+>. Ka¿da partycje stanowi osobn± czê¶æ,
+    tak jakby by³a osobnym dyskiem. Idea polega na tym, ¿e chc±c mieæ
+    dwa systemy operacyjne na jednym dysku mo¿esz stworzyæ odpowiednie
+    partycje. Ka¿dy z systemów bêdzie wykorzystywa³ swoj± czê¶æ na w³asny
+    sposób, inne nie bêd± go interesowaæ. Dziêki temu kilka systemów
+    operacyjnych mo¿e koegzystowaæ na jednym dysku.
+	</P
+><P
+> Dyskietki nie posiadaj± partycji, nie istnieje taka
+    potrzeba - ze wzglêdu na ich niewielk± pojemno¶æ.
+	CD-ROM-y zazwyczaj nie s± dzielone poniewa¿ ³atwiej u¿ywaæ ich
+    jako jedn± ca³o¶æ, rzadko kiedy zdarza siê potrzeba umieszczenia
+    na nich kilku systemów operacyjnych.
+	</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN888"
+>4.7.1. MBR, sektory ³aduj±ce i tablica partycji</A
+></H2
+><P
+> Informacje o podziale dysku umieszczone s± w pierwszym sektorze
+    (dok³adniej: pierwszym sektorze pierwszej ¶cie¿ki pierwszej 
+    p³aszczy¼ny). Sektor ten nazwany jest 
+	<I
+CLASS="glossterm"
+>g³ównym rekordem ³aduj±cym (master boot record)</I
+> (MBR)
+    ; czê¶æ ta odczytywana jest przez BIOS w czasie startu komputera
+    Zawiera ma³y program (~400 bajtów) który odczytuje tablicê partycji,
+    po czym odczytuje pierwszy sektor aktywnej partycji - 
+    <I
+CLASS="glossterm"
+>rekord ³aduj±cy</I
+>. W sektorze tym powinien
+    znajdowaæ siê ma³y program odczytuj±cy czê¶æ systemu operacyjnego
+    niezbêdn± do ³adowania, po czym uruchomiæ j±.
+	</P
+><P
+> Schemat partycjonowania dysku nie jest wbudowany w sprzêt,
+    ani w BIOS. Jest to konwencja u¿ywana w wielu systemach operacyjnych.
+    Nie wszystkie z nich przestrzegaj± j±, istniej± równie¿ pewne wyj±tki.
+    Niektóre z systemów zajmuj± jedn± partycjê, na której u¿ywaj± w³asnego
+    schematu podzia³u. Takie dzia³anie umo¿liwia zainstalowanie kilku systemów
+    operacyjnych, natomiast w przypadku systemów nie obs³uguj±cych partycji 
+    jeden dysk oznacza mo¿liwo¶æ zainstalowania tylko jednego systemu
+    operacyjnego.
+	</P
+><P
+> Zalecanym jest spisanie na kartce informacji o podziale dysku,
+    w ten sposób uszkodzenie tablicy partycji nie spowoduje straty
+    danych - dziêki zapisanym informacjom bêdziesz móg³ j± odtworzyæ.
+	Zepsuta tablica partycji mo¿e zostaæ naprawiona programem
+	<TT
+CLASS="command"
+>fdisk</TT
+>. Oto informacje o partycjach uzyskane poleceniem
+    <TT
+CLASS="command"
+>fdisk -l</TT
+>:
+	</P
+><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>fdisk -l /dev/hda</KBD
+>
+<SAMP
+CLASS="computeroutput"
+></SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>Disk /dev/hda: 15 heads, 57 sectors, 790 cylinders</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>Units = cylinders of 855 * 512 bytes</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+></SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>   Device Boot  Begin   Start     End  Blocks   Id  System</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>/dev/hda1           1       1      24   10231+  82  Linux swap</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>/dev/hda2          25      25      48   10260   83  Linux native</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>/dev/hda3          49      49     408  153900   83  Linux native</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>/dev/hda4         409     409     790  163305    5  Extended</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>/dev/hda5         409     409     744  143611+  83  Linux native</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>/dev/hda6         745     745     790   19636+  83  Linux native</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN912"
+>4.7.2. Partycje rozszerzone i logiczne</A
+></H2
+><P
+> Oryginalny schemat partycjonowania szybko okaza³ siê niewystarczaj±cy.
+    Wielu ludzi chcia³o mieæ wiêcej ni¿ cztery systemy operacyjne na
+    jednym dysku (Linux, MS-DOS, OS/2, Minix, FreeBSD, NetBSD, Windows/NT, 
+    itp.), równie¿ czê¶æ ludzi chcia³a rozmie¶ciæ jeden system na kilku
+    partycjach. Dla przyk³adu: w Linuksie swap ze wzglêdu wydajno¶ci
+    umieszcza siê na osobnej partycji (wiêcej poni¿ej).
+	</P
+><P
+> Aby omin±æ te ograniczenia wymy¶lono <I
+CLASS="glossterm"
+>partycje rozszerzone</I
+>.
+    Trik ten umo¿liwia dzielenie <I
+CLASS="glossterm"
+>podstawowej partycji</I
+> na
+    podpartycje.
+	Podstawowa partycja, która jest podzielona nazywa siê <I
+CLASS="glossterm"
+>partycj±
+    rozszerzon±</I
+>; podpartycja nazywa siê <I
+CLASS="glossterm"
+>partycj± logiczn±
+    </I
+>. Zachowuj± siê
+	
+		<A
+NAME="AEN920"
+HREF="#FTN.AEN920"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	jak zwyk³e partycje, ale tworzone s± w odmienny sposób.
+    Nie istnieje ró¿nica w prêdko¶ci.
+	</P
+><P
+> Struktura partycji mog³aby wygl±daæ nastêpuj±co 
+	<A
+HREF="x883.html#hard-disk-layout"
+>Figure 4-2</A
+>. Dysk podzielony jest na trzy
+    partycje podstawowe, druga partycja jest podzielona na dwa dyski
+    logiczne. Czê¶æ dysku nie jest podzielona.
+	Dysk oraz ka¿da z partycji posiada rekord ³aduj±cy.</P
+><DIV
+CLASS="figure"
+><A
+NAME="hard-disk-layout"
+></A
+><P
+><B
+>Figure 4-2. Przyk³adowy podzia³ dysku.</B
+></P
+><P
+><IMG
+SRC="hd-layout.png"></P
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN927"
+>4.7.3. Typ partycji</A
+></H2
+><P
+> Tablica partycji zawiera, dla ka¿dej, bajt oznaczaj±cy
+    typ partycji. Ma to na celu zidentyfikowanie systemu u¿ywaj±cego
+    danej partycji, lub celu u¿ycia. Celem by³o utrudnienie sytuacji,
+    w której dwa systemy operacyjne u¿ywa³yby tej samej partycji.
+    Jednak, w rzeczywisto¶ci wiele systemów nie interesuje siê
+    zawarto¶ci± tego¿ bajtu (Linux ma go w nosie). Co gorzej, niektóre
+    z nich interpretuj± go niepoprawnie - DR-DOS ignoruje najbardziej
+    znacz±cy bit tego¿ bajtu, przy czym inne systemy tego nie robi±.
+	</P
+><P
+> Nie istnieje standard zawieraj±cy informacje o dok³adnym znaczeniu
+    poszczególnych warto¶ci, czê¶æ z powszechnie akceptowanych
+	zawarta jest w <A
+HREF="x883.html#partition-ids"
+>Table 4-1</A
+>. T± sam± list±
+    pos³uguje siê program <TT
+CLASS="command"
+>fdisk</TT
+>.</P
+><DIV
+CLASS="table"
+><A
+NAME="partition-ids"
+></A
+><P
+><B
+>Table 4-1. Typy partycji (z Linuksowego programu <TT
+CLASS="command"
+>fdisk</TT
+>).</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><COL><COL><COL><COL><TBODY
+><TR
+><TD
+>0</TD
+><TD
+>Pusta</TD
+><TD
+>40</TD
+><TD
+>Venix 80286</TD
+><TD
+>94</TD
+><TD
+>Amoeba BBT</TD
+></TR
+><TR
+><TD
+>1</TD
+><TD
+>DOS 12-bit FAT</TD
+><TD
+>51</TD
+><TD
+>Novell?</TD
+><TD
+>a5</TD
+><TD
+>BSD/386</TD
+></TR
+><TR
+><TD
+>2</TD
+><TD
+>XENIX root</TD
+><TD
+>52</TD
+><TD
+>Microport</TD
+><TD
+>b7</TD
+><TD
+>BSDI fs</TD
+></TR
+><TR
+><TD
+>3</TD
+><TD
+>XENIX usr</TD
+><TD
+>63</TD
+><TD
+>GNU HURD</TD
+><TD
+>b8</TD
+><TD
+>BSDI swap</TD
+></TR
+><TR
+><TD
+>4</TD
+><TD
+>DOS 16-bitf &#60;32M</TD
+><TD
+>64</TD
+><TD
+>Novell</TD
+><TD
+>c7</TD
+><TD
+>Syrinx</TD
+></TR
+><TR
+><TD
+>5</TD
+><TD
+>Rozszerzona</TD
+><TD
+>75</TD
+><TD
+>PC/IX</TD
+><TD
+>db</TD
+><TD
+>CP/M</TD
+></TR
+><TR
+><TD
+>6</TD
+><TD
+>DOS 16-bit &#62;=32M</TD
+><TD
+>80</TD
+><TD
+>Old MINIX</TD
+><TD
+>e1</TD
+><TD
+>DOS access</TD
+></TR
+><TR
+><TD
+>7</TD
+><TD
+>OS/2 HPFS</TD
+><TD
+>81</TD
+><TD
+>Linux/MINIX</TD
+><TD
+>e3</TD
+><TD
+>DOS R/O</TD
+></TR
+><TR
+><TD
+>8</TD
+><TD
+>AIX</TD
+><TD
+>82</TD
+><TD
+>Linux swap</TD
+><TD
+>f2</TD
+><TD
+>DOS, druga</TD
+></TR
+><TR
+><TD
+>9</TD
+><TD
+>AIX, startowalna</TD
+><TD
+>83</TD
+><TD
+>Naturalna dla Linuxa</TD
+><TD
+>ff</TD
+><TD
+>BBT</TD
+></TR
+><TR
+><TD
+>a</TD
+><TD
+>OS/2 Boot Manager</TD
+><TD
+>93</TD
+><TD
+>Amoeba</TD
+><TD
+>&nbsp;</TD
+><TD
+>&nbsp;</TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1015"
+>4.7.4. Dzielenie dysku twardego</A
+></H2
+><P
+> Istnieje wiele programów s³u¿±cych do tego celu.
+    Wiêkszo¶æ systemów operacyjnych zawiera w³asne, których powinno siê
+    u¿ywaæ - mog± one robiæ co¶ niezwyk³ego, czego nie potrafi± zrobiæ inne.
+    Wiele z tych programów nazywa siê <TT
+CLASS="command"
+>fdisk</TT
+>, w³±czaj±
+    program Linuxa - odmianê tego¿ programu. Szczegó³y dotycz±ce programu
+    znajduj± siê w jego podrêczniku. 
+	Istnieje równie¿ <TT
+CLASS="command"
+>cfdisk</TT
+>, który jest '³adniejsz±' wersj±
+    <TT
+CLASS="command"
+>fdiska</TT
+>.
+	</P
+><P
+> U¿ywaj±c dysków IDE musisz upewniæ siê, ¿e partycja z obrazem j±dra
+    znajdzie siê poni¿ej 1024 cylindra. Jest to wymagane poniewa¿ proces
+    bootowania opiera siê na dzia³aniu BIOS-u, a ten nie potrafi
+    obs³u¿yæ wiêcej ni¿ 1024 cylindrów. Mo¿naby stworzyæ partycjê
+    zaczynaj±c± siê poni¿ej tej granicy, jednak nie jest to dobrym
+    pomys³em - fragmentacja dysku, lub niefortunne umieszczenie pliku
+    mog± spowodowaæ, ¿e nie bêdzie mo¿na uruchomiæ komputera.
+    Dla ¶wiêtego spokoju, upewnij siê, ¿e ca³a partycja znajduje siê poni¿ej
+    1024 cylindra.
+	</P
+><P
+> Niektóre nowsze BIOS-y i dyski IDE potrafi± obs³u¿yæ wiêcej
+    ni¿ 1024 cylindrów, je¿eli tak jest masz problem z g³owy, je¿eli
+    nie jeste¶ pewien za³ó¿, ¿e BIOS nie dzia³a - oszczêdzi Ci to k³opotów.
+	</P
+><P
+> Ka¿da partycja powinna mieæ parzyst± liczbê sektorów -
+    Linux u¿ywa systemu plików z blokiem o rozmiarze 1 kB - 2 sektory.
+    Nieparzysta liczba sektorów powoduje, ¿e ostatni z nich nie jest
+    u¿ywany, niektóre wersje 
+	<TT
+CLASS="command"
+>fdiska</TT
+> powiedz± Ci o tym.
+	</P
+><P
+> Zmiana rozmiaru partycji zazwyczaj wymaga utworzenia
+    kopi zapasowej (najlepiej ca³ego dysku), usuniêcia partycji, utworzenia
+    nowej i odtworzenia danych. Je¿eli powiêkszasz partycjê powiniene¶
+    stworzyæ kopie zapasowe usuwanych partycji (których miejsce u¿yjesz aby
+    utworzyæ wiêksz± partycjê).
+	</P
+><P
+> Poniewa¿ zmiana rozmiaru partycji nie jest mi³± czynno¶ci± powiniene¶
+    stworzyæ odpowiednie za pierwszym razem - zastanów siê przed za³o¿eniem
+    partycji, pomy¶l o przysz³o¶ci. Je¿eli instalujesz system z medium
+    niewymagaj±cego obecno¶ci cz³owieka (powiedzmy z CD-ROM-u, a nie dyskietek :-) warto
+    najpierw przetestowaæ kilka rozwi±zañ. Taki system mo¿na bez
+    problemu usun±æ - nie ma tam ¿adnych danych u¿ytkowników, itd.
+	</P
+><P
+> Istnieje program dla MS-DOS, nazywaj±cy siê
+	<TT
+CLASS="command"
+>fips</TT
+>, który zmienia rozmiar partycji
+    MS-DOS bez potrzeby tworzenia kopii zapasowej i odtwarzania,
+    w przypadku innych systemów plików musisz wykonaæ te kroki.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1029"
+>4.7.5. Pliki urz±dzeñ i partycje</A
+></H2
+><P
+> Ka¿da z partycji posiada swój plik urz±dzenia. Plik taki
+    ma czê¶æ wskazuj±c± na dysk (innymi s³owy nazwa dysku), zakoñczon±
+    numerem. Liczby 1-4 wskazuj± na partycje podstawowe (obojêtnie
+    od liczby partycji - mo¿esz mieæ partycje 2, 4, itp. ),
+    5-8 oznaczaj± dyski logiczne ( niezale¿nie od partycji podstawowej,
+    na której siê znajduj±). Dla przyk³adu: 
+	<TT
+CLASS="filename"
+>/dev/hda1</TT
+> oznacza pierwsz± podstawow± partycjê
+    na dysku hda, <TT
+CLASS="filename"
+>/dev/sdb7</TT
+> jest trzeci±
+    partycj± rozszerzon± na drugim dysku SCSI.
+	Lista urz±dzeñ zawiera wiêcej szczegó³ów.</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN920"
+HREF="x883.html#AEN920"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Nie logicznie?</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x826.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1034.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Formatowanie</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c712.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>System plików</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

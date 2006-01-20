@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Usuwanie u¿ytkownika</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Zarz±dzanie kontami u¿ytkowników"
+HREF="c1946.html"><LINK
+REL="PREVIOUS"
+TITLE="Zmiana ustawieñ u¿ytkownika"
+HREF="x2049.html"><LINK
+REL="NEXT"
+TITLE="Tymczasowe blokowanie u¿ytkownika"
+HREF="x2087.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x2049.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 9. Zarz±dzanie kontami u¿ytkowników</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x2087.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN2073"
+>9.4. Usuwanie u¿ytkownika</A
+></H1
+><P
+>  Przed usuniêciem u¿ytkownika usuñ wszystkie jego pliki,
+    skrzynki pocztowe, aliasy pocztowe, ¿±dania drukowania,
+    prace <TT
+CLASS="command"
+>crona</TT
+> i <TT
+CLASS="command"
+>at</TT
+>,
+    oraz wszelkie inne odwo³ania do niego. Teraz mo¿esz usun±æ
+    wpisy w <TT
+CLASS="filename"
+>/etc/passwd</TT
+> i <TT
+CLASS="filename"
+>/etc/group</TT
+>
+    (pamiêtaj o usuniêciu nazwy u¿ytkownika ze wszystkich grup, do których
+    by³ dodany). Dobrym pomys³em jest zablokowanie konta (powy¿ej) przed
+    powy¿szymi czynno¶ciami.
+	</P
+><P
+> 
+	Pamiêtaj, ¿e u¿ytkownicy mog± mieæ jakie¶ pliki poza swoimi katalogami
+    domowymi. Polecenie <TT
+CLASS="command"
+>find</TT
+> pomo¿e Ci je znale¼æ:
+
+</P><PRE
+CLASS="screen"
+>&#13;find / -user nazwa_u¿ytkownika 
+</PRE
+><P>
+
+	Pamiêtaj, ¿e to wykonanie polecenia mo¿e zaj±æ
+	<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>du¿o</I
+></SPAN
+> czasu, zale¿nie od ilo¶ci danych. 
+    Je¿eli czê¶æ dysków montowana jest przez sieæ mo¿e to znacz±co
+    j± obci±¿yæ (i serwer).
+	</P
+><P
+>  Niektóre dystrybucje Linuxa posiadaj± program
+	<TT
+CLASS="command"
+>deluser</TT
+>, lub <TT
+CLASS="command"
+>userdel</TT
+>, który
+    s³u¿y do automatycznego usuwania u¿ytkowników.
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x2049.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x2087.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Zmiana ustawieñ u¿ytkownika</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c1946.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Tymczasowe blokowanie u¿ytkownika</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

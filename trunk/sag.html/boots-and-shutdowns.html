@@ -1,0 +1,307 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Start i stop</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Bufor"
+HREF="buffer-cache.html"><LINK
+REL="NEXT"
+TITLE="Proces startowania - szczegó³y"
+HREF="x1587.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="buffer-cache.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1587.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="boots-and-shutdowns"
+></A
+>Chapter 6. Start i stop</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>6.1. <A
+HREF="boots-and-shutdowns.html#AEN1573"
+>Ogólne informacje</A
+></DT
+><DT
+>6.2. <A
+HREF="x1587.html"
+>Proces startowania - szczegó³y</A
+></DT
+><DT
+>6.3. <A
+HREF="x1633.html"
+>Wiêcej o zamykaniu systemu</A
+></DT
+><DT
+>6.4. <A
+HREF="x1660.html"
+>Restartowanie</A
+></DT
+><DT
+>6.5. <A
+HREF="x1667.html"
+>Tryb jednego u¿ytkownika</A
+></DT
+><DT
+>6.6. <A
+HREF="x1671.html"
+>Dyskietki ratunkowe</A
+></DT
+></DL
+></DIV
+><A
+NAME="AEN1569"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+> <P
+CLASS="literallayout"
+><br>
+Start&nbsp;me&nbsp;up<br>
+Ah...&nbsp;you've&nbsp;got&nbsp;to...&nbsp;you've&nbsp;got&nbsp;to<br>
+Never,&nbsp;never&nbsp;never&nbsp;stop<br>
+Start&nbsp;it&nbsp;up<br>
+Ah...&nbsp;start&nbsp;it&nbsp;up,&nbsp;never,&nbsp;never,&nbsp;never<br>
+&nbsp;You&nbsp;make&nbsp;a&nbsp;grown&nbsp;man&nbsp;cry,<br>
+&nbsp;&nbsp;you&nbsp;make&nbsp;a&nbsp;grown&nbsp;man&nbsp;cry<br>
+(Rolling&nbsp;Stones)<br>
+</P
+></P
+></BLOCKQUOTE
+><P
+>  Sekcja wyja¶nia co siê dzieje podczas startu i zamykania Linuxa.
+    Je¿eli poprawne procedury nie s± przestrzegane mo¿e doj¶æ do zniszczenia
+    systemu plików i utraty danych.
+	</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1573"
+>6.1. Ogólne informacje</A
+></H1
+><P
+> Akt w³±czania komputera i ³adowania systemu operacyjnego
+	
+		<A
+NAME="AEN1576"
+HREF="#FTN.AEN1576"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+	nazywany jest <I
+CLASS="glossterm"
+>bootowaniem (³adowaniem)</I
+>.
+	</P
+><P
+> Na pocz±tku komputer wykonuje 
+    <I
+CLASS="glossterm"
+>program ³aduj±cy</I
+>, którego zadaniem
+    jest za³adowanie i uruchomienie systemu operacyjnego. Kod ten
+    zazwyczaj znajduje siê w ¶ci¶le okre¶lonym miejscu i 
+    jest stosunkowo ma³y (kilkaset bajtów).
+	</P
+><P
+> Ró¿ne komputery maj± ró¿ne procedury startowania.
+    PeCet (jego BIOS) odczytuje pierwszy sektor  
+	(zwany <I
+CLASS="glossterm"
+>sektorem ³aduj±cym</I
+>) dyskietki, lub dysku.
+    Program ³aduj±cy znajduj±cy siê w tym¿e sektorze ³aduje
+    system operacyjny z innej czê¶ci dysku (lub z innego urz±dzenia).
+    </P
+><P
+> Po za³adowaniu Linuxa nastêpuje inicjalizacja sprzêtu i odpowiednich
+    sterowników, po czym uruchomiony zostaje 
+	<TT
+CLASS="command"
+>init</TT
+>. <TT
+CLASS="command"
+>init</TT
+> uruchamia inne
+    procesy, te z kolei umo¿liwiaj± zalogowanie siê u¿ytkowników i wiele
+    innych rzeczy.
+    Szczegó³y zostan± omówione poni¿ej.
+	</P
+><P
+> W celu wy³±czenia systemu Linux nale¿y wszystkim procesom
+    powiedzieæ, ¿e maj± siê zakoñczyæ (zamkn±æ wszystkie pliki i zrobiæ
+    inne niezbêdne rzeczy), nastêpuje odmontowanie systemu plików i
+    obszarów wymiany, po czym nastêpuje wy¶wietlenie informacji
+    o mo¿liwo¶ci wy³±czenia komputera. Je¿eli prawid³owa procedura
+    nie jest przestrzegana dyski mog± nie zostaæ zaktualizowane
+    (dane zostaj± stracone, mo¿liwo¶æ uszkodzenia systemu plików).
+	</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1576"
+HREF="boots-and-shutdowns.html#AEN1576"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> W pierwszych komputerach nie wystarczy³o w³±czyæ
+        urz±dzenia, trzeba by³o rêcznie za³adowaæ system operacyjny.
+	    </P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="buffer-cache.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1587.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Bufor</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Proces startowania - szczegó³y</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

@@ -1,0 +1,539 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Tworzenie u¿ytkownika</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Zarz±dzanie kontami u¿ytkowników"
+HREF="c1946.html"><LINK
+REL="PREVIOUS"
+TITLE="Zarz±dzanie kontami u¿ytkowników"
+HREF="c1946.html"><LINK
+REL="NEXT"
+TITLE="Zmiana ustawieñ u¿ytkownika"
+HREF="x2049.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c1946.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 9. Zarz±dzanie kontami u¿ytkowników</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x2049.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1959"
+>9.2. Tworzenie u¿ytkownika</A
+></H1
+><P
+> J±dro Linuxa traktuje u¿ytkowników jako liczby.
+    Ka¿dy u¿ytkownik identyfikowany jest poprzez unikaln± liczbê
+    ca³kowit± - <I
+CLASS="glossterm"
+>id u¿ytkownika</I
+>, lub <I
+CLASS="glossterm"
+>uid</I
+>,
+    dzieje siê tak dlatego, ¿e liczby najszybciej siê przetwarza.
+    Zewnêtrzna baza zawiera odpowiednie przypisania -
+    <I
+CLASS="glossterm"
+>u¿ytkownik</I
+> i jego identyfikator. 
+    </P
+><P
+>  Aby stworzyæ u¿ytkownika nale¿y zmieniæ bazê u¿ytkowników,
+    utworzyæ katalog domowy. Mo¿na go równie¿ pouczyæ i przygotowaæ mu
+    ¶rodowisko pracy.
+	</P
+><P
+> Wiêkszo¶æ dystrybucji posiada w³a¶ciwe sobie programy, np.
+    pracuj±ce w ¶rodowisku graficznym.
+    Zazwyczaj ogólnie rozprowadzanymi s±: <TT
+CLASS="command"
+>adduser</TT
+>
+    i <TT
+CLASS="command"
+>useradd</TT
+>. <A
+HREF="x1959.html#manual-adduser"
+>Section 9.2.5</A
+>
+    opisuje rêczne dodawanie u¿ytkowników.
+	</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1970"
+>9.2.1. <TT
+CLASS="filename"
+>/etc/passwd</TT
+> i inne pliki</A
+></H2
+><P
+>  Podstawow± baz± u¿ytkowników w Uniksach jest plik
+    textowy <TT
+CLASS="filename"
+>/etc/passwd</TT
+> (nazywany <I
+CLASS="glossterm"
+>plikiem
+    hase³</I
+>), który zawiera wszystkich poprawnych u¿ytkowników,
+    oraz niektóre informacje o nich. Na jednego u¿ytkownika przypada
+    jedna linia zawieraj±ca siedem, oddzielonych dwukropkami, pól:
+
+	<P
+></P
+></P><UL
+><LI
+><P
+> Nazwa u¿ytkownika.</P
+></LI
+><LI
+><P
+> Has³o w postaci zakodowanej.</P
+></LI
+><LI
+><P
+> Numeryczny identyfikator u¿ytkownika.</P
+></LI
+><LI
+><P
+> Numeryczny identyfikator grupy.</P
+></LI
+><LI
+><P
+> Imiê i nazwisko, oraz dodatkowy opis u¿ytkownika.</P
+></LI
+><LI
+><P
+> Katalog domowy.</P
+></LI
+><LI
+><P
+> Pow³oka logowania (program uruchamiany po zalogowaniu siê).</P
+></LI
+></UL
+><P>
+
+	Strona podrêcznika dotycz±ca <TT
+CLASS="filename"
+>passwd</TT
+> zawiera wiêcej
+    informacji.</P
+><P
+> Ka¿dy z u¿ytkowników mo¿e odczytaæ plik hase³, a w ten sposób
+    poznaæ nazwy innych u¿ytkowników. Oznacza to, ¿e has³a (w postaci zakodowanej) 
+    s± dostêpne dla wszystkich; teoretycznie nie powinno byæ to gro¼ne.
+	Niestety kodowanie mo¿na z³amaæ, zw³aszcza gdy has³o jest s³abe
+    (jest zbyt krótkie, mo¿na je znale¼æ w s³owniku, lub, co gorsza, domy¶leæ
+    siê go). Dlatego, z czasem, has³a zosta³y przeniesione do osobnego pliku.
+	</P
+><P
+> 
+    Wiele systemów zaimplementowa³o system <I
+CLASS="glossterm"
+>ukrytych hase³
+    </I
+>. Jest to alternatywna metoda przechowywania zakodowanych
+    hase³, która u¿ywa plik <TT
+CLASS="filename"
+>/etc/shadow</TT
+>, który
+    odczytywalny jest tylko przez roota.
+	<TT
+CLASS="filename"
+>/etc/passwd</TT
+> zawiera specjalny znacznik
+    oznaczaj±cy, ¿e has³o znajduje siê gdzie¶ indziej.
+	Ka¿dy program dokonuj±cy autoryzacji u¿ytkowników musi mieæ 
+    ustawiony bit setuid. Normalne programy, które potrzebuj± innych
+    pól, dzia³aj± bez zmian.
+	
+		<A
+NAME="AEN1997"
+HREF="#FTN.AEN1997"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN2000"
+>9.2.2. U¿ywanie numerycznych identyfikatorów</A
+></H2
+><P
+>  Najczê¶ciej nie musisz znaæ numerycznych numerów identyfikacyjnych,
+    jednak wiedza ta staje siê potrzebna gdy u¿ywasz Sieciowego systemu plików
+    (NFS) - na wszystkich komputerach identyfikatory musz± siê zgadzaæ.
+    Dzieje siê tak poniewa¿ NFS rozró¿nia u¿ytkowników po ich identyfikatorach
+    numerycznych.
+	</P
+><P
+>  Chc±c u¿ywaæ NFS musisz wynale¼æ mechanizm synchronizacji
+    informacji o kontach. W tym celu mo¿na u¿yæ systemu NIS
+    (opis w network-admin-guide).  </P
+><P
+>  Zasadniczo nie powiniene¶ u¿ywaæ starych identyfikatorów 
+    (textowych, czy numerycznych) - nowy u¿ytkownik móg³by przej±æ 
+    pliki starego u¿ytkownika.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN2005"
+>9.2.3. Zarz±dzanie grupami</A
+></H2
+><P
+>  S± dwie szko³y zarz±dzania grupami: domy¶lnie tworzyæ
+    dla ka¿dego u¿ytkownika now± grupê, lub do³±czaæ go do podanej.
+    Ka¿de z tych podej¶æ ma wady i zalety.
+    </P
+><P
+>  Tworzenie osobnych grup dla u¿ytkowników zwiêksza
+    bezpieczeñstwo ich danych - dodatkowa grupa praw dostêpu, któr±
+    nie musz± siê zajmowaæ - prawa dla grupy nie s± wa¿ne gdy tylko jeden
+    u¿ytkownik do niej nale¿y. Je¿eli chcesz zarz±dzaæ du¿± grup± u¿ytkowników,
+    traktowaæ ich na równych prawach lepiej domy¶lnie umieszczaæ ich
+    w jednej grupie.
+    </P
+><P
+>  Ja w ka¿dym przypadku powiniene¶ mieæ swoje zdanie, tylko ty
+    mo¿esz okre¶liæ swoje potrzeby, wiêc sam je realizuj.
+    </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN2010"
+>9.2.4. Domy¶lne ¶rodowisko: <TT
+CLASS="filename"
+>/etc/skel</TT
+></A
+></H2
+><P
+>  Zazwyczaj podczas tworzenia katalogu domowego u¿ytkownika
+    zostaj± do niego skopiowane pliki z katalogu
+	<TT
+CLASS="filename"
+>/etc/skel</TT
+>.
+    Dziêki temu administrator systemu mo¿e stworzyæ 
+	pliki, które dostarcz± u¿ytkownikowi przyjaznego ¶rodowiska.
+	Dla przyk³adu, w pliku <TT
+CLASS="filename"
+>/etc/skel/.profile</TT
+> 
+    mo¿na ustawiæ zmienn± EDITOR na jaki¶ edytor przyjazny nowicjuszom
+    ( vi ;-).
+	</P
+><P
+>  Zazwyczaj czê¶æ konfiguracji umieszcza siê w globalnych plikach 
+    konfiguracyjnych - w ten sposób gdy zmieni siê edytor mo¿esz
+    szybko zaktualizowaæ ustawienia u¿ytkowników.
+	Powiniene¶ pomy¶leæ nad pewnym podzia³em: zmienne, itp. lepiej 
+    umieszczaæ w plikach globalnych, natomiast ustawienia dla poszczególnych
+    programów, które u¿ytkownicy zapewne bêd± chcieli zmieniæ, w 
+    katalogach domowych.
+    </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="manual-adduser"
+>9.2.5. Rêczne tworzenie u¿ytkownika</A
+></H2
+><P
+>  Aby rêcznie stworzyæ konto wykonaj nastêpuj±ce kroki:
+
+	<P
+></P
+></P><UL
+><LI
+><P
+>  Zmieñ <TT
+CLASS="filename"
+>/etc/passwd</TT
+> za pomoc±
+	<TT
+CLASS="command"
+>vipw</TT
+>, dodaj odpowiedni± liniê dla nowego
+    u¿ytkownika.
+	<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>Nie zmieniaj tego pliku bezpo¶rednio za pomoc± edytora!
+    </I
+></SPAN
+> <TT
+CLASS="command"
+>vipw</TT
+> blokuje plik, co uniemo¿liwia
+    innym programom jego zmiany. Jako has³o powiniene¶ wstawiæ
+    `<VAR
+CLASS="literal"
+>*</VAR
+>' - blokuj±c konto.  </P
+></LI
+><LI
+><P
+>  Zmieñ <TT
+CLASS="filename"
+>/etc/group</TT
+>
+    za pomoc± <TT
+CLASS="command"
+>vigr</TT
+>.  </P
+></LI
+><LI
+><P
+>  Utwórz katalog domowy u¿ytkownika.
+	</P
+></LI
+><LI
+><P
+>  Skopiuj pliki z <TT
+CLASS="filename"
+>/etc/skel</TT
+>
+    do utworzonego katalogu.
+	</P
+></LI
+><LI
+><P
+>  Ustaw w³a¶ciciela i prawa dostêpu za pomoc±
+	<TT
+CLASS="command"
+>chown</TT
+> i <TT
+CLASS="command"
+>chmod</TT
+>. Przydatn± jest
+    opcja <VAR
+CLASS="option"
+>-R</VAR
+>. Poprawne prawa dostêpu s± ró¿ne na ró¿nych
+    systemach, jednak polecenia wygl±daæ powinny podobnie:
+
+</P><PRE
+CLASS="screen"
+>&#13;<KBD
+CLASS="userinput"
+>cd /home/nazwa_u¿ytkownika
+chown -R nazwa.grupa .
+chmod -R go=u,go-w .
+chmod go= .</KBD
+>
+</PRE
+><P>
+
+	</P
+></LI
+><LI
+><P
+>  Ustaw has³o za pomoc± <TT
+CLASS="command"
+>passwd</TT
+>.
+	</P
+></LI
+></UL
+><P>
+	</P
+><P
+>  Po ustawieniu has³a u¿ytkownik mo¿e siê zalogowaæ, wiêc
+    powinno to byæ ostatnim krokiem.
+	</P
+><P
+> 
+	Czasami trzeba utworzyæ bezu¿ytkownikowe konto,
+	dla przyk³adu: anonimowy serwer FTP potrzebuje u¿ytkownika
+    ftp. W takim wypadku powiniene¶ blokowaæ takie konta
+    - w ten sposób tylko root mo¿e staæ siê takim u¿ytkownikiem,
+    nikt siê nie mo¿e zalogowaæ.
+	</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1997"
+HREF="x1959.html#AEN1997"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Wszystkie informacje o u¿ytkowniku 
+        znajduj± siê w pliku hase³, <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>za wyj±tkiem</I
+></SPAN
+>
+        has³a :-)</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c1946.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x2049.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Zarz±dzanie kontami u¿ytkowników</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c1946.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Zmiana ustawieñ u¿ytkownika</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

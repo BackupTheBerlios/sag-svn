@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Bufor</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Zarz±dzanie pamiêci±"
+HREF="memory-management.html"><LINK
+REL="PREVIOUS"
+TITLE="Allokowanie obszaru wymiany"
+HREF="swap-allocation.html"><LINK
+REL="NEXT"
+TITLE="Start i stop"
+HREF="boots-and-shutdowns.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="swap-allocation.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 5. Zarz±dzanie pamiêci±</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="boots-and-shutdowns.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="buffer-cache"
+>5.6. Bufor</A
+></H1
+><P
+> Odczytywanie dysku
+	
+		<A
+NAME="AEN1541"
+HREF="#FTN.AEN1541"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	jest bardzo wolne w porównaniu z odczytem prawdziwej pamiêci.
+    Do tego, najczê¶ciej ten sam obszar dysku odczytywany jest w
+    ma³ych odstêpach czasu. Dla przyk³adu: kto¶ mo¿e odczytaæ list
+    e-mail chc±c na niego odpowiedzieæ, po czym odczytaæ go ponownie
+    aby przenie¶æ go do innego folderu. Lub, pomy¶l ile razy
+	<TT
+CLASS="command"
+>ls</TT
+> mo¿e zostaæ uruchomiony na systemie z wieloma
+    u¿ytkownikami. Zapisywanie danych odczytanych z dysku przy¶piesza kolejne
+    odwo³ania. Proces taki zwany jest <I
+CLASS="glossterm"
+>buforowaniem dysków
+	</I
+>.
+	</P
+><P
+> Poniewa¿ pamiêæ jest, niestety, skoñczona bufor musi mieæ
+    ograniczon± wielko¶æ (czasami nie mo¿e pomie¶ciæ na raz wymaganych
+    danych). Gdy dochodzi do zape³nienia bufora dane, które nie by³y
+    u¿ywane przez najd³u¿szy czas s± usuwane z bufora, powstaje miejsce
+    na nowe.
+	</P
+><P
+> Buforowanie dysków dzia³a równie¿ dla operacji zapisu.
+    Czêsto ¶wie¿o zapisane s± odczytywane ponownie, w krótkim odstêpie
+    czasu (np. zmiana kodu ¼ród³owego i ponowna kompilacja).
+    Dlatego umieszczanie zapisywanych danych w buforze jest dobr±
+    praktyk±. Odk³adanie zapisania na dysk równie¿ przy¶piesza programy.
+	</P
+><P
+> Wiêkszo¶æ systemów operacyjnych posiada mechanizm
+    buforowania operacji dyskowych, jednak nie wszystkie z nich dzia³aj±
+    wed³ug powy¿szego opisu.
+	Niektóre z nich dzia³aj± wdg zasady <I
+CLASS="glossterm"
+>zapisuj-poprzez</I
+>: 
+    dane zapisywane s± na dysku i odk³adane w buforze. Istnieje równie¿
+    metoda <I
+CLASS="glossterm"
+>zapisz-i-powróæ</I
+> - dane s± umieszczane
+    w pamiêci, aktualizacja dysku dokonywana jest co pewien okres.
+    Druga metoda jest wydajniejsza jednak czyni system bardziej podatnym na
+    zdarzenia losowe - odciêcie zasilania powoduje utratê danych znajduj±cych
+    siê w pamiêci, mo¿e to równie¿ doprowadziæ do uszkodzenia systemu plików -
+    struktury systemu plików mog± nie zostaæ uaktualnione.
+	</P
+><P
+> Dlatego, nigdy nie powiniene¶ wy³±czaæ komputera przed
+    poprawnym wykonaniem procedury wy³±czenia systemu operacyjnego
+    (zobacz <A
+HREF="boots-and-shutdowns.html"
+>Chapter 6</A
+>), oraz zmieniaæ 
+    dyskietek przed ich odmontowaniem.
+	Program <TT
+CLASS="command"
+>sync</TT
+> <I
+CLASS="glossterm"
+>flushes (opró¿nia)</I
+>
+	bufor - wymusza zapisanie wszelkich danych znajduj±cych siê w nim.
+    W tradycyjnych odmianach Unixa istnieje polecenie 
+	<TT
+CLASS="command"
+>update</TT
+>, które co 30 sekund uruchamia
+	<TT
+CLASS="command"
+>sync</TT
+>, Linux posiada demona 
+	<TT
+CLASS="command"
+>bdflush</TT
+>, który wykonuje pobie¿n± synchronizacjê
+    danych aby unikn±æ ogromnej ilo¶ci operacji we/wy na dysk powodowanych,
+    czasami, przez <TT
+CLASS="command"
+>sync</TT
+>.</P
+><P
+> W Linuksie <TT
+CLASS="command"
+>bdflush</TT
+> uruchamiany jest przez
+	<TT
+CLASS="command"
+>update</TT
+>. Je¿eli co¶ siê przydarzy <TT
+CLASS="command"
+>bdflush</TT
+> 
+    j±dro Ciê o tym poinformuje i bêdziesz musia³ rêcznie uruchomiæ opró¿nianie buforów
+	(<TT
+CLASS="command"
+>/sbin/update</TT
+>).</P
+><P
+> Aktualnie buforowaniu podlegaj± bloki (nie pliki), które
+    s± najmniejsza jednostk± operacji dyskowych.
+	(pod Linuxem s± one zazwyczaj wielko¶ci 1 kB). Dziêki temu
+    katalogi, superbloki i inne struktury systemu plików, oraz dane
+    niezale¿ne od systemu plików s± buforowane.
+	</P
+><P
+> Efektywno¶æ bufora jest najczê¶ciej podyktowana jego rozmiarem.
+    Ma³y bufor jest prawie bezu¿yteczny - dane znikn± z niego przed
+    ponownym odwo³aniem siê do nich. 
+	</P
+><P
+> Je¿eli bufor posiada sta³y rozmiar nie powinien byæ on zbyt du¿y,
+    poniewa¿ aplikacje nie bêd± mia³y miejsca do dzia³ania i bêd± musia³y
+    byæ zapisywane w swapie (co jest powolnym procesem).
+    Aby jak najefektywniej wykorzystaæ fizyczn± pamiêæ Linux
+    automatycznie wykorzystujê wszelkie nieu¿ywane zakamarki jako
+    bufor operacji blokowych, jednocze¶nie automatycznie zwalnia
+    pamiêæ w przypadku zapotrzebowania na ni±.
+	</P
+><P
+> W Linuksie nie musisz robiæ nic aby wykorzystywaæ dobrodziejstwa
+    bufora, wszystko zachodzi automatycznie. Jedyne co musisz robiæ to
+    poprawnie uruchamiaæ i zamykaæ system.
+    </P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1541"
+HREF="buffer-cache.html#AEN1541"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Pomijaj±c RAM-dysk, z przyczyn oczywistych.
+        </P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="swap-allocation.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="boots-and-shutdowns.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Allokowanie obszaru wymiany</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="memory-management.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Start i stop</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

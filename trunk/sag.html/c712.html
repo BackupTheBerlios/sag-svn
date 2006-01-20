@@ -1,0 +1,515 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Korzystanie z ró¿nych medii przechowuj±cych dane</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="System plików /proc"
+HREF="x608.html"><LINK
+REL="NEXT"
+TITLE="Dyski twarde"
+HREF="x756.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x608.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x756.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="AEN712"
+></A
+>Chapter 4. Korzystanie z ró¿nych medii przechowuj±cych dane</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>4.1. <A
+HREF="c712.html#AEN731"
+>Dwa typy urz±dzeñ</A
+></DT
+><DT
+>4.2. <A
+HREF="x756.html"
+>Dyski twarde</A
+></DT
+><DT
+>4.3. <A
+HREF="x795.html"
+>Dyskietki</A
+></DT
+><DT
+>4.4. <A
+HREF="x810.html"
+>CD-ROM-y</A
+></DT
+><DT
+>4.5. <A
+HREF="x820.html"
+>Ta¶my</A
+></DT
+><DT
+>4.6. <A
+HREF="x826.html"
+>Formatowanie</A
+></DT
+><DT
+>4.7. <A
+HREF="x883.html"
+>Partycje</A
+></DT
+><DD
+><DL
+><DT
+>4.7.1. <A
+HREF="x883.html#AEN888"
+>MBR, sektory ³aduj±ce i tablica partycji</A
+></DT
+><DT
+>4.7.2. <A
+HREF="x883.html#AEN912"
+>Partycje rozszerzone i logiczne</A
+></DT
+><DT
+>4.7.3. <A
+HREF="x883.html#AEN927"
+>Typ partycji</A
+></DT
+><DT
+>4.7.4. <A
+HREF="x883.html#AEN1015"
+>Dzielenie dysku twardego</A
+></DT
+><DT
+>4.7.5. <A
+HREF="x883.html#AEN1029"
+>Pliki urz±dzeñ i partycje</A
+></DT
+></DL
+></DD
+><DT
+>4.8. <A
+HREF="x1034.html"
+>System plików</A
+></DT
+><DD
+><DL
+><DT
+>4.8.1. <A
+HREF="x1034.html#AEN1036"
+>Czym jest system plików?</A
+></DT
+><DT
+>4.8.2. <A
+HREF="x1034.html#AEN1053"
+>Paleta systemów plików</A
+></DT
+><DT
+>4.8.3. <A
+HREF="x1034.html#AEN1112"
+>Które systemy plików powinnych byæ u¿ywane?</A
+></DT
+><DT
+>4.8.4. <A
+HREF="x1034.html#AEN1115"
+>Tworzenie systemu plików</A
+></DT
+><DT
+>4.8.5. <A
+HREF="x1034.html#mount-and-umount"
+>Montowanie i odmontowywanie</A
+></DT
+><DT
+>4.8.6. <A
+HREF="x1034.html#AEN1273"
+>Sprawdzanie integralno¶ci systemu plików za pomoc± <TT
+CLASS="command"
+>fsck</TT
+></A
+></DT
+><DT
+>4.8.7. <A
+HREF="x1034.html#AEN1292"
+>Sprawdzanie b³êdów dysku za pomoc± <TT
+CLASS="command"
+>badblocks</TT
+></A
+></DT
+><DT
+>4.8.8. <A
+HREF="x1034.html#AEN1306"
+>Zwalczanie fragmentacji</A
+></DT
+><DT
+>4.8.9. <A
+HREF="x1034.html#AEN1313"
+>Inne programy dla wszystkich systemów plików</A
+></DT
+><DT
+>4.8.10. <A
+HREF="x1034.html#AEN1326"
+>Inne narzêdzia dla ext2</A
+></DT
+></DL
+></DD
+><DT
+>4.9. <A
+HREF="x1355.html"
+>Dyski bez systemu plików</A
+></DT
+><DT
+>4.10. <A
+HREF="x1372.html"
+>Allokowanie przestrzeni dyskowej</A
+></DT
+><DD
+><DL
+><DT
+>4.10.1. <A
+HREF="x1372.html#AEN1374"
+>Schemat partycjonowania</A
+></DT
+><DT
+>4.10.2. <A
+HREF="x1372.html#AEN1389"
+>Wymagana przestrzeñ</A
+></DT
+><DT
+>4.10.3. <A
+HREF="x1372.html#AEN1398"
+>Przyk³adowe konfiguracje</A
+></DT
+><DT
+>4.10.4. <A
+HREF="x1372.html#AEN1426"
+>Dodawanie nowych dysków</A
+></DT
+><DT
+>4.10.5. <A
+HREF="x1372.html#AEN1430"
+>Jak oszczêdaæ powierzchniê dysków</A
+></DT
+></DL
+></DD
+></DL
+></DIV
+><A
+NAME="AEN714"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+> <SPAN
+CLASS="QUOTE"
+>"Czysty dysk mo¿esz przeszukiwaæ wiecznie.
+	"</SPAN
+></P
+></BLOCKQUOTE
+><P
+> Instaluj±c lub uaktualniaj±c system musisz dokonaæ wiele
+        operacji dyskowych. Musisz stworzyæ systemy plików, zarezerwowaæ
+        odpowiedni± ilo¶æ miejsca dla poszczególnych czê¶ci.
+        </P
+><P
+> Rozdzia³ omawia wszystkie te czynno¶ci. Zazwyczaj
+        etap ten jest jednokrotny, za wyj±tkiem pracy z dyskietkami.
+        Bêdziesz musia³ powróciæ do tego rozdzia³u w przypadku nowego
+        dysku lub optymalizacji operacji dyskowych.
+        </P
+><P
+> Podstawowe obowi±zki:</P
+><P
+></P
+><UL
+><LI
+><P
+> 
+        Sformatowaæ dysk. Oznacza to wszelkie rzeczy przygotowuj±ce
+        dysk do pracy, sprawdzenie wystêpowania z³ych sektorów
+        (aktualnie formatowanie nie jest konieczne).
+	    </P
+></LI
+><LI
+><P
+> 
+        Stworzyæ partycje. Mo¿e to byæ nieuniknione w przypadku chêci
+        posiadania kilku odmiennych systemów operacyjnych.
+        Rozmieszczenie drzewa katalogów na kilku dyskach czyni czê¶æ
+        z nich bardziej odpornymi na b³êdy - niektóre z nich mo¿na
+        zamontowaæ jako wy³±cznie do odczytu, czêsto plików u¿ytkowników
+        umieszcza siê na innej partycji w celu uproszczenia
+        tworzenia kopii zapasowych.
+	</P
+></LI
+><LI
+><P
+> 
+        Stworzyæ system plików (odpowiedniego typu) na ka¿dej partycji.
+	    Linux nie mo¿e dzia³aæ bez systemu plików - tylko w oparciu
+        o niego mo¿na tworzyæ/kasowaæ pliki, itd.
+	</P
+></LI
+><LI
+><P
+> 
+        Zamontowaæ ró¿ne systemu plików w odpowiedniej hierarchi -
+        automatczynie lub rêcznie (rêcznie montowane systemy plików
+        s± zazwyczaj odmontowywane, ale powiniene¶ siê upewniæ).
+	</P
+></LI
+></UL
+><P
+> <A
+HREF="memory-management.html"
+>Chapter 5</A
+> zawiera informacje
+    o wirtualnej pamiêci i buforowaniu operacji dyskowych - o czym
+    powiniene¶ pomy¶leæ.
+	</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN731"
+>4.1. Dwa typy urz±dzeñ</A
+></H1
+><P
+> UNIX, oraz Linux, rozpoznaje dwa typy urz±dzeñ: 
+    urz±dzenia blokowe losowego dostêpu (dyski), oraz urz±dzenia
+    znakowe (ta¶my, po³±czenia szeregowe ), niektóre z nich mo¿na
+    odczytywaæ losowo, niektóre sekwencyjnie. Ka¿de z urz±dzeñ
+    posiada <I
+CLASS="glossterm"
+>plik urz±dzenia</I
+>. Czytaj±/zapisuj±c
+    do pliku urz±dzenia odwo³ujesz siê do przypisanego plikowi sprzêtu.
+    Dziêki temu nie potrzeba ¿adnych specjalnych programów (oraz
+    specjalnego stylu programowania) aby u¿ywaæ dane urz±dzenie.
+    Dla przyk³adu: aby wys³aæ plik na drukarkê wystarczy
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>cat filename &#62; /dev/lp1</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	i zawarto¶æ pliku zostanie wydrukowana (oczywi¶cie plik musi
+    byæ w formacie akceptowanym przez drukarkê). Jednocze¶nie, je¿eli
+    kilku u¿ytkowników wy¶le jednocze¶nie pliki na drukarkê mo¿e
+    powstaæ sieczka - aby temu zapobiec nale¿y skorzystaæ z zewnêtrznych
+    programów (np. <TT
+CLASS="command"
+>lpr</TT
+>). Program ten upewnia siê, ¿e
+    tylko jeden plik jest w danym momencie drukowany. Takie podej¶cie
+    wymagane jest dla wielu urz±dzeñ. Zasadniczo, nie powiniene¶
+    zajmowaæ siê plikami urz±dzeñ, ale odpowiednimi programami.
+	</P
+><P
+> Poniewa¿ urz±dzenia s± plikami (w katalogu <TT
+CLASS="filename"
+>/dev</TT
+> directory)
+	mo¿na siê ³atwo przekonaæ czy dane urz±dzenie istnieje - wystarczy
+    u¿yæ <TT
+CLASS="command"
+>ls</TT
+>, lub podobnego programu.
+    Polecenie <TT
+CLASS="command"
+>ls -l</TT
+> pokazuje w pierwszej kolumnie
+    typ urz±dzenia, w drugiej prawa dostêpu. Dla przyk³adu:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>ls -l /dev/cua0</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>crw-rw-rw-   1 root     uucp       5,  64 Nov 30  1993 /dev/cua0</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Pierwszy znak w <VAR
+CLASS="literal"
+>crw-rw-rw-</VAR
+> - 
+    `<VAR
+CLASS="literal"
+>c</VAR
+>' oznacza, ¿e jest to urz±dzenie znakowe.
+    Dla zwyk³ych plików pierwszym znakiem jest 
+	`<VAR
+CLASS="literal"
+>-</VAR
+>', dla katalogów
+	`<VAR
+CLASS="literal"
+>d</VAR
+>', dla urz±dzeñ blokowych
+	`<VAR
+CLASS="literal"
+>b</VAR
+>'; zobacz stronê podrêcznika o programie <TT
+CLASS="command"
+>ls</TT
+>.
+    </P
+><P
+> Zapamiêtaj, ¿e wiêkszo¶æ plików istnieje pomimo braku 
+    zainstalowanych urz±dzeñ. Takie podej¶cie upraszcza proces instalacji,
+    oraz dodawania nowego sprzêtu (nie trzeba znaæ odpowiednich programów
+    i ich opcji aby utworzyæ odpowiedni plik).
+	</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x608.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x756.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>System plików <TT
+CLASS="filename"
+>/proc</TT
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Dyski twarde</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

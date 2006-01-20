@@ -1,0 +1,1664 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>System plików</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Korzystanie z ró¿nych medii przechowuj±cych dane"
+HREF="c712.html"><LINK
+REL="PREVIOUS"
+TITLE="Partycje"
+HREF="x883.html"><LINK
+REL="NEXT"
+TITLE="Dyski bez systemu plików"
+HREF="x1355.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x883.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Korzystanie z ró¿nych medii przechowuj±cych dane</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1355.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1034"
+>4.8. System plików</A
+></H1
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1036"
+>4.8.1. Czym jest system plików?</A
+></H2
+><P
+> <I
+CLASS="glossterm"
+>System plików</I
+> to metody i struktury
+    danych u¿ywane przez system operacyjny u¿ywane w celu
+    zapisania informacji o plikach i ich zawarto¶ci na danej partycji;
+    jest to sposób organizacji plików na dysku. S³owo to jest
+    u¿ywane równie¿ w znaczeniu dysku, partycji. Mo¿e to byæ nieco
+    myl±ce.
+	</P
+><P
+> Ró¿nica miêdzy dyskiem a partycj±, lub systemem plików
+        jest wa¿na. Kilka programów (w³±czaj± programy tworz±ce
+        systemy plików) pracuj± opieraj±c siê na sektorach;
+        je¿eli w polu dzia³ania istnieje system plików zostanie
+        on zniszczony, lub powa¿nie uszkodzony. Wiêkszo¶æ programów
+        pracuje w oparciu o system plików, nie bêd± one pracowaæ
+        na partycji nie zawieraj±cej go (lub na partycji zawieraj±cej
+        z³y system plików).
+        </P
+><P
+> Przed u¿yciem partycji, lub dysku jako system pliku nale¿y
+    odpowiednio go przygotowaæ, stworzyæ odpowiednie struktury.
+    Proces ten nazywany jest 
+	<I
+CLASS="glossterm"
+>tworzeniem systemu plików</I
+>.</P
+><P
+> Wiêkszo¶æ systemów plików u¿ywanych przez Unixy jest ogólnie
+    podobna (lub s± one funkcjonalnie podobne), jednak szczegó³y mog±
+    siê znacz±co ró¿niæ. Wspólnymi pomys³ami s±:
+	<I
+CLASS="glossterm"
+>superblok</I
+>,
+	<I
+CLASS="glossterm"
+>iwêze³</I
+>, <I
+CLASS="glossterm"
+>blok danych</I
+>,
+	<I
+CLASS="glossterm"
+>blok katalogu</I
+>, oraz <I
+CLASS="glossterm"
+>blok po¶redni
+	</I
+>.  Superblok zawiera informacje o systemie jako ca³o¶ci, np.
+    rozmiar (dok³adna zawarto¶æ zale¿y od systemu plików).
+	Iwêze³ zawiera wszelkie informacje o pliku, za wyj±tkiem jego nazwy.
+    Nazwa przechowywana jest w katalogu, razem z numerem iwêz³a.
+    Wpis katalogu zawiera nazwê, liczbê iwêz³ów plików.
+	Iwêze³ zawiera numery kilku bloków danych, które u¿ywane s± do przechowywania
+    pliku. Automatycznie allokowane miejsce pozwala przechowywaæ tylko kilka
+    numerów, jednak w razie potrzeby zostaje dynamicznie allokowana
+    dodatkowa przestrzeñ. Bloki allokowane dynamicznie nazywaj± siê bezpo¶rednimi;
+    nazwa wskazuje, ¿e w celu znalezienia numeru bloku danych nale¿y znale¼æ
+    pierwszy blok po¶redni.
+	</P
+><P
+> Zazwyczaj system plików UNIXA pozwala tworzyæ
+	<I
+CLASS="glossterm"
+>dziury</I
+> w plikach (s± one tworzone za pomoc±
+    <CODE
+CLASS="function"
+>lseek</CODE
+>; sprawd¼ stronê podrêcznika), oznacza to,
+    ¿e system udaje wystêpowanie zera na danym miejscu, jednak nie
+    zajmuje ono dysku. Dzieje siê tak czêsto w przypadku ma³ych binariów,
+    bibliotek dzielonych Linuxa, niektórych baz danych i przy innych okazjach.
+    Dziury przechowywane s± poprzez zapisywanie specjalne warto¶ci w polu
+    adresu bloku po¶redniego, lub iwêz³a. Ten specjalny adres oznacza, ¿e
+    w pliku jest dziura.
+	</P
+><P
+> Dziury s± ca³kiem po¿yteczne. Na systemie autora,
+    prosty pomiar pokaza³, i¿ oszczêdzono w ten sposób 4 MB dla 200 MB danych.
+	Ten system zawiera relatywnie ma³o programów i ¿adnych baz danych.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1053"
+>4.8.2. Paleta systemów plików</A
+></H2
+><P
+> Linux obs³uguje kilka typów systemów plików. Najwa¿niejszymi z
+    nich s±:
+
+	<DIV
+CLASS="glosslist"
+><DL
+><DT
+><B
+>minix</B
+></DT
+><DD
+><P
+> 
+		Najstarszy, uwa¿any za najbardziej niezawodny, jednak posiada
+        on znaczne ograniczenia (brakuje niektórych znaczników czasu,
+        nazwy plików mog± mieæ maxymalnie 30 znaków, system plików mo¿e
+        mieæ co najwy¿ej 64 MB ).
+		</P
+></DD
+><DT
+><B
+>xia</B
+></DT
+><DD
+><P
+> 
+		Zmodyfikowana wersja systemu minix, w której zosta³y podniesione
+        limity: maxymalnej d³ugo¶ci nazwy, oraz rozmiaru systemu plików.
+        ¯adne nowo¶ci nie zosta³y wprowadzone. Nie jest zbyt
+        popularny, jednak istniej± dowody, i¿ dzia³a ca³kiem dobrze.
+		</P
+></DD
+><DT
+><B
+>ext2</B
+></DT
+><DD
+><P
+> 
+		Najbogatszy w mo¿liwo¶ci system plików Linuxa,
+        aktualnie jest najbardziej popularny. Zaprojektowany
+        z my¶l± o zgodno¶ci wzwy¿, dziêki czemu powstanie nowej
+        wersji nie oznacza potrzeby konwersji.
+		</P
+></DD
+><DT
+><B
+>ext</B
+></DT
+><DD
+><P
+> 
+		Starsza wersja ext2, nie jest zgodna wzwy¿. Aktualnie nie
+        u¿ywany, wiêkszo¶æ ludzi u¿ywa ext2.
+		</P
+></DD
+><DT
+><B
+>Powstaj±ce systemy</B
+></DT
+><DD
+><P
+> 
+        Aktualnie powstaje kilka systemów 'z kartotek±', ich cechami s±
+        szybko¶æ operacji na du¿ej ilo¶ci plików, oraz algorytmy obs³uguj±ce,
+        które pozwalaj± na samoczynne naprawianie siê systemu w czasie
+        pracy.
+        </P
+></DD
+></DL
+></DIV
+>
+	</P
+><P
+> J±dro Linuxa potrafi (je¿eli tak je skompilowano) obs³u¿yæ
+    systemy plików obcego pochodzenia. Systemom takim czêsto brakuje
+    pewnych cech znanych z rozwi±zañ rdzennych dla Unixa, czasami
+    posiadaj± one dziwne ograniczenia.
+
+	<DIV
+CLASS="glosslist"
+><DL
+><DT
+><B
+>msdos</B
+></DT
+><DD
+><P
+> 
+		Kompatybliny z MS-DOS (OS/2 i Windows NT) system plików FAT.
+		</P
+></DD
+><DT
+><B
+>usmdos</B
+></DT
+><DD
+><P
+> 
+		Rozszerzona wersja systemu msdos, która umo¿liwia tworzyæ
+        d³ugie nazwy plików, ustanawiaæ w³a¶cicieli, prawa dostêpu,
+        ³±cza, oraz pliki urz±dzeñ. Dziêki niemu zwyk³y system
+        plików msdos zyskuje cechy znane w ¶rodowisku Unix, oraz
+        umo¿liwia zainstalowanie Linuxa na partycji MS-DOS.
+		</P
+></DD
+><DT
+><B
+>iso9660</B
+></DT
+><DD
+><P
+> 
+		Statdardowy system plików p³yt CD-ROM; popularne rozszerzenie "Rock
+        Ridge" rozpoznawane jest automatycznie.
+		</P
+></DD
+><DT
+><B
+>nfs</B
+></DT
+><DD
+><P
+> 
+		Sieciowy System Plików Suna umo¿liwia dzielenie systemów plików
+        poprzez sieæ, umo¿liwia tworzenie bezdyskowych stacji, itp.
+		</P
+></DD
+><DT
+><B
+>hpfs</B
+></DT
+><DD
+><P
+> 
+		System plików OS/2.
+		</P
+></DD
+><DT
+><B
+>sysv</B
+></DT
+><DD
+><P
+> 
+		U¿ywany przez SystemV/386, Coherenta i Xenixa.
+		</P
+></DD
+></DL
+></DIV
+>
+	</P
+><P
+> Wybór systemu plików czêsto podyktowany jest spraw± kompatybilno¶ci.
+    Je¿eli musisz mo¿esz wykorzystywaæ te systemy, jednak w przypadku
+    gdy kompatybilno¶æ nie jest wymagana najlepiej wybraæ ext2,
+    poniewa¿ posiada on wszelkie potrzebne mo¿liwo¶ci i do tego jest wydajny. 
+	</P
+><P
+> Istnieje równie¿ system plików proc, najczê¶ciej jest on
+    dostêpny poprzez katalog <TT
+CLASS="filename"
+>/proc</TT
+>, nie jest to rzeczywisty
+    system plików - jest to specjalne rozwi±zanie pozwalaj±ce sprawdzaæ
+    i modyfikowaæ, niektóre parametry j±dra podczas pracy systemu.
+	Takie podej¶cie umo¿liwia wgl±d w j±dro za pomoc± zwyk³ych
+    narzêdzi do manipulacji plikami. Dla przyk³adu aby odczytaæ aktualn±
+    listê procesów mo¿na zrobiæ co¶ takiego:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>ls -l /proc</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>total 0
+dr-xr-xr-x   4 root     root            0 Jan 31 20:37 1
+dr-xr-xr-x   4 liw      users           0 Jan 31 20:37 63
+dr-xr-xr-x   4 liw      users           0 Jan 31 20:37 94
+dr-xr-xr-x   4 liw      users           0 Jan 31 20:37 95
+dr-xr-xr-x   4 root     users           0 Jan 31 20:37 98
+dr-xr-xr-x   4 liw      users           0 Jan 31 20:37 99
+-r--r--r--   1 root     root            0 Jan 31 20:37 devices
+-r--r--r--   1 root     root            0 Jan 31 20:37 dma
+-r--r--r--   1 root     root            0 Jan 31 20:37 filesystems
+-r--r--r--   1 root     root            0 Jan 31 20:37 interrupts
+-r--------   1 root     root      8654848 Jan 31 20:37 kcore
+-r--r--r--   1 root     root            0 Jan 31 11:50 kmsg
+-r--r--r--   1 root     root            0 Jan 31 20:37 ksyms
+-r--r--r--   1 root     root            0 Jan 31 11:51 loadavg
+-r--r--r--   1 root     root            0 Jan 31 20:37 meminfo
+-r--r--r--   1 root     root            0 Jan 31 20:37 modules
+dr-xr-xr-x   2 root     root            0 Jan 31 20:37 net
+dr-xr-xr-x   4 root     root            0 Jan 31 20:37 self
+-r--r--r--   1 root     root            0 Jan 31 20:37 stat
+-r--r--r--   1 root     root            0 Jan 31 20:37 uptime
+-r--r--r--   1 root     root            0 Jan 31 20:37 version</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	(Poka¿e to kilka dodatkowych plików, które nie odpowiadaj± procesom.
+    Powy¿szy przyk³ad zosta³ skrócony.)
+	</P
+><P
+> Zapamiêtaj, ¿e pomimo swej nazwy "system plików" nie potrzeba
+    dla niego ¿adnego miejsca (oprócz miejsca na katalog /proc),
+    niektóre z plików posiadaj± rozmiar ró¿ny od zera, jest fikcyjny tak
+    samo jak ca³y system plików - stanowi czê¶æ informacji dostarczanej przez 
+    j±dro, ¿aden bajt dysku nie jest u¿yty.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1112"
+>4.8.3. Które systemy plików powinnych byæ u¿ywane?</A
+></H2
+><P
+> Zazwyczaj bezsensownym jest u¿ywanie kilku typów systemów
+    plików. Aktualnie ext2 jest najpopularniejszym i prawdopodobnie
+    stanowi najlepszy wybór. Zale¿nie od miejsca zu¿ywanego przez
+    sam system plików, prêdko¶ci, pewno¶ci dzia³ania,
+    kompatybilno¶ci i innych powodów mo¿na wybraæ inny system plików.
+    Ka¿dy przypadek wymaga oddzielnego podej¶cia.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1115"
+>4.8.4. Tworzenie systemu plików</A
+></H2
+><P
+> System plików jest tworzony (inicjalizowany) przez 
+    <TT
+CLASS="command"
+>mkfs</TT
+>. Aktualnie istnieje kilka osobnych programów
+    dla ka¿dego systemu plików.
+    Polecenie <TT
+CLASS="command"
+>mkfs</TT
+> po¶redniczy miêdzy nimi a u¿ytkownikiem.
+    Typ wybierany jest za pomoc± opcji <VAR
+CLASS="option"
+>-t typ</VAR
+>.</P
+><P
+> Programy wywo³ywane przez <TT
+CLASS="command"
+>mkfs</TT
+> mog± wymagaæ 
+    innych opcji. Wspólne i najwa¿niejsze podane s± poni¿ej; zobacz
+    odpowiednie strony podrêcznika.
+
+	<DIV
+CLASS="glosslist"
+><DL
+><DT
+><B
+><VAR
+CLASS="option"
+>-t typ</VAR
+></B
+></DT
+><DD
+><P
+> 
+		Wybierz system plików.
+		</P
+></DD
+><DT
+><B
+><VAR
+CLASS="option"
+>-c</VAR
+></B
+></DT
+><DD
+><P
+> 
+		 Sprawd¼ czy s± jakie¶ zepsute bloki, inicjalizuj listê
+         z³ych bloków odpowiednio.
+		</P
+></DD
+><DT
+><B
+>-l plik</B
+></DT
+><DD
+><P
+> 
+		Odczytaj z pliku listê z³ych bloków.
+		</P
+></DD
+></DL
+></DIV
+>
+	</P
+><P
+> Aby na dyskietce utworzyæ system plików ext2 nale¿y wykonaæ nastêpuj±ce polecenia:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>fdformat -n /dev/fd0H1440</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>Double-sided, 80 tracks, 18 sec/track. Total capacity 1440 kB.
+Formatting ... done</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>badblocks /dev/fd0H1440 1440 $&#62;$ bad-blocks</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>mkfs -t ext2 -l bad-blocks /dev/fd0H1440</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>mke2fs 0.5a, 5-Apr-94 for EXT2 FS 0.5, 94/03/10
+360 inodes, 1440 blocks
+72 blocks (5.00%) reserved for the super user
+First data block=1
+Block size=1024 (log=0)
+Fragment size=1024 (log=0)
+1 block group
+8192 blocks per group, 8192 fragments per group
+360 inodes per group
+
+Writing inode tables: done
+Writing superblocks and filesystem accounting information: done</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+	</P
+><P
+>&#13;	Najpierw sformatowano dyskietkê ( opcja <VAR
+CLASS="option"
+>-n</VAR
+> wy³±cza
+    sprawdzanie wystêpowania z³ych bloków ), pó¼niej sprawdzili¶my
+    czy dyskietka nie posiada zepsutych obszarów za pomoc± programu
+    <TT
+CLASS="command"
+>badblocks</TT
+>, wyj¶cie skierowali¶my do pliku.
+    Ostatecznie stworzyli¶my system plików, zainicjowali¶my listê
+    z³ych bloków zawarto¶ci± pliku.
+	</P
+><P
+> Mo¿na by³o u¿yæ opcji <VAR
+CLASS="option"
+>-c</VAR
+> programu
+	<TT
+CLASS="command"
+>mkfs</TT
+>, zamiast uruchamiaæ program <TT
+CLASS="command"
+>badblocks</TT
+>
+	Poni¿szy przyk³ad dzia³a tak:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>mkfs -t ext2 -c /dev/fd0H1440</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>mke2fs 0.5a, 5-Apr-94 for EXT2 FS 0.5, 94/03/10
+360 inodes, 1440 blocks
+72 blocks (5.00%) reserved for the super user
+First data block=1
+Block size=1024 (log=0)
+Fragment size=1024 (log=0)
+1 block group
+8192 blocks per group, 8192 fragments per group
+360 inodes per group
+
+Checking for bad blocks (read-only test): done
+Writing inode tables: done
+Writing superblocks and filesystem accounting information: done</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Opcja <VAR
+CLASS="option"
+>-c</VAR
+> jest pewniejsza ni¿ u¿ycie
+	<TT
+CLASS="command"
+>badblocks</TT
+>, jednak program <TT
+CLASS="command"
+>badblocks</TT
+> 
+    jest niezbêdny do sprawdzania istniej±cych systemów plików.</P
+><P
+> Aby przygotowaæ dysk nale¿y wykonaæ podobne czynno¶ci, przy czym
+    formatowanie nie jest potrzebne.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="mount-and-umount"
+>4.8.5. Montowanie i odmontowywanie</A
+></H2
+><P
+> Przed u¿yciem systemu plików nale¿y go <I
+CLASS="glossterm"
+>zamountowaæ</I
+>.
+    System operacyjny sprawdza, niektóre czê¶ci systemu plików w
+    celu upewnienia siê, ¿e dzia³a. Poniewa¿ w Unixie pliki przechowywane
+    w jednym drzewie nowy system plików bêdzie tworzy³ zawarto¶æ jakiego¶
+    katalogu.
+	</P
+><P
+> Dla przyk³adu: <A
+HREF="x1034.html#hd-mount-root"
+>Figure 4-3</A
+> pokazuje systemy plików,
+    ich katalogi g³ówne zosta³y zaznaczone.
+	Montuj±c ostatnie dwa systemy plików odpowiednio w katalogu
+    <TT
+CLASS="filename"
+>/home</TT
+> i <TT
+CLASS="filename"
+>/usr</TT
+>, wszystko to
+    na pierwszym systemie plików, otrzymamy spójne drzewo katalogów:
+	<A
+HREF="x1034.html#hd-mount-all"
+>Figure 4-4</A
+>.</P
+><DIV
+CLASS="figure"
+><A
+NAME="hd-mount-root"
+></A
+><P
+><B
+>Figure 4-3. Trzy osobne systemy plików.</B
+></P
+><P
+><IMG
+SRC="hd-mount-separate.png"></P
+></DIV
+><DIV
+CLASS="figure"
+><A
+NAME="hd-mount-all"
+></A
+><P
+><B
+>Figure 4-4. <TT
+CLASS="filename"
+>/home</TT
+> i <TT
+CLASS="filename"
+>/usr</TT
+> zosta³y zamontowane.</B
+></P
+><P
+><IMG
+SRC="hd-mount-mounted.png"></P
+></DIV
+><P
+> Montowañ mo¿na dokonaæ w sposób nastêpuj±cy:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>mount /dev/hda2 /home</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>mount /dev/hda3 /usr</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Pierwszy argument oznacza plik urz±dzenia zawieraj±cy
+    system plików. Drugi argument to katalog, w którym nale¿y
+    zamontowaæ zawarto¶æ urz±dzenia. Po zamontowaniu zawarto¶æ
+    systemu plików podanego urz±dzenia staje siê zawarto¶ci±
+    katalogu.
+	
+	Zauwa¿ ró¿nicê miêdzy urz±dzeniem <TT
+CLASS="filename"
+>/dev/hda2</TT
+>, a
+	<TT
+CLASS="filename"
+>/home</TT
+>. Plik urz±dzenia umo¿liwia dostêp
+    do surowych danych, natomiast, po zamontowaniu, katalog udostêpnia
+    te dane w postaci plików i katalogów.
+    Katalog, do którego montujemy system plików nazywany jest
+	<I
+CLASS="glossterm"
+>punktem montowania</I
+>.</P
+><P
+> Linux obs³uguje wiele systemów plików.  <TT
+CLASS="command"
+>mount</TT
+> 
+    próbuje odgadn±æ typ systemu (co mo¿e mu siê nie udaæ). Aby
+    jawnie podaæ system plików nale¿y pos³u¿yæ siê opcj±
+	<VAR
+CLASS="option"
+>-t typ</VAR
+>;
+    Aby zamontowaæ dyskietkê MS-DOS:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>mount -t msdos /dev/fd0 /floppy</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+	</P
+><P
+> Punkt montowania nie powinien zawieraæ plików - bêd±
+    one niedostêpne a¿ do odmontowania systemu plików (otwarte
+    pliki bêd± nadal dostêpne).
+	Nie czyni to szkody, a czasami mo¿e byæ po¿yteczne:
+	za³ó¿my, ¿e <TT
+CLASS="filename"
+>/tmp</TT
+> i <TT
+CLASS="filename"
+>/var/tmp</TT
+> 
+    s± synonimami, niech <TT
+CLASS="filename"
+>/tmp</TT
+> bêdzie ³±czem symbolicznym
+    do <TT
+CLASS="filename"
+>/var/tmp</TT
+>. Podczas startu systemu, przed zamontowaniem
+    <TT
+CLASS="filename"
+>/var</TT
+>, katalog <TT
+CLASS="filename"
+>/var/tmp</TT
+> znajduj±cy
+    siê na g³ównym systemie plików jest u¿ywany.
+	Montuj±c <TT
+CLASS="filename"
+>/var</TT
+> przes³aniamy <TT
+CLASS="filename"
+>/var/tmp</TT
+>.
+    Je¿eli <TT
+CLASS="filename"
+>/var/tmp</TT
+> nie istnia³by na g³ównym systemie
+    plików nie mo¿naby tworzyæ plików tymczasowych przez zamontowaniem
+	<TT
+CLASS="filename"
+>/var</TT
+>.</P
+><P
+> Je¿eli nie zamierzasz zmieniaæ systemu plików u¿yj opcji
+	<VAR
+CLASS="option"
+>-r</VAR
+> - w ten sposób zamontujesz go w trybie <I
+CLASS="glossterm"
+>&#13;    wy³±cznie do odczytu</I
+>. J±dro odrzuci wszelkie próby zapisu
+    , oraz nie bêdziê aktualizowaæ czasu dostêpu do iwêz³ów.
+    Montowanie w trybie wy³±cznie-do-odczytu jest niezbêdne dla niezapisywalnych
+    mediów (np. CD-ROM-ów).
+	</P
+><P
+> Uwa¿ny czytelnik zapewne zauwa¿y³ pewnien logiczny problem.
+    Jak mo¿na zamontowaæ pierwszy system plików (nazywany 
+	<I
+CLASS="glossterm"
+>g³ównym</I
+>, skoro nie mo¿na go zamontowaæ jako 
+    podkatalog innego? Có¿, dzieje siê tak za spraw± magii.
+	
+		<A
+NAME="AEN1215"
+HREF="#FTN.AEN1215"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	G³ówny system plików jest magicznie montowany w czasie starty
+    systemu. Je¿eli nie mo¿e zostaæ zamontowany system nie uruchomi siê.
+    Nazwa pierwszego systemu plików jest albo wkompilowana w j±dro,
+    albo ustawiona za pomoc± LILO, lub <TT
+CLASS="command"
+>rdev</TT
+>.
+	</P
+><P
+> G³ówny system plików jest najczê¶ciej montowany jako
+    wy³±cznie-do-odczytu. Pó¼niej skrypt startowy uruchamia
+    <TT
+CLASS="command"
+>fsck</TT
+> w celu walidacji poprawno¶ci, je¿eli
+    nie wykryto b³êdów system plików zostaje przemontowany
+    do trybu zapisywalnego. 
+	<TT
+CLASS="command"
+>fsck</TT
+> nie mo¿e byæ uruchamiany na zamontowanym
+    systemie plików poniewa¿ wszelkie poczynione zmiany spowodowa³yby
+    wadliw± pracê tego programu i prawdopodobn± utratê danych.
+    Jednak¿e system plików znajduje siê w trybie tylko-do-odczytu i
+    <TT
+CLASS="command"
+>fsck</TT
+> mo¿e go zmieniaæ, operacja
+    przemontowywania usunie z pamiêci wszelkie poczynione zmiany i
+    nie dojdzie do uszkodzenia systemu plików.
+    </P
+><P
+> W wielu systemach u¿ywa siê kilku systemów plików, które
+    powinny zostaæ zamontowane automatycznie podczas startu systemu.
+	Podaje je siê w pliku <TT
+CLASS="filename"
+>/etc/fstab</TT
+> (zobacz
+    stronê odpowiedni± stronê podrêcznika).
+    Dok³adne szczegó³y dotycz±ce tego procesu mog± siê ró¿niæ - s±
+    zale¿ne od administratora, zobacz sekcjê 
+    <A
+HREF="boots-and-shutdowns.html"
+>Chapter 6</A
+>.</P
+><P
+> Je¿eli system plików nie jest ju¿ potrzeby nale¿y go odmontowaæ
+    poleceniem <TT
+CLASS="command"
+>umount</TT
+>.
+	
+		<A
+NAME="AEN1227"
+HREF="#FTN.AEN1227"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>
+		
+	<TT
+CLASS="command"
+>umount</TT
+> potrzebuje jednego argumentu -
+	systemu plików.
+    Oto jak odmontowaæ systemu plików zamontowane w poprzednim
+    przyk³adzie:
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>umount /dev/hda2</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>umount /usr</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+	</P
+><P
+> Zobacz odpowiedni± stronê podrêcznika. Nale¿y pamiêtam, ¿e
+    nale¿y odmontowaæ system plików przed wyci±gniêciem jego no¶nika
+    (np. dyskietki). 
+	<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>Nie wyci±gaj dyskietki bez jej odmontowania!
+	</I
+></SPAN
+> Informacje zapisywane s± w odpowiednich buforach, w pamiêci
+    i tylko co jaki¶ czas nastêpuje aktualizacja, wyci±gaj±c dyskietkê w
+    najlepszym przypadku stracisz dane, w najgorszym zniszczysz system plików.
+	</P
+><P
+> Montowanie i odmontowywanie wymaga przywilejów superu¿ytkownika.
+    W ten sposób u¿ytkownik nie mo¿e wprowadziæ 'brzydkiego' programu.
+	Zdarza siê, ¿e niektórym u¿ytkownikom nale¿y udostêpniæ napêd
+    dyskietek, istnieje na to kilka sposobów:
+
+	<P
+></P
+></P><UL
+><LI
+><P
+> Daæ im has³o roota. Oczywi¶cie stanowi to
+    zagro¿enie bezpieczeñstwa systemu, ale jest na³atwiejszym wyj¶ciem.
+	Jest to dobre wyj¶cie na domowych komputerach.
+	</P
+></LI
+><LI
+><P
+> Skorzystaæ z programu <TT
+CLASS="command"
+>sudo</TT
+> aby umo¿liwiæ
+    u¿ytkownikom uruchamianie programu mount. Ci±gle jest dziura w bezpieczeñstwie,
+    choæ nie daje bezpo¶redniego dostêpu do roota.
+		<A
+NAME="AEN1246"
+HREF="#FTN.AEN1246"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+>
+	</P
+></LI
+><LI
+><P
+> Pozwoliæ u¿ytkownikom korzystaæ z pakietu
+    <TT
+CLASS="command"
+>mtools</TT
+>(programy manipuluj±ce dyskietkami
+    MS-DOS bez potrzeby montowania).
+	</P
+></LI
+><LI
+><P
+> Wstawiæ odpowiednie wpisy do pliku
+	<TT
+CLASS="filename"
+>/etc/fstab</TT
+>.</P
+></LI
+></UL
+><P>
+
+	Ostatnia alternatywa mo¿e zostaæ zaimplementowana poprzez wstawienie
+    nastêpuj±cej linijki do pliku <TT
+CLASS="filename"
+>/etc/fstab</TT
+>:
+
+</P><PRE
+CLASS="screen"
+>&#13;/dev/fd0            /floppy      msdos   user,noauto      0     0
+</PRE
+><P>
+
+	Kolumny oznaczaj±: plik urz±dzenia, punkt montowania, typ systemu plików,
+    opcje, czêstotliwo¶æ tworzenia kopii bezpieczeñstwa
+    (u¿ywane przez <TT
+CLASS="command"
+>dump</TT
+>) i numer dla <TT
+CLASS="command"
+>fsck</TT
+>
+    oznaczaj±cy kolejno¶æ sprawdzania (aby podaæ kolejno¶æ sprawdzania,
+    0 oznacza jego brak).
+	</P
+><P
+> Opcja <VAR
+CLASS="option"
+>noauto</VAR
+> powstrzymuje mount od automatycznego
+    montowania podczas startu systemu (wykonywania 
+	<TT
+CLASS="command"
+>mount -a</TT
+>).  Opcja <VAR
+CLASS="option"
+>user</VAR
+> 
+    oznacza, ¿e ka¿dy u¿ytkownik ma prawo zamontowaæ system plików
+    oraz, ¿e u¿ytkownik nie ma prawa uruchamiaæ programów znajduj±cych
+    siê na tym systemie plików, oraz wy³±cza interpretacje plików urz±dzeñ.
+	Po takich zmianach ka¿dy u¿ytkownik mo¿e zamontowaæ dyskietkê
+    zawieraj±c± system plików FAT:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>mount /floppy</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Dyskietka musi zostaæ odmontowana za pomoc± polecenia
+	<TT
+CLASS="command"
+>umount</TT
+>.</P
+><P
+> Je¿eli chcesz udostêpniæ mo¿liwo¶æ korzystania z dyskietek
+    ró¿nych typów musisz wstawiæ odpowiednie linijki, oraz
+    stworzyæ kilka puntków montowania.
+	Dla przyk³adu:
+
+</P><PRE
+CLASS="screen"
+>&#13;/dev/fd0    /mnt/dosfloppy    msdos   user,noauto  0  0
+/dev/fd0    /mnt/ext2floppy   ext2    user,noauto  0  0
+</PRE
+><P>
+
+	Dla systemu plików MS-DOS-a zapewne chcesz zablokowaæ pozosta³ym
+    dostêp do dyskietki - umo¿liwia to po³±czenie opcji:
+	<VAR
+CLASS="option"
+>uid</VAR
+>, <VAR
+CLASS="option"
+>gid</VAR
+> i <VAR
+CLASS="option"
+>umask</VAR
+>
+    (wiêcej znajduje siê w podrêczniku dotycz±cym <TT
+CLASS="command"
+>mount</TT
+>).
+	Je¿eli jeste¶ nieostro¿ny, zamontowanie takiej dyskietki
+    umo¿liwi skorzystanie z niej ka¿demu, co nie jest dobrym pomys³em.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1273"
+>4.8.6. Sprawdzanie integralno¶ci systemu plików za pomoc± <TT
+CLASS="command"
+>fsck</TT
+></A
+></H2
+><P
+> Systemy plików to z³o¿one stworzonka i jako takie maj± 
+    sk³onno¶ci do psucia siê. Poprawno¶æ systemu plików mo¿na sprawdziæ
+    za pomoc± programu <TT
+CLASS="command"
+>fsck</TT
+>.
+	Mo¿na go ustawiæ tak aby naprawia³ automatycznie drobne b³êdy,
+    oraz powiadamia³ u¿ytkownika w przypadku nienaprawialnych usterek.
+    Na szczê¶cie, kod implementuj±cy systemy plików by³ bacznie
+    sprawdzany, przez to wiêkszo¶æ b³êdów powstaje z powodu u¿ytkownika
+    (niepoprawne zamkniêcie systemu), sprzêtu lub wypadki losowe
+    (problemy z zasilaniem).
+    </P
+><P
+> Wiêkszo¶æ systemów ma ustawione automatyczne uruchamianie
+    <TT
+CLASS="command"
+>fsck</TT
+> w czasie startu, dziêki czemu
+    wykryte b³êdy s± naprawiane przed u¿ycie systemu plików.
+    Pamiêtaj, ¿e u¿ywanie zepsutego systemu plików najczê¶ciej
+    powoduje powstanie nowych b³êdów.
+	Poniewa¿ sprawdzanie du¿ego systemu plików mo¿e zaj±æ
+    <TT
+CLASS="command"
+>fsck</TT
+> du¿o czasu stosuje siê pewne sztuczki.
+	Po piewsze, je¿eli instnieje plik <TT
+CLASS="filename"
+>/etc/fastboot</TT
+>
+    sprawdzanie zostanie pominiête. Po drugie, ext2 posiada specjalne
+    pole w superbloku mówi±ce czy dany system plików zosta³ poprawnie
+    odmontowany. To umo¿liwia <TT
+CLASS="command"
+>e2fsck</TT
+> (odmianie <TT
+CLASS="command"
+>fsck</TT
+>
+	dla systemu plików ext2) pomin±æ sprawdzanie poprawnie odmontowanych
+    (zak³ada siê, ¿e poprawnie odmontowany system plików nie powinien
+    zawieraæ b³êdów). Trik z <TT
+CLASS="filename"
+>/etc/fastboot</TT
+>
+    opiera siê na dzia³aniu skryptów startowych.
+	</P
+><P
+> Automatyczne sprawdzanie dzia³a tylko dla systemów automatycznie
+    montowanych podczas startu.
+	Aby sprawdziæ inne musisz rêcznie uruchomiæ <TT
+CLASS="command"
+>fsck</TT
+>.
+	</P
+><P
+> Je¿eli <TT
+CLASS="command"
+>fsck</TT
+> znajdzie nienaprawialne b³êdy
+    potrzebujesz g³êbokiej wiedzy o systemie plików, lub dobrej kopii 
+    zapasowej. Druga opcja wydaje siê byæ ³atwiejsza (za to nudna),
+    pierwsza natomiast wymaga dobrego znajomego, grupy dyskusyjnej (lub
+    listy), lub innego ¼ród³a informacji je¿eli nie wiesz jak siê
+    do tego zabraæ. Chcia³bym o tym napisaæ wiêcej jednak brakuje mi
+    wiedzy i do¶wiadczenia, program	<TT
+CLASS="command"
+>debugfs</TT
+> mo¿e
+    okazaæ siê po¿yteczny.</P
+><P
+> Za pomoc± <TT
+CLASS="command"
+>fsck</TT
+> powiniene¶ sprawdzaæ tylko odmontowane systemy plików (wyj±tkiem jest sprawdzanie zmontowanego w trybie
+tylko-do-odczytu g³ównego systemu plików). Jest to spowodowane tym, ¿e program
+modyfikuje system plików bezpo¶rednio, bez wiedzy systemu operacyjnego.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1292"
+>4.8.7. Sprawdzanie b³êdów dysku za pomoc± <TT
+CLASS="command"
+>badblocks</TT
+></A
+></H2
+><P
+> Dobrym pomys³em jest okresowe uruchamianie <TT
+CLASS="command"
+>badblocks</TT
+>
+	Program wy¶wietla listê bloków, które uzna³ za zepsute.
+    Tak± listê mo¿na przekazaæ programowi
+	<TT
+CLASS="command"
+>fsck</TT
+>, który zapisze odpowiednie informacje
+    w strukturze systemu plików.
+	Nastêpuj±cy przyk³ad ukazuje sposób wykonania:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>badblocks /dev/fd0H1440 1440 &#62; bad-blocks</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>fsck -t ext2 -l bad-blocks /dev/fd0H1440</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>Parallelizing fsck version 0.5a (5-Apr-94)
+e2fsck 0.5a, 5-Apr-94 for EXT2 FS 0.5, 94/03/10
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Check reference counts.
+Pass 5: Checking group summary information.
+
+/dev/fd0H1440: ***** FILE SYSTEM WAS MODIFIED *****
+/dev/fd0H1440: 11/360 files, 63/1440 blocks</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Je¿eli badblocks wypisa³ blok, który by³ w u¿yciu
+	<TT
+CLASS="command"
+>e2fsck</TT
+> spróbuje przenie¶æ go w inne
+    miejsce. Je¿eli blok by³ powa¿nie uszkodzony zawarto¶æ pliku
+    mog³a ulec zniszczeniu.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1306"
+>4.8.8. Zwalczanie fragmentacji</A
+></H2
+><P
+> Podczas zapisu pliku na dysku czêsto zdarza siê, ¿e
+    nie mo¿na go zapisaæ w jednym miejscu. Plik, który nie jest
+    przechowywany w kolejnych blokach nazywa siê
+	<I
+CLASS="glossterm"
+>sfragmentowanym</I
+>. Odczytanie takiego pliku
+    trwa d³u¿ej poniewa¿ g³owica musi przemie¶ciæ siê wiêcej razy.
+	Po¿±danym jest unikniêcie fragmentacji, chocia¿ na systemach
+    z dobrym buforowaniem i czytaniem z wyprzedzeniem nie stanowi
+    to du¿ego problemu.
+	</P
+><P
+> Algorytmy obs³uguj±ce system plików staraj± siê zapobiegaæ
+    fragmentacji - poprzez trzymanie bloków nale¿±cych do tego
+    samego pliku najbli¿ej jak siê da.
+    Dlatego zazwyczaj nie ma potrzeby defragmentowania systemu plików,
+    jednak¿e istniej± programu do tego s³u¿±ce, jednym z nich
+    jest <TT
+CLASS="command"
+>e2defrag</TT
+>, wiêcej informacji powinno znajdowaæ
+    siê w dokumentacji dotycz±cej ext2.
+	</P
+><P
+> Istnieje wiele programów defragmentuj±cych system plików FAT.
+    Aby zdefragmentowaæ system plików bez odpowiedniego programu
+    powiniene¶ stworzyæ kopiê zapasow± systemu plików, stworzyæ nowy,
+    po czym odtworzyæ dane z kopii zapasowej. Dobrze jest tworzyæ kopie
+    zapasowe przed defragmentacj± - nie wiadomo czy co¶ nie pójdzie ¼le.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1313"
+>4.8.9. Inne programy dla wszystkich systemów plików</A
+></H2
+><P
+> Istnieje wiele przydatnych poleceñ.
+	<TT
+CLASS="command"
+>df</TT
+> pokazuje ilo¶æ wolnego miejsca na 
+    jednym lub kilku systemach plików; <TT
+CLASS="command"
+>du</TT
+> 
+    pokazuje ile dysku zajmuje zawarto¶æ katalogu.
+	</P
+><P
+> <TT
+CLASS="command"
+>sync</TT
+> wymusza zapisanie buforowanych
+    danych (zobacz <A
+HREF="buffer-cache.html"
+>Section 5.6</A
+>).  
+    Zazwyczaj nie trzeba go rêcznie uruchamiaæ -
+	demon <TT
+CLASS="command"
+>update</TT
+> robi to automatycznie.
+	Program mo¿e byæ przydatny po katastrofie, w której
+    poleg³ <TT
+CLASS="command"
+>update</TT
+>, lub jego pomocnik <TT
+CLASS="command"
+>bdflush</TT
+>,
+    lub w sytuacji gdy musisz <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>natychmiast</I
+></SPAN
+> wy³±czyæ komputer i nie mo¿esz
+    czekaæ na wywo³anie <TT
+CLASS="command"
+>update</TT
+>.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1326"
+>4.8.10. Inne narzêdzia dla ext2</A
+></H2
+><P
+> <TT
+CLASS="command"
+>tune2fs</TT
+> zmienia ustawienia systemu plików.
+    Kilka najbardziej interesuj±cych opcji: 
+
+	<P
+></P
+></P><UL
+><LI
+><P
+> 
+	Maxymalna liczba montowañ.  <TT
+CLASS="command"
+>e2fsck</TT
+> wymusza sprawdzenie
+    dysku po okre¶lonej liczbie montowañ. W systemie s³u¿±cym jako
+    maszyna testowa dobrym pomys³em mo¿e byæ zredukowanie tego limitu.
+	</P
+></LI
+><LI
+><P
+> 
+	Maxymalny okres miêdzy sprawdzeniami. <TT
+CLASS="command"
+>e2fsck</TT
+> 
+    wymusza sprawdzenie je¿eli czas ten zosta³ przekroczony.
+	Mo¿na wy³±czyæ.
+    </P
+></LI
+><LI
+><P
+> 
+	Liczba bloków zarezerwowanych dla roota. Ext2 rezerwuje trochê
+    bloków dla roota - zape³nienie dysku przez u¿ytkowników nie uniemo¿liwia
+    rootowi jego pracy. Domy¶lnie 5 procent powierzchni systemu plików
+    zarezerwowane jest dla roota. Na dyskietkach nie ma sensu rezerwowaæ
+    miejsca dla roota.
+	</P
+></LI
+></UL
+><P>
+	
+	Zobacz stronê podrêcznika dotycz±c± <TT
+CLASS="command"
+>tune2fs</TT
+>.</P
+><P
+> <TT
+CLASS="command"
+>dumpe2fs</TT
+> pokazuje informacje o
+    systemie plików ext2, wiêkszo¶æ z nich odczytana zostaje z superbloku.
+	<A
+HREF="x1034.html#dumpe2fs-output"
+>Figure 4-5</A
+> zawiera przyk³adowe wyj¶cie programu.
+    Niektóre informacje s± techniczne i wymagaj± zrozumienia sposobu
+    dzia³ania systemu plików (zobacz dodatek XXX ext2fspaper), jednak
+    wiêkszo¶æ jest zrozumia³a dla ka¿dego (nawet adminlamera ;-).
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="dumpe2fs-output"
+></A
+><P
+><B
+>Figure 4-5. Przyk³adowe wyj¶cie programu <TT
+CLASS="command"
+>dumpe2fs</TT
+></B
+></P
+><P
+CLASS="literallayout"
+><br>
+dumpe2fs&nbsp;0.5b,&nbsp;11-Mar-95&nbsp;for&nbsp;EXT2&nbsp;FS&nbsp;0.5a,&nbsp;94/10/23<br>
+Filesystem&nbsp;magic&nbsp;number:&nbsp;&nbsp;0xEF53<br>
+Filesystem&nbsp;state:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clean<br>
+Errors&nbsp;behavior:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Continue<br>
+Inode&nbsp;count:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;360<br>
+Block&nbsp;count:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1440<br>
+Reserved&nbsp;block&nbsp;count:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;72<br>
+Free&nbsp;blocks:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1133<br>
+Free&nbsp;inodes:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;326<br>
+First&nbsp;block:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br>
+Block&nbsp;size:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1024<br>
+Fragment&nbsp;size:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1024<br>
+Blocks&nbsp;per&nbsp;group:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8192<br>
+Fragments&nbsp;per&nbsp;group:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8192<br>
+Inodes&nbsp;per&nbsp;group:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;360<br>
+Last&nbsp;mount&nbsp;time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tue&nbsp;Aug&nbsp;&nbsp;8&nbsp;01:52:52&nbsp;1995<br>
+Last&nbsp;write&nbsp;time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tue&nbsp;Aug&nbsp;&nbsp;8&nbsp;01:53:28&nbsp;1995<br>
+Mount&nbsp;count:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3<br>
+Maximum&nbsp;mount&nbsp;count:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20<br>
+Last&nbsp;checked:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tue&nbsp;Aug&nbsp;&nbsp;8&nbsp;01:06:31&nbsp;1995<br>
+Check&nbsp;interval:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br>
+Reserved&nbsp;blocks&nbsp;uid:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;(user&nbsp;root)<br>
+Reserved&nbsp;blocks&nbsp;gid:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;(group&nbsp;root)<br>
+<br>
+Group&nbsp;0:<br>
+&nbsp;&nbsp;Block&nbsp;bitmap&nbsp;at&nbsp;3,&nbsp;Inode&nbsp;bitmap&nbsp;at&nbsp;4,&nbsp;Inode&nbsp;table&nbsp;at&nbsp;5<br>
+&nbsp;&nbsp;1133&nbsp;free&nbsp;blocks,&nbsp;326&nbsp;free&nbsp;inodes,&nbsp;2&nbsp;directories<br>
+&nbsp;&nbsp;Free&nbsp;blocks:&nbsp;307-1439<br>
+&nbsp;&nbsp;Free&nbsp;inodes:&nbsp;35-360<br>
+</P
+></DIV
+><P
+> <TT
+CLASS="command"
+>debugfs</TT
+> jest odpluskwiaczem systemu plików.
+	Umo¿liwia bezpo¶redni dostêp do struktur danych tworz±cych
+    system plików, przez co umo¿liwia naprawienie systemu plików w sytuacji
+    nienaprawialnej przez <TT
+CLASS="command"
+>fsck</TT
+>.
+	Niektórzy u¿ywaj± tego programu do odkasowywania plików.
+	<TT
+CLASS="command"
+>debugfs</TT
+> wymaga aby¶ wiedzia³ co robisz; w innym
+    wypadku mo¿esz sobie zrobiæ kuku.
+	</P
+><P
+> <TT
+CLASS="command"
+>dump</TT
+> i <TT
+CLASS="command"
+>restore</TT
+> 
+    mog± zostaæ u¿yte do utworzenia kopii zapasowej i odtworzenia systemu
+    plików. S± to standardowe wersje znane z innych Unixów przeznaczone
+    do wspó³pracy z ext2.
+	Zobacz <A
+HREF="backups.html"
+>Chapter 10</A
+>.</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1215"
+HREF="x1034.html#AEN1215"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Wiêcej informacji znajdziesz w 
+		Kernel Hacker's	Guide.</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1227"
+HREF="x1034.html#AEN1227"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Oczywi¶cie powinno byæ 
+		<TT
+CLASS="command"
+>unmount</TT
+>, jednak¿e n zniknê³o w latach 70 i nie
+        powróci³o od tamtego czasu. Znalezione proszê zwróciæ 
+        Laboratoriom Bella, NJ.</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1246"
+HREF="x1034.html#AEN1246"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Musisz zastanowiæ siê móg³by¶ zrobiæ bêd±c
+        u¿ytkownikiem.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x883.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1355.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Partycje</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c712.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Dyski bez systemu plików</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

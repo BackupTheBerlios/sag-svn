@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>System plików /usr</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Przegl±d struktury katalogów"
+HREF="dir-tree-overview.html"><LINK
+REL="PREVIOUS"
+TITLE="Katalog /dev"
+HREF="x478.html"><LINK
+REL="NEXT"
+TITLE="System plików /var"
+HREF="x547.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x478.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Przegl±d struktury katalogów</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x547.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN488"
+>3.5. System plików <TT
+CLASS="filename"
+>/usr</TT
+></A
+></H1
+><P
+> System plików <TT
+CLASS="filename"
+>/usr</TT
+> jest zazwyczaj
+    du¿y - wiêkszo¶æ programów znajduje siê w jego podkatalogach.
+	Zazwyczaj wszystkie pliki w katalogu
+	<TT
+CLASS="filename"
+>/usr</TT
+> przysz³y wraz z dan± dystrybucj±,
+    programy instalowane rêcznie, z innych pakietów powinny byæ
+    umieszczane w <TT
+CLASS="filename"
+>/usr/local</TT
+>.	Dziêki
+    temu po aktualizacji, zmianie systemu nie musimy instalowaæ (a przed tym
+    np. ¶ci±gaæ z sieci) dodatkowych programów.
+	Niektóre z podkatalogów <TT
+CLASS="filename"
+>/usr</TT
+> opisane s± poni¿ej
+    (pe³ny opis i lista znajduj± siê w FSSTND).
+	<DIV
+CLASS="glosslist"
+><DL
+><DT
+><B
+><TT
+CLASS="filename"
+>/usr/X11R6</TT
+></B
+></DT
+><DD
+><P
+> X Window System, wszystkie pliki.
+		Aby upro¶ciæ tworzenie i instalacjê systemu X, wszelkie pliki
+        umieszczane s± w osobnym katalogu.
+		W <TT
+CLASS="filename"
+>/usr/X11R6</TT
+> istnieje hierarchia podkatalogów
+        podobna do zawarto¶ci <TT
+CLASS="filename"
+>/usr</TT
+>.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/usr/X386</TT
+></B
+></DT
+><DD
+><P
+> To samo co
+		<TT
+CLASS="filename"
+>/usr/X11R6</TT
+>, tylko dla wersji "X11 Release 5".
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/usr/bin</TT
+></B
+></DT
+><DD
+><P
+> Prawie wszystkie polecenia u¿ytkownika.
+		Niektóre polecenia znajduj± siê w <TT
+CLASS="filename"
+>/bin</TT
+> i
+        <TT
+CLASS="filename"
+>/usr/local/bin</TT
+>.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/usr/sbin</TT
+></B
+></DT
+><DD
+><P
+> Programy administratora, które nie musz±
+        znajdowaæ siê na g³ównym systemie plików, np. wiêkszo¶æ
+        serwerów.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/usr/man</TT
+>, <TT
+CLASS="filename"
+>/usr/info</TT
+>, <TT
+CLASS="filename"
+>/usr/doc</TT
+></B
+></DT
+><DD
+><P
+> Odpowiednio: strony podrêcznika, dokumenty GNU Info i dokumentacja
+        w innych formatach.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/usr/include</TT
+></B
+></DT
+><DD
+><P
+> Pliki nag³owkowe dla jêzyka C.
+		Aktualnie powinny byæ w 
+		<TT
+CLASS="filename"
+>/usr/lib</TT
+>, jednak tradycja jest silniejsza.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/usr/lib</TT
+></B
+></DT
+><DD
+><P
+> Niezmieniaj±ce siê dane, zale¿ne od architektury,
+        niekiedy pliki konfiguracyjne programów.
+		Nazwa <TT
+CLASS="filename"
+>lib</TT
+> pochodzi od "library" (biblioteka);
+		oryginalnie biblioteki programistyczne by³y przechowywane w 
+		<TT
+CLASS="filename"
+>/usr/lib</TT
+>.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/usr/local</TT
+></B
+></DT
+><DD
+><P
+> Miejsce sk³adowania oprogramowania (i konfiguracji)
+        zainstalowanego niezale¿nie od dystrybucji.
+		</P
+></DD
+></DL
+></DIV
+></P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x478.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x547.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Katalog <TT
+CLASS="filename"
+>/dev</TT
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="dir-tree-overview.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>System plików <TT
+CLASS="filename"
+>/var</TT
+></TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

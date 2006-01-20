@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Tymczasowe blokowanie u¿ytkownika</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Zarz±dzanie kontami u¿ytkowników"
+HREF="c1946.html"><LINK
+REL="PREVIOUS"
+TITLE="Usuwanie u¿ytkownika"
+HREF="x2073.html"><LINK
+REL="NEXT"
+TITLE="Kopie zapasowe"
+HREF="backups.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x2073.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 9. Zarz±dzanie kontami u¿ytkowników</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="backups.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN2087"
+>9.5. Tymczasowe blokowanie u¿ytkownika</A
+></H1
+><P
+>  Czasami trzeba okresowo zablokowaæ konto, bez usuwania go.
+    Dla przyk³adu: u¿ytkownik nie ui¶ci³ op³aty, lub cracker
+    dorwa³ has³o.
+	</P
+><P
+>  Najlepszym sposobem na zablokowanie konta jest zmiana
+    pow³oki na program wy¶wietlaj±cy wiadomo¶ci. Dziêki czemu
+    u¿ytkownik dostanie odpowiedni± wiadomo¶æ. 
+	</P
+><P
+> 
+	Mo¿naby równie¿ zmieniæ nazwê u¿ytkownika, lub has³o, jednak
+    w tym przypadku u¿ytkownik nie bêdzie wiedzia³ co siê dzieje.
+	Niedoinformowani u¿ytkownicy oznaczaj± wiêcej pracy.
+	
+		<A
+NAME="AEN2092"
+HREF="#FTN.AEN2092"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+
+	</P
+><P
+>  Prostym sposobem na stworzenie takich informacji s± 
+	'skrypty tail':
+
+</P><PRE
+CLASS="screen"
+>&#13;#!/usr/bin/tail +2
+Konto zosta³o zablokowane z powodu naruszenia zasad bezpieczeñstwa.
+Zadzwoñ pod numer 555-1234 i czekaj na zjawienie siê ludzi w czerni.
+</PRE
+><P>
+
+	Pierwsze dwa znaki (`<VAR
+CLASS="literal"
+>#!</VAR
+>') mówi± j±dru, ¿e plik bêdzie interpretowany
+ przez zewnêtrzny program, reszta lini okre¶la jakie polecenie
+ nale¿y wykonaæ aby zinterpretowaæ plik.
+    W tym wypadku polecenie <TT
+CLASS="command"
+>tail</TT
+> wy¶wietli 2 ostatnie
+    linie wej¶cia.
+	</P
+><P
+> 
+	Je¿eli podejrzewasz, ¿e konto billg zosta³o przejête móg³by¶ zrobiæ
+    co¶ takiego:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>chsh -s /usr/local/lib/no-login/security billg</KBD
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>su - billg</KBD
+>
+Konto zosta³o zablokowane z powodu naruszenia zasad bezpieczeñstwa.
+Zadzwoñ pod numer 555-1234 i czekaj na zjawienie siê ludzi w czerni.
+<SAMP
+CLASS="prompt"
+>#</SAMP
+>
+</PRE
+><P>
+
+	Polecenie <TT
+CLASS="command"
+>su</TT
+>, w tym przypadku, s³u¿y do przetestowania zmiany.
+    </P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN2092"
+HREF="x2087.html#AEN2092"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Ale s± tacy <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>zabawni</I
+></SPAN
+> je¿eli
+        jeste¶ BOFH.</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x2073.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="backups.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Usuwanie u¿ytkownika</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c1946.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Kopie zapasowe</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

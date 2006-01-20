@@ -1,0 +1,413 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Formatowanie</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Korzystanie z ró¿nych medii przechowuj±cych dane"
+HREF="c712.html"><LINK
+REL="PREVIOUS"
+TITLE="Ta¶my"
+HREF="x820.html"><LINK
+REL="NEXT"
+TITLE="Partycje"
+HREF="x883.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x820.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Korzystanie z ró¿nych medii przechowuj±cych dane</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x883.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN826"
+>4.6. Formatowanie</A
+></H1
+><P
+> <I
+CLASS="glossterm"
+>Formatowanie</I
+> jest to proces nanoszenia
+    znaków, które u¿ywane s± jako znaczniki ¶cie¿ek i sektorów.
+    Przed sformatowaniem dysku powierzchnia magnetyczna jest w stanie
+    nieuporz±dkowanym. W czasie formatowania powstaj± ¶cie¿ki, które
+    pó¼niej dzielone s± na sektory - w ten sposób nastêpuje uporz±dkowanie
+    powierzchni. Aktualnie sprawa ma siê nieco inaczej, jednak jest to
+    bez znaczenia. Najwa¿niejsze jest to, ¿e ta¶my nie mo¿na u¿ywaæ przed
+    sformatowaniem.
+	</P
+><P
+> Aktualna terminologia jest nieco myl±ca: w MS-DOS s³owo
+    "formatowanie" oznacza tak¿e proces tworzenia systemu plików
+    (który omówimy pó¼niej), wiêc jest to kombinacja dwóch procesów.
+    Dla celów dyskusji prawdziwe formatowanie nazywane jest
+    <I
+CLASS="glossterm"
+>formatowaniem niskopoziomowym</I
+>, przy czym
+    tworzenie systemu plików nazywane jest <I
+CLASS="glossterm"
+>formatowaniem
+    wysokopoziomowym</I
+>. W krêgu Unixa istniej± osobne okre¶lenia
+    na te dwa procesy: formatowanie, tworzenie systemu plików.
+	</P
+><P
+> Dyski IDE i niektóre SCSI formatowane s± w fabryce i nie
+    wymagaj± ponowienia tej operacji; wiêkszo¶æ ludzi nie musi siê tym
+    martwiæ. Prawdê mówi±c, reformatowanie dysku mo¿e spowodowaæ
+    spadek wydajno¶ci - czasami trzeba to zrobiæ w specjalny sposób aby
+    aktywowaæ automatyczn± zamianê z³ych sektorów, itd.
+	</P
+><P
+> Dyski, które wymagaj±, lub mog± byæ formatowane wymagaj±
+    najczê¶ciej specjalnych programów poniewa¿ logika odpowiedzialna
+    za formatowanie ró¿ni siê miêdzy napêdami. Program formatuj±cy
+    mo¿e odwo³ywaæ siê do BIOS-u kontrolera, lub jest programem DOS-owskim,
+    w obu przypadkach trudno go wykorzystaæ pod Linuxem.
+	</P
+><P
+> Podczas formatowania mog± pojawiæ siê zepsute miejsca zwane
+	<I
+CLASS="glossterm"
+>zepsutymi blokami</I
+>, lub <I
+CLASS="glossterm"
+>zepsutymi
+	sektorami</I
+>. Czasami s± one wewnêtrznie obs³ugiwane przez
+    napêd, jednak powinno siê poczyniæ specjalne dzia³ania aby unikn±æ próby
+    zapisu takiego miejsca. Logika odpowiedzialna za unikanie takich prób wbudowana jest w
+    system plików. Mo¿na równie¿ utworzyæ ma³± partycjê obejmuj±c± 
+    b³êdy; jest to dobre podej¶cie w przypadku gdy uszkodzona jest
+    du¿a czê¶æ dysku.
+	</P
+><P
+> Dyskietki formatowane s± za pomoc± <TT
+CLASS="command"
+>fdformat</TT
+>.  
+    Urz±dzenie podaje siê jako parametr. Dla przyk³adu: nastêpuj±ce
+    polecenie sformatuje dyskietkê HD 1,44 MB:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>fdformat /dev/fd0H1440</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>Double-sided, 80 tracks, 18 sec/track. Total capacity 1440 kB.</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>Formatting ... done</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>Verifying ... done</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Zapamietaj, ¿e je¿eli chcesz u¿yæ urz±dzenia autodetekcji
+    powiniene¶ najpierw ustawiæ domy¶lny format za pomoc± polecenia
+    <TT
+CLASS="command"
+>setfdprm</TT
+>. To samo mo¿na otrzymaæ w nastêpuj±cy
+    sposób:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>setfdprm /dev/fd0 1440/1440</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>fdformat /dev/fd0</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>Double-sided, 80 tracks, 18 sec/track. Total capacity 1440 kB.</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>Formatting ... done</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>Verifying ... done</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+    Nie jest rozs±dnym formatowanie dyskietki do formatu pojemniejszego
+    ni¿ zaprojektowany format.
+	</P
+><P
+> <TT
+CLASS="command"
+>fdformat</TT
+> weryfikuje dyskietkê - sprawdza j±
+    pod k±tem wystêpowania zepsutych bloków. Je¿eli taki ponowi sprawdzenie
+    kilkakrotnie - w ten weryfikuje siê prawdziwo¶æ b³êdu, np. móg³
+    to byæ tylko kurz. Prawdziwy b³±d przerwie proces walidacji, j±dro
+    wy¶wietli informacje o b³êdzie we/wy (I/O error) na konsoli lub
+    odpowiednia informacja pojawi siê w pliku 
+	<TT
+CLASS="filename"
+>/usr/log/messages</TT
+> (pod warunkiem, ¿e <TT
+CLASS="command"
+>syslog</TT
+>
+    dzia³a). <TT
+CLASS="command"
+>fdformat</TT
+> nie potrafi powiedzieæ gdzie
+    nast±pi³ b³±d (zazwyczaj nikt o to nie dba - dyskietki s± tak tanie,
+    ¿e zepsute najczê¶ciej l±duj± w koszu).
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>fdformat /dev/fd0H1440</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>Double-sided, 80 tracks, 18 sec/track. Total capacity 1440 kB.</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>Formatting ... done</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>Verifying ... read: Unknown error</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Polecenie <TT
+CLASS="command"
+>badblocks</TT
+> mo¿e zostaæ u¿yte w celu
+    sprawdzenia wystêpowania b³êdów na dysku (dyskietce). Program
+    nie formatuje dysku, wiêc mo¿esz sprawdzaæ dyski zawieraj±ce
+    dane. Poni¿szy przyk³ad sprawdza 3,5 calow± dyskietkê:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>badblocks /dev/fd0H1440 1440</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>718</SAMP
+>
+<SAMP
+CLASS="computeroutput"
+>719</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	<TT
+CLASS="command"
+>badblocks</TT
+> wypisuje numery uszkodzonych bloków.
+    Wiêkszo¶æ systemów plików potrafi omijaæ zepsute czê¶ci dysku -
+    informacje o zepsutych blokach zapisywane s± w odpowiednim miejscu, 
+    mo¿na je równie¿ modyfikowaæ. Pierwszego sprawdzenia mo¿na dokonaæ tworz±c 
+    system plików - <TT
+CLASS="command"
+>mkfs</TT
+> umo¿liwia to, pó¿niejsze 
+    sprawdzenia powinny byæ wykonywane za pomoc± <TT
+CLASS="command"
+>badblocks</TT
+>,
+    lista zepsutych bloków powinna byæ modyfikowana za pomoc± <TT
+CLASS="command"
+>fsck</TT
+>.
+	W pó¿niejszej czê¶ci ksi±¿ki znajdziesz opis <TT
+CLASS="command"
+>mkfs</TT
+> i
+	<TT
+CLASS="command"
+>fsck</TT
+>.</P
+><P
+> Wiele nowoczesnych dysków wykrywa zepsute obszary automatycznie,
+    czê¶æ z nich ma mechanizm naprawy polegaj±cy na u¿ywaniu w takim
+    przypadku bloków z zarezerwowanej puli. Jest to niewidoczne
+    dla systemu operacyjnego. Wiêcej informacji powinno znajdowaæ siê
+    w dokumentacji twojego dysku. Wykrywalne b³êdy pojawiaj± siê
+    dopiero gdy wszystkie zapasowe bloki zostaj± wykorzystane, jednak
+    taka sytuacja zdarza siê najczê¶ciej gdy dysk nie nadaje siê ju¿ do niczego.
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x820.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x883.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Ta¶my</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c712.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Partycje</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

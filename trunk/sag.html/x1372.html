@@ -1,0 +1,445 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Allokowanie przestrzeni dyskowej</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Korzystanie z ró¿nych medii przechowuj±cych dane"
+HREF="c712.html"><LINK
+REL="PREVIOUS"
+TITLE="Dyski bez systemu plików"
+HREF="x1355.html"><LINK
+REL="NEXT"
+TITLE="Zarz±dzanie pamiêci±"
+HREF="memory-management.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1355.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Korzystanie z ró¿nych medii przechowuj±cych dane</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="memory-management.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1372"
+>4.10. Allokowanie przestrzeni dyskowej</A
+></H1
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1374"
+>4.10.1. Schemat partycjonowania</A
+></H2
+><P
+> Bardzo trudno jest dokonaæ optymalnego podzia³u.
+    Gorzej - nie istnieje ogólna metoda - za du¿o czynników 
+    nale¿y braæ pod uwagê.
+	</P
+><P
+> Tradycyjnie nale¿y mieæ ma³y g³ówny system plików, który zawiera³
+    bêdzie <TT
+CLASS="filename"
+>/bin</TT
+>, <TT
+CLASS="filename"
+>/etc</TT
+>, <TT
+CLASS="filename"
+>/dev</TT
+>,
+	<TT
+CLASS="filename"
+>/lib</TT
+>, <TT
+CLASS="filename"
+>/tmp</TT
+> i inne
+    potrzebne do startu rzeczy. Podzia³ taki powoduje, ¿e g³ówny system
+    plików jest w mniejszym stopniu nara¿ony podczas padu
+    systemu, umo¿liwia szybsze i ³atwiejsze naprawienie wszelkich
+    b³êdów wywo³anych katastrof±. Dla katalogów:
+	<TT
+CLASS="filename"
+>/usr</TT
+>, <TT
+CLASS="filename"
+>/home</TT
+>, oraz
+    swapu tworzysz osobne partycje, lub u¿ywasz osobnych dysków.
+    Dziêki temu tworzenie kopii zapasowych staje siê ³atwiejsze.
+    Czasami mo¿na uczyniæ katalog <TT
+CLASS="filename"
+>/usr</TT
+> dzielonym
+    poprzez sieæ i dziêki temu zaoszczêdziæ powierzchniê dysków stacji
+    roboczych.
+	</P
+><P
+> Podzia³ dysku na wiele partycji powoduje, ¿e wolne miejsce
+    rozbite zostaje na ma³e, zale¿ne od dysku, obszary.
+    Aktualnie, dyski i systemy operacyjne dzia³aj± pewnie, wiêc
+    w wiêkszo¶ci wypadków wystarczy jedna partycja, taki podzia³
+    czyni tworzenie kopii zapasowych (i ich u¿ywanie w razie potrzeby) 
+    mniej bolesnym.
+	</P
+><P
+> W przypadku ma³ych dysków (zak³adaj±c, ¿e nie modyfikujesz j±dra)
+    najlepszym wyj¶ciem pozostaje utworzenie jednej partycji.
+    Natomiast posiadacze du¿ych dysków powinny utworzyæ kilka partycji.
+	(Zauwa¿, ¿e s³owa "ma³y" i "du¿y" u¿ywane s± w znaczeniu relatywnym,
+    twoje potrzeby decyduj± o ich dok³adnym znaczeniu).
+	</P
+><P
+> Dobrym pomys³em jest bycie przygotowanym na eksperymentowanie
+    i zmiany w razie potrzeby (nie tylko przy instalacji, ale w pó¼niejszym
+    okresie). Wymaga to odrobiny pracy, kilku reinstalacji systemu,
+    ale tylko w ten sposób dojdziesz do optymalnego podzia³u.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1389"
+>4.10.2. Wymagana przestrzeñ</A
+></H2
+><P
+> Instalator dystrybucji powinien dostarczyæ Ci pewnych informacji
+    na temat ilo¶ci wymaganego miejsca, powiniene¶ my¶leæ równie¿
+    o przysz³o¶ci - zaallokowaæ odpowiednio wiêcej miejsca.
+	</P
+><P
+> Ilo¶æ wymaganego miejsca zale¿y od przeznaczenia komputera.
+    Np. u¿ytkownik, który wykorzystuje komputer jako prost± maszynê do pisania
+    zadowoli siê kilkoma megabajtami, natomiast chc±c wykorzystaæ komputer
+    do sk³adu textu (za pomoc± Tex-u) nale¿y zallokowaæ du¿o wiêcej miejsca.
+	</P
+><P
+> A propos, podczas porównywania rozmiarów plików i dysków nale¿y
+    uwa¿aæ, gdy¿ niektórzy producenci dysków jako podstawê liczenia przyjmuj±
+    1000 - 1000 bajtów to dla nich 1k, itd., co jest sprzeczne z przyjêtymi
+    zasadami - 1024 bajtów daje 1k, itd. Dlatego czasem mo¿e zabrakn±æ 
+    kilkunastu megabajtów.
+		
+        <A
+NAME="AEN1394"
+HREF="#FTN.AEN1394"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+	</P
+><P
+> Allokacja miejsca dla partycji swap zosta³a omówiona w <A
+HREF="swap-allocation.html"
+>Section 5.5</A
+>.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1398"
+>4.10.3. Przyk³adowe konfiguracje</A
+></H2
+><P
+> Mia³em kiedy¶ dysk o pojemno¶ci 109 MB. Aktualnie u¿ywam dysku
+    o pojemno¶ci 330 MB. Wyt³umaczê jak i dlaczego podzieli³em te dyski.
+	</P
+><P
+> Dysk 109 MB dzieli³em na wiele ró¿nych sposobów, zale¿nie od
+    potrzeb. Wyt³umaczê dwa typowe podzia³y. Pierwszy: MS-DOS razem
+    z Linuxem. Czê¶æ dla DOS-a zajmowa³a 20 MB, zawiera³a kompilator
+    C, edytor, kilka narzêdzi, program, na którym pracowa³em, oraz
+    trochê wolnego miejsca aby zmie¶ciæ wyniki. Dla Linuxa przeznaczy³em:
+    10 MB na swap, resztê (79 MB) na jedn± partycjê.
+    Eksperymentowa³em z rozdzieleniem g³ównego systemu plików, <TT
+CLASS="filename"
+>/usr</TT
+>
+    i <TT
+CLASS="filename"
+>/home</TT
+> na kilka partycji, jednak nigdy
+    nie mia³em wystarczaj±cej ilo¶ci miejsca aby zrobiæ co¶ ciekawego.
+	</P
+><P
+> Gdy przesta³em potrzebowaæ MS-DOS-a, przepartycjonowa³em dysk
+    tak, ¿e 12 MB zajmowa³ swap, resztê miejsca zu¿ywa³a jedna partycja
+    dla Linuxa.
+	</P
+><P
+> Dysk 330 MB podzieli³em na kilka partycji w nastêpuj±cy sposób:
+
+		<DIV
+CLASS="informaltable"
+><P
+></P
+><A
+NAME="AEN1406"
+></A
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><TBODY
+><TR
+><TD
+>5 MB</TD
+><TD
+>g³ówny system plików</TD
+></TR
+><TR
+><TD
+> 10 MB</TD
+><TD
+>swap</TD
+></TR
+><TR
+><TD
+>180 MB</TD
+><TD
+><TT
+CLASS="filename"
+>/usr</TT
+></TD
+></TR
+><TR
+><TD
+>120 MB</TD
+><TD
+><TT
+CLASS="filename"
+>/home</TT
+></TD
+></TR
+><TR
+><TD
+> 15 MB</TD
+><TD
+>pusta partycja</TD
+></TR
+></TBODY
+></TABLE
+><P
+></P
+></DIV
+>
+
+	Pusta partycja u¿ywana by³a do testowania rzeczy wymagaj±cych jej -
+    ró¿nych dystrybucji Linuxa, porównywania wydajno¶ci ró¿nych
+    systemów plików, itp. W czasie pomiêdzy testami s³u¿y³a jako druga 
+    partycja swap.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1426"
+>4.10.4. Dodawanie nowych dysków</A
+></H2
+><P
+> Dodanie nowego dysku nie nastrêcza ¿adnych problemów, oprócz
+    poprawnej konfiguracji sprzêtu. Formatujesz dysk (je¿eli musisz),
+    tworzysz partycje, systemy plików, dodajesz odpowiednie wpisy
+    w <TT
+CLASS="filename"
+>/etc/fstab</TT
+> i po k³opocie.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN1430"
+>4.10.5. Jak oszczêdaæ powierzchniê dysków</A
+></H2
+><P
+> Najwa¿niejsze jest aby nie instalowaæ niepotrzebnych 
+    programów. Niektóre z pakietów da siê okroiæ do danych potrzeb.
+    </P
+><P
+> Je¿eli nie mo¿esz odinstalowaæ programu rozwi±zaniem
+    mo¿e byæ kompresja. Programami do tego s³u¿±cymi s± np.:
+    <TT
+CLASS="command"
+>gzip</TT
+>, <TT
+CLASS="command"
+>zip</TT
+>, <TT
+CLASS="command"
+>bzip2</TT
+>.
+    Program <TT
+CLASS="command"
+>gzexe</TT
+> umo¿liwia kompresjê programów i ich
+    automatyczn± dekompresjê w razie potrzeby.
+    System DouBle (w fazie tworzenia) kompresuje wszystkie pliki na
+    danym systemie plików, czyni to w sposób niewidzialny dla u¿ytkownika.
+	(podstawa dzia³ania jest taka sama jak w programie Stacker dla MS-DOS)
+	</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1394"
+HREF="x1372.html#AEN1394"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Sic transit discus mundi.</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1355.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="memory-management.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Dyski bez systemu plików</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c712.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Zarz±dzanie pamiêci±</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

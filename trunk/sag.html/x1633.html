@@ -1,0 +1,310 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Wiêcej o zamykaniu systemu</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Start i stop"
+HREF="boots-and-shutdowns.html"><LINK
+REL="PREVIOUS"
+TITLE="Proces startowania - szczegó³y"
+HREF="x1587.html"><LINK
+REL="NEXT"
+TITLE="Restartowanie"
+HREF="x1660.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1587.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 6. Start i stop</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1660.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1633"
+>6.3. Wiêcej o zamykaniu systemu</A
+></H1
+><P
+> Wa¿ne jest aby poprawnie zamkn±æ system. Je¿eli tego nie
+    zrobisz stracisz dane i uszkodzisz system plików. Dzieje siê tak
+    dlatego, poniewa¿ Linux nie zapisuje danych od razu, robi
+    to co pewien okres. Taki sposób dzia³ania znacz±co przy¶piesza
+    dzia³anie programów, jednak wymaga poprawnego zamkniêcia systemu.
+	</P
+><P
+> Poleceniem odpowiedzialny za prawid³owe wy³±czenie Linuxa
+    jest <TT
+CLASS="command"
+>shutdown</TT
+>.
+	</P
+><P
+> Programowi mo¿na podaæ czas oczekiwania przed zamkniêciem, 
+    umo¿liwiaj±c w ten sposób u¿ytkownikom szansê zamkniêcia programów
+    i wylogowania siê. Przyk³ad:
+	</P
+><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>shutdown -h +10 'Zainstalujemy nowy dysk. System bêdzie
+&#62; dostêpny w ci±gu 3 godzin.'
+</KBD
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+>
+</PRE
+><P
+>&#13;	Wiadomo¶æ zostanie wys³ana wszystkim u¿ytkownikom, je¿eli
+    nie zastosuj± siê do niej mog± utraciæ dane.
+    Oto jej przyk³adowa postaæ:
+	</P
+><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="computeroutput"
+>&#13;Broadcast message from root (ttyp0) Wed Aug  2 01:03:25 1995...
+
+Zainstalujemy nowy dysk. System bêdzie
+dostêpny w ci±gu 3 godzin.
+The system is going DOWN for system halt in 10 minutes !!
+</SAMP
+>
+</PRE
+><P
+>&#13;	Wiadomo¶æ bêdzie powtarzana coraz czê¶ciej w miarê up³ywu czasu.
+	</P
+><P
+> Kiedy rozpoczyna siê prawdziwe wy³±czanie systemu wszelkie
+    procesy dostaj± sygna³ SIGTERM (po pewnym odstêpie czasu SIGKILL),
+    systemy plików zostaj± odmontowane (oprócz g³ównego).
+	<TT
+CLASS="command"
+>init</TT
+> wypisuje informacje o mo¿liwo¶ci wy³±czenia
+    komputera. Wtedy i tylko wtedy mo¿esz wy³±czyæ zasilanie.
+	</P
+><P
+> Czasami, rzadko na systemach porz±dnie zarz±dzanych,
+    dochodzi do sytuacji gdy co¶ nie zadzia³a. Dla przyk³adu: j±dro
+    panikuje i wywala siê, wtedy mo¿esz siê jedynie modliæ aby¶ nie straci³
+    zbyt wiele i wy³±czyæ zasilanie. Je¿eli zdarzy³o siê co¶ mniej
+    powa¿nego (np. kto¶ ci siekier± klawiaturê rozwali³ ;-) pomy¶l
+    jak mo¿esz zmusiæ system do poprawnego zamkniêcia (w tym przypadku
+    logowanie przez sieæ rozwi±zuje problem), je¿eli taka mo¿liwo¶æ
+    nie istnieje spróbuj od³±czyæ wszelkie zewnêtrzne bod¼ce (np.
+    od³±cz sieæ, itp.), poczekaj a¿ 
+	<TT
+CLASS="command"
+>update</TT
+> kilka razy zapisze dane na dysku
+    (kilka minut) po czym wy³±cz zasilanie.
+	</P
+><P
+> Niektórzy lubi± zamykaæ system wywo³uj±c
+	<TT
+CLASS="command"
+>sync</TT
+>
+	
+		<A
+NAME="AEN1653"
+HREF="#FTN.AEN1653"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	trzy razy, po czym czekaj± na zakoñczenie dyskowych operacji we/wy i
+    wy³±czaj± zasilanie. Je¿eli nie ma dzia³aj±cych programów
+    dzia³a to, <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>prawie</I
+></SPAN
+>, tak samo jak 
+	<TT
+CLASS="command"
+>shutdown</TT
+>.  Jednak¿e, nie nastêpuje odmontowanie
+    systemu plików co powoduje, ¿e podczas nastêpnego startowania dyski zostan±
+    sprawdzone.
+	<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>Nie zaleca siê takiego podej¶cia</I
+></SPAN
+>.</P
+><P
+> (Je¿eli siê zastanawiasz: powodem trzykrotnego wywo³ania 
+    sync jest to, i¿ we wczesnych dniach Unixa osobne trzykrotne wpisywanie
+    polecenia dawa³o do¶æ czasu na zakoñczenie wszelkich operacji we/wy.)
+	</P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1653"
+HREF="x1633.html#AEN1653"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> <TT
+CLASS="command"
+>sync</TT
+> wymusza
+        aktualizacje dysków.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1587.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1660.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Proces startowania - szczegó³y</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="boots-and-shutdowns.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Restartowanie</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

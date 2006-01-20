@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Zarz±dzanie kontami u¿ytkowników</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Start pow³oki"
+HREF="x1940.html"><LINK
+REL="NEXT"
+TITLE="Tworzenie u¿ytkownika"
+HREF="x1959.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1940.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1959.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="AEN1946"
+></A
+>Chapter 9. Zarz±dzanie kontami u¿ytkowników</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>9.1. <A
+HREF="c1946.html#AEN1952"
+>Konto - co to?</A
+></DT
+><DT
+>9.2. <A
+HREF="x1959.html"
+>Tworzenie u¿ytkownika</A
+></DT
+><DD
+><DL
+><DT
+>9.2.1. <A
+HREF="x1959.html#AEN1970"
+><TT
+CLASS="filename"
+>/etc/passwd</TT
+> i inne pliki</A
+></DT
+><DT
+>9.2.2. <A
+HREF="x1959.html#AEN2000"
+>U¿ywanie numerycznych identyfikatorów</A
+></DT
+><DT
+>9.2.3. <A
+HREF="x1959.html#AEN2005"
+>Zarz±dzanie grupami</A
+></DT
+><DT
+>9.2.4. <A
+HREF="x1959.html#AEN2010"
+>Domy¶lne ¶rodowisko: <TT
+CLASS="filename"
+>/etc/skel</TT
+></A
+></DT
+><DT
+>9.2.5. <A
+HREF="x1959.html#manual-adduser"
+>Rêczne tworzenie u¿ytkownika</A
+></DT
+></DL
+></DD
+><DT
+>9.3. <A
+HREF="x2049.html"
+>Zmiana ustawieñ u¿ytkownika</A
+></DT
+><DT
+>9.4. <A
+HREF="x2073.html"
+>Usuwanie u¿ytkownika</A
+></DT
+><DT
+>9.5. <A
+HREF="x2087.html"
+>Tymczasowe blokowanie u¿ytkownika</A
+></DT
+></DL
+></DIV
+><A
+NAME="AEN1948"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+> <SPAN
+CLASS="QUOTE"
+>"Sysadmini i handlarze prochami s± podobni:
+    odmierzaj± rzeczy w K-ach i maj± swoich u¿ytkowników."</SPAN
+>
+	(stary, zmêczony dowcip komputerowy.)</P
+></BLOCKQUOTE
+><P
+> Rozdzia³ zawiera informacje na temat tworzenia kont u¿ytkowników,
+    ich usuwania, oraz zmieniania w³a¶ciwo¶ci.
+	Ró¿ne dystrybucje maj± ró¿ne narzêdzia, choæ istniej± równie¿ ogólne metody.
+    </P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1952"
+>9.1. Konto - co to?</A
+></H1
+><P
+> Kiedy komputer jest u¿ywany przez wielu ludzi zazwyczaj
+    tworzy siê informacje rozró¿niaj±ce ich, dziel±ce ich dane (aby
+    sobie w drogê nie wchodzili ;-). Jest to wa¿ne, nawet je¿eli tylko jeden
+    u¿ytkownik mo¿e pracowaæ jednocze¶nie.
+	
+		<A
+NAME="AEN1955"
+HREF="#FTN.AEN1955"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	Zatem ka¿demu u¿ytkownikowi przydzielana jest unikalna nazwa,
+    któr± podaje siê podczas logowania.
+	</P
+><P
+> <I
+CLASS="glossterm"
+>Konto</I
+> to wszystkie pliki, zasoby i
+    informacje nale¿±ce do u¿ytkownika. W komercyjnych systemach,
+    konta s± podobne to tych w banku - istnieje jaka¶ warto¶æ pocz±tkowa
+    (odpowiednia ilo¶æ pieniêdzy), która kurczy siê zale¿nie od 
+    potrzeb u¿ytkownika - zale¿nie od tego w jakim stopniu wykorzystuje 
+    system. Dla przyk³adu: mo¿emy wyceniæ wykorzystanie dysków,
+    procesora, itp.
+	</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1955"
+HREF="c1946.html#AEN1955"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> By³oby to nieco krêpuj±ce, gdyby moja siostra
+        mog³a czytaæ moje listy mi³osne.
+        </P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1940.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1959.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Start pow³oki</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Tworzenie u¿ytkownika</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

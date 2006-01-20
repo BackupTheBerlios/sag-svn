@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Wy¶wietlanie i zmienianie czasu</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Utrzymywanie aktualnego czasu"
+HREF="c2341.html"><LINK
+REL="PREVIOUS"
+TITLE="Zegary sprzêtowe i programowe"
+HREF="x2360.html"><LINK
+REL="NEXT"
+TITLE="Kiedy czas jest niepoprawny"
+HREF="x2412.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x2360.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 11. Utrzymywanie aktualnego czasu</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x2412.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN2366"
+>11.3. Wy¶wietlanie i zmienianie czasu</A
+></H1
+><P
+>  W dystrybucji Debian strefa czasowa ustawiania jest za pomoc±
+	³±cza symbolicznego <TT
+CLASS="filename"
+>/etc/localtime</TT
+>.
+	Odno¶nik wskazuje na plik zawieraj±cy dane dotycz±ce
+    lokalnej strefy czasu. Pliki wszystkich stref przechowywane s± w
+	<TT
+CLASS="filename"
+>/usr/lib/zoneinfo</TT
+>. Inne dystrybucje mog± to
+    robiæ odmiennie.
+	</P
+><P
+>  U¿ytkownik mo¿e zmieniæ swoj± strefê czasu ustawiaj±c odpowiednio
+    zmienn± TZ. Je¿eli nie jest ona ustawiona u¿ywana jest strefa systemu.
+    Sk³adnia warto¶æ zmiennej TZ opisana jest w podrêczniku
+	<CODE
+CLASS="function"
+>tzset</CODE
+>.  </P
+><P
+> 
+	Program <TT
+CLASS="command"
+>date</TT
+> pokazuje aktualn± datê i czas.
+	
+		<A
+NAME="AEN2375"
+HREF="#FTN.AEN2375"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	Przyk³ad:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>date</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>czw lis 16 10:54:18 CET 2000</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Jak widaæ jest: czwartek, 16 listopada roku 2000, strefa czasu CET
+	(CET, mo¿e np. oznaczaæ czas Europy ¶rodkowej).
+	<TT
+CLASS="command"
+>date</TT
+> mo¿e równie¿ pokazaæ czas uniwersalny:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>date -u</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>czw lis 16 09:55:52 UTC 2000</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Za pomoc± <TT
+CLASS="command"
+>date</TT
+> mo¿na zmieniæ wewnêtrzny zegar j±dra:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>date 11162157</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>czw lis 16 21:57:00 CET 2000</SAMP
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>date</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>czw lis 16 21:57:02 CET 2000</SAMP
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+>
+</PRE
+><P>
+
+	Zajrzyj do strony podrêcznika programu <TT
+CLASS="command"
+>date</TT
+>;
+    sk³adnia wywo³ania jest nieco skomplikowana. Tylko root mo¿e ustawiæ
+    czas; ka¿dy u¿ytkownik mo¿e ustawiæ strefê czasu, jednak zegar
+    dla ka¿dego z nich pozostaje taki sam.
+	</P
+><P
+>  <TT
+CLASS="command"
+>date</TT
+> pokazuje tylko datê zegara systemowego.
+    Poleceniem <TT
+CLASS="command"
+>clock</TT
+> mo¿esz zsynchronizowaæ zegary
+    sprzêtowy i programowy. Je¿eli musisz ustawiæ oba zegary, najpierw
+    ustaw systemowy, po czym zaktualizuj zegar sprzêtowy
+	(<TT
+CLASS="command"
+>clock -w</TT
+>).  </P
+><P
+>  Opcja <VAR
+CLASS="option"
+>-u</VAR
+> powiadamia <TT
+CLASS="command"
+>clock</TT
+>,
+    ¿e zegar sprzêtowy wskazuje czas uniwersalny.
+	<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>Musisz</I
+></SPAN
+> poprawnie u¿ywaæ opcjê <VAR
+CLASS="option"
+>-u</VAR
+>.
+    W innym przypadku twój komputer nie bêdzie zna³ aktualnego czasu.
+	</P
+><P
+>  Zegary powinny byæ zmieniane ostro¿nie. Wiele programów
+    Unixa zale¿y od czasu (poprawno¶ci jego up³ywu), dla przyk³adu:
+	demon <TT
+CLASS="command"
+>cron</TT
+>.
+	Je¿eli zmienisz zegar demon nie bêdzie wiedzia³ czy uruchomi³ dane
+    zadanie, czy te¿ nale¿y to zrobiæ. Na pewnym wczesnym Uniksie kto¶
+    przestawi³ zegar 20 lat do przodu, 
+	<TT
+CLASS="command"
+>cron</TT
+> chcia³ nadrobiæ zaleg³o¶ci uruchamiaj±c
+    wszystkie zaleg³e prace dla okresu 20 lat.
+	Aktualne wersje <TT
+CLASS="command"
+>crona</TT
+> obs³uguj± tak± sytuacjê
+    poprawnie, jednak powiniene¶ byæ ostro¿ny. Du¿e skoki do przodu, lub
+    do ty³u s± niebezpieczniejsze od powolnego posuwania siê w danym kierunku.
+	</P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN2375"
+HREF="x2366.html#AEN2375"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Pamiêtaj, ¿e program <TT
+CLASS="command"
+>time</TT
+> 
+        nie pokazuje aktualnego czasu.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x2360.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x2412.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Zegary sprzêtowe i programowe</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c2341.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Kiedy czas jest niepoprawny</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

@@ -1,0 +1,439 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>System plików /proc</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Przegl±d struktury katalogów"
+HREF="dir-tree-overview.html"><LINK
+REL="PREVIOUS"
+TITLE="System plików /var"
+HREF="x547.html"><LINK
+REL="NEXT"
+TITLE="Korzystanie z ró¿nych medii przechowuj±cych dane"
+HREF="c712.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x547.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Przegl±d struktury katalogów</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="c712.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN608"
+>3.7. System plików <TT
+CLASS="filename"
+>/proc</TT
+></A
+></H1
+><P
+>  System plików <TT
+CLASS="filename"
+>/proc</TT
+> jest ca³kowicie
+    wirtualny - nie istnieje na dysku.
+	Jest tworzony i utrzymywany przez j±dro w pamiêci. U¿ywany
+    jest w celu dostarczenia informacji o systemie (oryginalnie o
+    dzia³aj±cych procesach, st±d nazwa). Wa¿niejsze pozycje omówione
+    s± poni¿ej.
+	System plików <TT
+CLASS="filename"
+>/proc</TT
+> posiada w³asn± stronê
+    podrêcznika.
+	<DIV
+CLASS="glosslist"
+><DL
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/1</TT
+></B
+></DT
+><DD
+><P
+> Katalog zawieraj±cy informacje o procesie
+        numer 1 (init ma zawsze ten numer). Ka¿dy proces posiada
+        w³asny podkatalog o nazwie przedstawiaj±cej identyfikator
+        procesu.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/cpuinfo</TT
+></B
+></DT
+><DD
+><P
+> Informacje o procesorze: model, wydajno¶æ, itp.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/devices</TT
+></B
+></DT
+><DD
+><P
+> Lista sterowników urz±dzeñ, które s± aktualnie 
+        skonfigurowane i dzia³aj±ce.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/dma</TT
+></B
+></DT
+><DD
+><P
+> Aktualnie u¿ywane kana³y DMA.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/filesystems</TT
+></B
+></DT
+><DD
+><P
+> Systemy plików aktualnie skonfigurowane.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/interrupts</TT
+></B
+></DT
+><DD
+><P
+> Lista przerwañ aktualnie wykorzystywanych,
+        oraz ilo¶æ przerwañ, które zosta³y kiedykolwiek obs³u¿one.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/ioports</TT
+></B
+></DT
+><DD
+><P
+> U¿ywane porty We/Wy.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/kcore</TT
+></B
+></DT
+><DD
+><P
+> Obraz fizycznej pamiêci systemu.
+        Posiada rozmiar równy rozmiarowi zainstalowanej pamiêci, jednak
+        na dysku nie zajmuje ani bajta.
+		(Uwaga: wpisy w katalogu 
+		<TT
+CLASS="filename"
+>/proc</TT
+> nie zajmuj± miejsca, chyba ¿e je skopiujesz
+        w inne miejsce).
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/kmsg</TT
+></B
+></DT
+><DD
+><P
+> Wiadomo¶ci wysy³ane przez j±dro.
+		S± one równie¿ przesy³ane do <TT
+CLASS="command"
+>sysloga</TT
+>.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/ksyms</TT
+></B
+></DT
+><DD
+><P
+> Tablica symboli j±dra.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/loadavg</TT
+></B
+></DT
+><DD
+><P
+> `¶rednie obci±¿enie' systemu; trzy nic
+        nie znacz±ce liczby wskazuj±ce ilo¶æ aktualnie wykonywanej
+        pracy.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/meminfo</TT
+></B
+></DT
+><DD
+><P
+> Informacje o wykorzystaniu pamiêci fizycznej i swapu.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/modules</TT
+></B
+></DT
+><DD
+><P
+> Aktualnie za³adowane modu³y.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/net</TT
+></B
+></DT
+><DD
+><P
+> Informacje o protoko³ach sieciowych.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/self</TT
+></B
+></DT
+><DD
+><P
+> £±cze symboliczne do katalogu procesu,
+        który czyta <TT
+CLASS="filename"
+>/proc</TT
+>.  Dla dwóch procesów
+        czytaj±cych <TT
+CLASS="filename"
+>/proc</TT
+> wskazania odno¶ników s±
+        inne.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/stat</TT
+></B
+></DT
+><DD
+><P
+> Statystyki systemu, np. ilo¶æ b³êdów
+        stron od czasu startu, itd.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/uptime</TT
+></B
+></DT
+><DD
+><P
+> Okres pracy systemu.
+		</P
+></DD
+><DT
+><B
+><TT
+CLASS="filename"
+>/proc/version</TT
+></B
+></DT
+><DD
+><P
+> Wersja j±dra.
+		</P
+></DD
+></DL
+></DIV
+></P
+><P
+> Zauwa¿, ¿e wiêkszo¶æ z tych plików jest w postaci
+    textowej, mog± one byæ czasami w postaci niezbyt czytelnej.
+	Istnieje wiele poleceñ, które odczytuj± takie pliki i specjalnie
+    je przetwarzaj±. Np. program
+	<TT
+CLASS="command"
+>free</TT
+> rozumie plik <TT
+CLASS="filename"
+>/proc/meminfo</TT
+>
+    i konwertuje warto¶ci podane w bajtach na kB oraz dodaje inne
+    informacje.
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x547.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="c712.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>System plików <TT
+CLASS="filename"
+>/var</TT
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="dir-tree-overview.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Korzystanie z ró¿nych medii przechowuj±cych dane</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

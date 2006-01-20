@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Allokowanie obszaru wymiany</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Zarz±dzanie pamiêci±"
+HREF="memory-management.html"><LINK
+REL="PREVIOUS"
+TITLE="Dzielenie obszaru wymiany miêdzy systemami operacyjnymi"
+HREF="x1516.html"><LINK
+REL="NEXT"
+TITLE="Bufor"
+HREF="buffer-cache.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1516.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 5. Zarz±dzanie pamiêci±</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="buffer-cache.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="swap-allocation"
+>5.5. Allokowanie obszaru wymiany</A
+></H1
+><P
+> Niektórzy twierdz±, i¿ powiniene¶ zaallokowaæ dwa razy 
+    wielko¶æ ramu, nie jest to prawid³owe podej¶cie.
+	Oto jak to zrobiæ poprawnie:
+
+	<P
+></P
+></P><UL
+><LI
+><P
+> Okre¶l ca³kowite zapotrzebowanie na pamiêæ. Jest to najwiêksza
+    ilo¶æ pamiêci, któr± bêdziesz jednocze¶nie potrzebowa³,
+    suma zapotrzebowañ wszystkich programów. Mo¿esz to zrobiæ uruchamiaj±c
+    wszystkie programy z twojej listy. (je¿eli nie masz dostatecznej
+    ilo¶ci pamiêci prawdopodobnie czê¶æ z nich siê wywali).</P
+><P
+> Dla przyk³adu: je¿eli chcesz uruchamiaæ X, powiniene¶ zaallokowaæ
+    dla niego oko³o 8 MB, gcc potrzebuje kilka megabajtów ( niektóre
+    pliki potrzebuj± niezwykle du¿o pamiêci - oko³o 10 MB, jednak zazwyczaj
+    wystarczaj± 4 MB ), itd. J±dro zu¿yje oko³o megabajta dla siebie,
+    zazwyczaj pow³oka i kilka potrzebnych narzêdzi razem da nam 
+    zapotrzebowanie na 1 MB. Nie musisz byæ dok³adnym, jednak powiniene¶
+    podchodziæ do sprawy pesymistycznie.
+	</P
+><P
+> Pamiêtaj, ¿e nale¿y braæ równie¿ liczbê osób pracuj±cych
+    na komputerze. Jednak¿e, je¿eli dwaj u¿ytkownicy uruchomi± ten sam 
+    program zu¿ycie nie podwoi siê - czê¶æ programu, oraz biblioteki bêd±
+    dzielone miêdzy procesami.
+	</P
+><P
+> Polecenia: <TT
+CLASS="command"
+>free</TT
+> i <TT
+CLASS="command"
+>ps</TT
+>
+    przydadz± Ci siê do oszacowania zapotrzebowania.
+	</P
+></LI
+><LI
+><P
+> Podczas szacowania pamiêci w kroku 1 musisz pamiêtaæ
+    o bezpiecznej granicy - prawdopodobnie zapomnisz o kilku programach,
+    albo zmienisz swoje wymagania. Musisz od³o¿yæ trochê pamiêci
+    na czarn± godzinê. (Lepiej zaallokowaæ zbyt du¿o ni¿ zbyt ma³o
+    swapu, jednak nie ma sensu aby miejsce siê marnowa³o - musisz
+    wybraæ dla siebie optimum). Poniewa¿ lepiej jest pracowaæ z okr±g³ymi
+    liczbami mo¿esz zaokr±gliæ rozmiar do pe³nych megabajtów.
+	</P
+></LI
+><LI
+><P
+> Opieraj±c siê na powy¿szych obliczeniach powiniene¶
+    oszacowaæ twoje potrzeby. Aby wyznaczyæ rozmiar obszaru wymiany
+    powiniene¶ od obliczonej liczby odj±æ rozmiar fizycznej pamiêci.
+    (Na niektórych Unixach musisz zaallokowaæ obszar licz±c równie¿
+    pamiêæ fizyczn± - w tym wypadku nie odejmuj jej rozmiaru).
+	</P
+></LI
+><LI
+><P
+> Je¿eli twój wyliczony rozmiar swapu jest znacznie wiêkszy
+    ni¿ twoja fizyczna pamiêæ (kilkakrotnie wiêcej) powiniene¶ zainwestowaæ
+    pieni±dze w zakup wiêkszej ilo¶æ pamiêci, w innym wypadku odczujesz
+    spadek wydajno¶ci.
+	</P
+></LI
+></UL
+><P>
+    </P
+><P
+> Dobrym pomys³em jest utworzenie swapu nawet je¿eli go nie potrzebujesz.
+    Linux agresywnie korzysta ze swapu, tak aby jak najwiêcej
+    fizycznej pamiêci by³o dostêpne. Linux zapisze na dysku wszelkie
+    nie u¿ywane dane. W ten sposób mamy wiêcej pamiêci dostêpnej od
+    rêki.
+	</P
+><P
+> Obszar wymiany mo¿e byæ rozdzielony na kilka dysków.
+    W ten sposób mo¿na poprawiæ wydajno¶æ. Mo¿esz popróbowaæ kilku
+    schematów, jednak pamiêtaj, ¿e robienie takich eksperymentów jest
+    trudne. Nie powiniene¶ wierzyæ w wy¿szo¶æ jednego schematu nad drugim,
+    zale¿y to od wielu czynników i w twoim wypadku mo¿e byæ k³amstwem.
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1516.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="buffer-cache.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Dzielenie obszaru wymiany miêdzy systemami operacyjnymi</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="memory-management.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Bufor</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

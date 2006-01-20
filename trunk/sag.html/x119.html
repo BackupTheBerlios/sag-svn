@@ -1,0 +1,728 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Podstawowe us³ugi w systemie UNIX</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Wprowadzenie do Linuxa"
+HREF="c89.html"><LINK
+REL="PREVIOUS"
+TITLE="Wa¿ne czê¶ci j±dra"
+HREF="x108.html"><LINK
+REL="NEXT"
+TITLE="Przegl±d struktury katalogów"
+HREF="dir-tree-overview.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x108.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Wprowadzenie do Linuxa</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="dir-tree-overview.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN119"
+>2.3. Podstawowe us³ugi w systemie UNIX</A
+></H1
+><P
+> Sekcja opisuje kilka z najwa¿niejszych us³ug oferowanych
+    w Uniksie, nie omawia szczegó³ów (znajdziesz je w dalszych czê¶ciach
+    ksi±¿ki). 
+	</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN122"
+>2.3.1. <TT
+CLASS="command"
+>init</TT
+></A
+></H2
+><P
+> Jedna z najwa¿niejszych us³ug w systemie Unix oferowana
+    jest przez program <TT
+CLASS="command"
+>init</TT
+>.  <TT
+CLASS="command"
+>init</TT
+>
+	jest pierwszym uruchomionym przez j±dro procesem, ostatnim stadium
+    bootowania j±dra. <TT
+CLASS="command"
+>init</TT
+> po uruchomieniu dokañcza
+    proces bootowania poprzez wykonanie odpowiednich skryptów (np.
+    zawieraj±cych sprawdzenie i zamontowanie systemów plików, uruchomienie
+    demonów).</P
+><P
+> Dok³adna lista czynno¶ci wykonywanych przez <TT
+CLASS="command"
+>init</TT
+>
+	ró¿ni siê zale¿nie od systemu.
+	<TT
+CLASS="command"
+>init</TT
+> zazwyczaj udostêpnia <I
+CLASS="glossterm"
+>tryb jednego
+    u¿ytkownika</I
+>, w którym nikt nie mo¿e siê zalogowaæ, a root
+    korzysta z pow³oki na konsoli; normalnie system pracuje w 
+	<I
+CLASS="glossterm"
+>trybie wielu u¿ytkowników</I
+>. W niektórych systemach
+    istnieje podzia³ na <I
+CLASS="glossterm"
+>poziomy pracy</I
+>; tryb
+    jednego u¿ytkownika i wielu u¿ytkowników to dwa poziomy pracy,
+    mog± istnieæ równie¿ dodatkowe, np. tryb, w którym X jest domy¶lnie
+    uruchamiane.</P
+><P
+> Podczas normalnego dzia³ania <TT
+CLASS="command"
+>init</TT
+> sprawdza
+    czy dzia³a <TT
+CLASS="command"
+>getty</TT
+> (aby umo¿liwiæ u¿ytkownikom
+    zalogowanie), adoptuje osierocone procesy (których rodzic umar³;
+	w Uniksie <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>wszystkie</I
+></SPAN
+> procesy <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>musz±</I
+></SPAN
+>
+	tworzyæ pojedyncze drzewo - sieroty musz± byæ adoptowane).
+    </P
+><P
+> Podczas zamykania systemu <TT
+CLASS="command"
+>init</TT
+> jest odpowiedzialny
+    za zabicie wszystkich procesów, oraz inne skonfigurowane rzeczy.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN142"
+>2.3.2. Logowanie z terminala</A
+></H2
+><P
+> Logowanie z terminala (via ³±cza szeregowe) oraz konsolê
+	(je¿eli X nie dzia³a) obs³ugiwane jest przez program
+    <TT
+CLASS="command"
+>getty</TT
+>.  <TT
+CLASS="command"
+>init</TT
+> dla ka¿dego
+    z terminali uruchamia osobny proces <TT
+CLASS="command"
+>getty</TT
+>.
+    <TT
+CLASS="command"
+>getty</TT
+> odczytuje  nazwê u¿ytkownika
+    po czym uruchamia program <TT
+CLASS="command"
+>login</TT
+>,
+	który odczytuje has³o.  Je¿eli nazwa u¿ytkownika i has³o
+	s± poprawne, <TT
+CLASS="command"
+>login</TT
+> uruchomi pow³okê.
+	Po zakoñczeniu pracy pow³oki (wylogowaniu siê u¿ytkownika), lub
+    w przypadku niezgadzaj±cego siê has³a <TT
+CLASS="command"
+>init</TT
+>
+    uruchomi nowy proces <TT
+CLASS="command"
+>getty</TT
+>.
+	J±dro nie wie co to "logowanie siê", jest to zale¿ne od programów
+    systemowych.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN153"
+>2.3.3. Syslog</A
+></H2
+><P
+> J±dro oraz programy systemowe produkuj± b³êdy, ostrze¿enia i 
+    inne wiadomo¶ci. Czasami wymaga siê aby by³a mo¿liwo¶æ pó¼niejszego
+    przegl±du tych wiadomo¶ci, wiêc powinny byæ zapisywane do pliku.
+	Troszczy siê o to <TT
+CLASS="command"
+>syslog</TT
+>.  Mo¿na go skonfigurowaæ
+    do sortowania wiadomo¶ci, odrzucania, lub zapisywania wymaganych, 
+    zapisywania wiadomo¶ci do kilku plików ze wzglêdu na wa¿no¶æ, itp.
+	Np. wiadomo¶ci wysy³ane przez j±dro s± najczê¶ciej zapisywane do
+    osobnego pliku, poniewa¿ s± one czêsto wa¿niejsze i powinny byæ
+    regularnie czytane, by dostrzec k³opoty.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN157"
+>2.3.4. Okresowe wykonywanie poleceñ: <TT
+CLASS="command"
+>cron</TT
+> i
+<TT
+CLASS="command"
+>at</TT
+></A
+></H2
+><P
+> U¿ytkownicy i administratorzy systemu czêsto musz± wykonywaæ
+    polecenia co pewien okres. Dla przyk³adu: administrator
+    móg³by chcieæ czy¶ciæ co okre¶lony czas katalogi zawieraj±ce pliki tymczasowe
+    (<TT
+CLASS="filename"
+>/tmp</TT
+> i <TT
+CLASS="filename"
+>/var/tmp</TT
+>).
+    Zapobiega to przepe³nieniu dysku, gdy¿ nie wszystkie programy poprawnie
+    sprz±taj± po sobie.</P
+><P
+> W tym celu powsta³ program <TT
+CLASS="command"
+>cron</TT
+>.
+    Ka¿dy u¿ytkownik posiada swój plik <TT
+CLASS="filename"
+>crontab</TT
+>, w
+    którym mo¿na zapisywaæ instrukcje uruchamiania okresowego.
+    Demon <TT
+CLASS="command"
+>cron</TT
+> troszczy siê o to aby wykonaæ dane
+    polecenie o wskazanym czasie.</P
+><P
+> Polecenie <TT
+CLASS="command"
+>at</TT
+> jest podobne do
+	programu <TT
+CLASS="command"
+>cron</TT
+>, ró¿ni siê tym, ¿e polecenie
+    jest uruchamiane tylko raz, w zadanym terminie; nie jest powtarzane.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN171"
+>2.3.5. Graficzny interfejs u¿ytkownika</A
+></H2
+><P
+> UNIX i Linux nie wbudowuj± interfejsu u¿ytkownika
+	w j±dro; przeciwnie - interfejs dostarczany jest przez ró¿ne
+    programy. Odnosi siê to do trybu tekstowego i graficznego,
+	</P
+><P
+> Takie podej¶cie czyni system bardziej elastycznym,
+    posiada jednak równie¿ wadê - u³atwia to tworzenie ró¿norakich
+    interfejsów, których mnogo¶æ stanowi barierê w poznawaniu systemu.
+	</P
+><P
+> Graficzne ¶rodowisko u¿ytkownika dostêpne w Linuksie nazywa siê:
+    X Window System (krótko: X).  X nie implementuje interfejsu
+    u¿ytkownika; jest on odpowiedzialny za system okna, narzêdzi,
+    dziêki którym mo¿na opracowaæ interfejs graficzny.
+    Trzy najpopularniejsze style interfejsów to:
+	Athena, Motif i Open Look.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN176"
+>2.3.6. Sieæ</A
+></H2
+><P
+> Sieæ jest to akt ³±czenia co najmniej dwóch komputerów
+    w sposób umo¿liwiaj±cych ich wzajemn± komunikacjê.
+	Aktualne metody ³±czenia i komunikacji s± wewnêtrznie skomplikowane,
+    jednak u¿ytkownikowi dostarczona jest u¿yteczna otoczka.
+	</P
+><P
+> Unix jest systemem sieciowym.
+	Wiêkszo¶æ podstawowych us³ug (systemy plików, drukowanie, kopie zapasowe)
+    mo¿e byæ wykonywana przez sieæ. U³atwia to administracjê systemem, gdy¿
+    pozwala na scentralizowan± administracjê, przy równoczesnym korzystaniu
+    z dobrodziejstw mikroprzetwarzania i rozproszonego przetwarzania, jak
+    ni¿sze koszty czy lepsza odporno¶æ na b³êdy.</P
+><P
+> Ksi±¿ka zawiera tylko podstawowe wiadomo¶ci na temat sieci; 
+    zobacz <I
+CLASS="citetitle"
+>Linux Network Administrators' Guide</I
+>,
+    który zawiera wiêcej informacji, w³±czaj±c zasady dzia³ania sieci.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN182"
+>2.3.7. Zdalne logowanie siê</A
+></H2
+><P
+> Zdalnie logowanie dzia³a nieco inaczej ni¿ normalne.
+	Dla ka¿dej fizycznej linii istnieje osobny terminal, przez który
+    mo¿na siê po³±czyæ. Dla ka¿dego zdalnego logowania istnieje
+    wirtualne po³±czenie sieciowe, mo¿e ich byæ dowolnie du¿o.
+	
+		<A
+NAME="AEN185"
+HREF="#FTN.AEN185"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	Z tego powodu nie jest mo¿liwe uruchomienie osobnego <TT
+CLASS="command"
+>getty</TT
+>
+    dla ka¿dego po³±czenia wirtualnego.
+	Istnieje te¿ kilka innych mo¿liwo¶ci zdalnego zalogowania siê,
+        z których najczê¶ciej wykorzystywane w sieciach TCP/IP s±
+	<TT
+CLASS="command"
+>telnet</TT
+>, <TT
+CLASS="command"
+>rlogin</TT
+> oraz <TT
+CLASS="command"
+>&#13;    ssh</TT
+>.</P
+><P
+> Dla tego typu logowañ, zamiast stada procesów
+	<TT
+CLASS="command"
+>getty</TT
+>, istnieje pojedynczy demon
+	(obs³uguj±cy <TT
+CLASS="command"
+>telnet</TT
+> i <TT
+CLASS="command"
+>rlogin</TT
+>
+    maj± odrêbne demony), który czeka na po³±czenia.
+    Je¿eli takie nastêpuje, uruchamia swoj± kopiê, która bêdzie
+    odpowiedzialna za obs³u¿enie danego po³±czenia; oryginalny proces 
+    nas³uchuje dalej.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN195"
+>2.3.8. Sieciowe systemy plików</A
+></H2
+><P
+> Jedn± z bardziej u¿ytecznych rzeczy, które mo¿na zrobiæ przez
+    sieæ jest udostêpnianie dysków za po¶rednictwem
+    <I
+CLASS="glossterm"
+>sieciowego systemu plików</I
+>. Najczê¶ciej
+    u¿ywa siê protoko³u Network File System (NFS), stworzonego przez
+    Sun-a.</P
+><P
+> Za pomoc± takiego systemu plików wszelkie operacje plikowe
+    wykonywane przez program na jednym komputerze przesy³ane s± przez sieæ
+    i wykonywane na innym. Oszukanemu programowi wydaje siê, ¿e wszystkie
+    pliki obcego komputera znajduj± siê na tej maszynie, na której go
+    uruchomiono. Powoduje to, ¿e wspó³dzielenie danych jest niezwykle ³atwe,
+    gdy¿ nie trzeba w ogóle zmieniaæ programów.
+    </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN200"
+>2.3.9. Poczta</A
+></H2
+><P
+> Poczta elektroniczna jest najwa¿niejsz± metod± komunikacji za
+    pomoc± komputera. Elektroniczny list przechowywany jest za pomoc±
+    pliku o specjalnym formacie, a do jego przetwarzania s³u¿± specjalne
+    programy.
+	</P
+><P
+> Ka¿dy u¿ytkownik posiada <I
+CLASS="glossterm"
+>skrzynkê pocztow±</I
+>
+	(plik lub katalog w odpowiednim formacie), w której umieszczane s±
+    pliki z poczt±. Kiedy kto¶ wysy³a pocztê program lokalizuje
+    komputer zawieraj±cy skrzynkê odbiorcy, po czym przesy³a wiadomo¶æ.
+	</P
+><P
+> System pocztowy sk³ada siê z wielu programów. 
+    Do³±czaniem wiadomo¶ci do skrzynek u¿ytkowników zajmuje siê
+    jeden program (<I
+CLASS="glossterm"
+>agent transferu poczty</I
+>, inaczej
+    <I
+CLASS="glossterm"
+>MTA</I
+>, np. <TT
+CLASS="command"
+>qmail</TT
+>,
+	<TT
+CLASS="command"
+>postfix</TT
+>), natomiast u¿ytkownicy korzystaj± z wielu
+	ró¿nych programów do czytania (<I
+CLASS="glossterm"
+>agentów poczty u¿ytkownika</I
+>,
+	<I
+CLASS="glossterm"
+>MUA</I
+>, np. <TT
+CLASS="command"
+>pine</TT
+>,
+	<TT
+CLASS="command"
+>mutt</TT
+>). Zazwyczaj poczta przychodz±ca przechowywana jest w
+    <TT
+CLASS="filename"
+>/var/spool/mail</TT
+>.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN215"
+>2.3.10. Drukowanie</A
+></H2
+><P
+> W danym momencie tylko jedna osoba mo¿e korzystaæ z drukarki,
+	jednak nieekonomicznym jest przydzielanie jej u¿ytkownikowi
+	na wy³±czno¶æ.
+    Drukark± zarz±dza specjalne oprogramowanie
+    implementuj±ce <I
+CLASS="glossterm"
+>kolejkê drukowania</I
+>: wszystkie
+    ¿±dania wydruku umieszczane s± w kolejce, po zakoñczeniu jednej pracy
+    wykonywana jest nastêpna. Dziêki temu u¿ytkownicy nie musz± walczyæ
+    o dostêp do drukarki.
+	
+		<A
+NAME="AEN219"
+HREF="#FTN.AEN219"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>
+	
+	</P
+><P
+> Oprogramowanie kolejkuj±ce <I
+CLASS="glossterm"
+>buforuje</I
+> na dysku
+	gotowe do druku prace. Umo¿liwia to programom przekazanie dokumentu
+    do programu odpowiedzialnego za drukowanie i powrót do pracy -
+    aplikacja nie musi czekaæ na faktyczne zakoñczenie drukowania.
+    Jest to naprawdê wygodne, gdy¿ pozwala wys³aæ do wydrukowania aktualn±
+    wersjê dokumentu i nie czekaj±c na zakoñczenie, rozpocz±æ tworzenie
+    nowej wersji.
+    </P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN224"
+>2.3.11. Struktura systemu plików</A
+></H2
+><P
+> System plików podzielony jest na wiele czê¶ci;
+    najczê¶ciej g³ówny system plików zawiera
+	<TT
+CLASS="filename"
+>/bin</TT
+>, <TT
+CLASS="filename"
+>/lib</TT
+>,
+	<TT
+CLASS="filename"
+>/etc</TT
+>, <TT
+CLASS="filename"
+>/dev</TT
+> i kilka innych;
+     katalog <TT
+CLASS="filename"
+>/usr</TT
+> z niezmiennymi danymi i programami;
+	katalog <TT
+CLASS="filename"
+>/var</TT
+> z czêsto zmienianymi plikami
+	(np. logi) oraz	<TT
+CLASS="filename"
+>/home</TT
+> zawieraj±cy katalogi
+    domowe u¿ytkowników. Zale¿nie od decyzji administratora 
+    struktura mo¿e byæ ró¿na, wszystko mo¿e znajdowaæ siê jednej partycji,
+    lub wielu, itd.
+	</P
+><P
+> <A
+HREF="dir-tree-overview.html"
+>Chapter 3</A
+> zawiera wiêcej szczegó³ów;
+    wyczerpuj±ce informacje znajduj± siê w: Linux Filesystem Standard.
+	</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN185"
+HREF="x119.html#AEN185"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> A co najmniej wiele. Przepustowo¶æ sieci
+        stanowi nadal jest nadal zasobem ograniczonym, wiêc istnieje pewien
+        faktyczny limit jednoczesnych logowañ poprzez jedno po³±czenie
+        sieciowe.
+		</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN219"
+HREF="x119.html#AEN219"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> W zamian, tworz± kolejkê <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>przy</I
+></SPAN
+>
+        drukarce czekaj±c na swój wydruk, poniewa¿ niewiele osób
+        jest w stanie sprawdziæ czy drukowanie zosta³o wykonane.
+        Dziêki temu gwa³towanie wzrasta wewn±trz-firmowe ¿ycie towarzyskie.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x108.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="dir-tree-overview.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Wa¿ne czê¶ci j±dra</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c89.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Przegl±d struktury katalogów</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Dyski bez systemu plików</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Korzystanie z ró¿nych medii przechowuj±cych dane"
+HREF="c712.html"><LINK
+REL="PREVIOUS"
+TITLE="System plików"
+HREF="x1034.html"><LINK
+REL="NEXT"
+TITLE="Allokowanie przestrzeni dyskowej"
+HREF="x1372.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1034.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Korzystanie z ró¿nych medii przechowuj±cych dane</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1372.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1355"
+>4.9. Dyski bez systemu plików</A
+></H1
+><P
+> Nie wszystkie dyski, lub partycje u¿ywane s± jako systemy plików.
+    Partycja swapu nie posiada systemu plików.
+    Wiele dyskietek u¿ywanych w trybie emulacji ta¶my u¿ywanym
+    przez <TT
+CLASS="command"
+>tar</TT
+> zawiera tylko zawarto¶æ pliku, bez
+    ¿adnych dodatkowych informacji.
+	Dyskietki bootuj±ce Linuxa posiadaj± obraz j±dra i nic poza nim.
+	</P
+><P
+> U¿ywanie medium bez systemu plików zwiêksza jego pojemno¶æ.
+    Zwiêksza kompatybilno¶æ z innymi systemami, np.: format tworzony
+    przez <TT
+CLASS="command"
+>tar</TT
+> jest taki sam dla wszystkich
+    systemów operacyjnych, natomiast systemy plików mog± ró¿niæ miêdzy sob±.
+    W razie potrzeby szybko siê przyzwyczaisz do takich dysków.
+    Bootowalne dyskietki Linuxa nie musz± zawieraæ systemu plików, choæ
+    jest to mo¿liwe.
+	</P
+><P
+> Kopiowanie zawarto¶ci dysku bez po¶rednictwa systemu plików jest
+    bardzo przydatne je¿eli dosz³o do uszkodzenia systemu plików.
+    Po stworzeniu kopii mo¿esz na ró¿ne sposoby próbowaæ odratowaæ
+    dane, a w przypadku nie udanej próby zacz±æ od nowa.
+	Mo¿na to osi±gn±æ za pomoc± <TT
+CLASS="command"
+>dd</TT
+>:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>dd if=/dev/fd0H1440 of=floppy-image</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>2880+0 records in
+2880+0 records out</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>dd if=floppy-image of=/dev/fd0H1440</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>2880+0 records in
+2880+0 records out</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Pierwsze wywo³anie tworzy dok³adn± kopiê dyskietki, zapisuje j± w pliku
+	<TT
+CLASS="filename"
+>floppy-image</TT
+>, drugie zapisuje zachowany obraz na
+    dyskietce (u¿ytkownik powinien zamieniæ dyskietkê przed drugim poleceniem -
+    inaczej polecenie stanie siê bezsensowne).
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1034.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1372.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>System plików</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c712.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Allokowanie przestrzeni dyskowej</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

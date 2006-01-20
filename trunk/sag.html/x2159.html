@@ -1,0 +1,466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Proste kopie zapasowe</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Kopie zapasowe"
+HREF="backups.html"><LINK
+REL="PREVIOUS"
+TITLE="Wybór programu"
+HREF="x2135.html"><LINK
+REL="NEXT"
+TITLE="Kopie wielopoziomowe"
+HREF="x2227.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x2135.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 10. Kopie zapasowe</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x2227.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN2159"
+>10.4. Proste kopie zapasowe</A
+></H1
+><P
+>  Tworzenie takich kopii sprowadza siê do skopiowania wszystkiego
+    za pierwszym razem, oraz pó¼niejszych dopisywañ.
+	Pierwsza kopia nazywana jest <I
+CLASS="glossterm"
+>pe³n±</I
+>, pó¼niejsze
+    to kopie <I
+CLASS="glossterm"
+>ró¿nicowe</I
+>. Odtwarzanie danych za pomoc±
+    kopii ró¿nicowych wymaga odtworzenia kopii pe³nej.
+	</P
+><P
+>  Je¿eli chcesz tworzyæ kopie codziennie i posiadasz 6 ta¶m,
+    mo¿esz 1 wykorzystaæ na pe³n± kopiê. Na ta¶mach 2 - 5 tworzyæ
+    kopie inkrementacyjne, po czym tworzysz pe³n± kopiê na ta¶mie 6
+    i znów wykorzystujesz ta¶my 2 - 5. Nie powiniene¶ nadpisywaæ ta¶my
+    1 do czasu stworzenia pe³nej kopii (na wszelki wypadek). Po utworzeniu
+    pe³nej kopii na ta¶mie 6 i przystêpuj±c do tworzenia nastêpnej 
+    pe³nej kopii wykorzystujesz ta¶mê nr 1, a 6 odk³adasz na pó³kê, itd.
+	</P
+><P
+>  Je¿eli posiadasz wiêcej ni¿ 6 ta¶m mo¿esz dodatkowe wykorzystaæ
+    do tworzenia pe³nych kopii. Za ka¿dym razem wykorzystujesz najstarsz± z
+    nich podczas tworzenia nastêpnej pe³nej kopii. Posiadaj±c kilka
+    pe³nych kopii mo¿esz znale¼æ plik, który aktualnie nie istnieje, lub jego
+    starsz± wersjê, itp.
+	</P
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN2166"
+>10.4.1. Tworzenie kopii za pomoc± <TT
+CLASS="command"
+>tara</TT
+></A
+></H2
+><P
+> 
+	Pe³n± kopiê mo¿na utworzyæ w sposób nastêpuj±cy:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>tar --create --file /dev/ftape /usr/src</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>tar: Removing leading / from absolute path names in the archive</SAMP
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+>
+</PRE
+><P>
+
+	W powy¿szym przyk³adzie u¿ywam opcji GNU <TT
+CLASS="command"
+>tara</TT
+>,
+    oryginalny <TT
+CLASS="command"
+>tar</TT
+> obs³uguje tylko jedno literowe
+    opcje. Wersja GNU posiada równie¿ inne rozszerzenia: obs³uguje 
+    bardzo d³ugie ¶cie¿ki, podzia³ archiwum na kilku mediach, itd.</P
+><P
+>  Je¿eli twoja kopia nie mie¶ci siê na jednej dyskietce u¿yj opcji
+    <VAR
+CLASS="option"
+>--multi-volume</VAR
+> (<VAR
+CLASS="option"
+>-M</VAR
+>):
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>tar -cMf /dev/fd0H1440 /usr/src</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>tar: Removing leading / from absolute path names in the archive
+Prepare volume #2 for /dev/fd0H1440 and hit return:</SAMP
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+>
+</PRE
+><P>
+
+	Pamiêtaj, ¿e przed u¿yciem dyskietek powiniene¶ jest sformatowaæ.
+	</P
+><P
+>  Po stworzeniu kopii powiniene¶ sprawdziæ jej poprawno¶æ:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>tar --compare --verbose -f /dev/ftape</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>usr/src/
+usr/src/linux
+usr/src/linux-1.2.10-includes/
+....</SAMP
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+>
+</PRE
+><P>
+
+	Pamiêtaj aby to zrobiæ, inaczej zauwa¿ysz awariê za pó¼no.
+	</P
+><P
+>  Kopia ró¿nicowa mo¿e zostaæ utworzona za pomoc± opcji 
+	<VAR
+CLASS="option"
+>--newer</VAR
+>(<VAR
+CLASS="option"
+>-N</VAR
+>):
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>tar --create --newer '8 Sep 1995' --file /dev/ftape /usr/src --verbose</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>tar: Removing leading / from absolute path names in the archive
+usr/src/
+usr/src/linux-1.2.10-includes/
+usr/src/linux-1.2.10-includes/include/
+usr/src/linux-1.2.10-includes/include/linux/
+usr/src/linux-1.2.10-includes/include/linux/modules/
+usr/src/linux-1.2.10-includes/include/asm-generic/
+usr/src/linux-1.2.10-includes/include/asm-i386/
+usr/src/linux-1.2.10-includes/include/asm-mips/
+usr/src/linux-1.2.10-includes/include/asm-alpha/
+usr/src/linux-1.2.10-includes/include/asm-m68k/
+usr/src/linux-1.2.10-includes/include/asm-sparc/
+usr/src/patch-1.2.11.gz</SAMP
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+>
+</PRE
+><P>
+
+	Niestety <TT
+CLASS="command"
+>tar</TT
+> nie zauwa¿a zmian w i-wê¼le pliku
+    (np. zmiana praw dostêpu, lub jego nazwy), mo¿na to obej¶æ
+    wykorzystuj±c program <TT
+CLASS="command"
+>find</TT
+>.
+    Skrypty wykonuj±ce te wszystkie operacje s± dostêpne na wielu
+    serwerach FTP.
+	</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN2201"
+>10.4.2. Odtwarzanie plików za pomoc± <TT
+CLASS="command"
+>tara</TT
+></A
+></H2
+><P
+>  Opcja <VAR
+CLASS="option"
+>--extract</VAR
+> (<VAR
+CLASS="option"
+>-x</VAR
+>)
+	pomo¿e Ci odzyskaæ twoje dane:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>tar --extract --same-permissions --verbose --file /dev/fd0H1440</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>usr/src/
+usr/src/linux
+usr/src/linux-1.2.10-includes/
+usr/src/linux-1.2.10-includes/include/
+usr/src/linux-1.2.10-includes/include/linux/
+usr/src/linux-1.2.10-includes/include/linux/hdreg.h
+usr/src/linux-1.2.10-includes/include/linux/kernel.h
+...</SAMP
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+>
+</PRE
+><P>
+
+	Mo¿esz równie¿ wyci±gn±æ specyficzny plik, lub katalog (wraz z podkatalogami
+    i zawartymi w nich plikami):
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>tar xpvf /dev/fd0H1440 usr/src/linux-1.2.10-includes/include/linux/hdreg.h</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>usr/src/linux-1.2.10-includes/include/linux/hdreg.h</SAMP
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+>
+</PRE
+><P>
+
+	Za pomoc± opcji <VAR
+CLASS="option"
+>--list</VAR
+> (<VAR
+CLASS="option"
+>-t</VAR
+>) mo¿esz
+    sprawdziæ zawarto¶æ kopii zapasowej:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>#</SAMP
+> <KBD
+CLASS="userinput"
+>tar --list --file /dev/fd0H1440</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>usr/src/
+usr/src/linux
+usr/src/linux-1.2.10-includes/
+usr/src/linux-1.2.10-includes/include/
+usr/src/linux-1.2.10-includes/include/linux/
+usr/src/linux-1.2.10-includes/include/linux/hdreg.h
+usr/src/linux-1.2.10-includes/include/linux/kernel.h
+...</SAMP
+>
+<SAMP
+CLASS="prompt"
+>#</SAMP
+>
+</PRE
+><P>
+
+	Pamiêtaj, ¿e <TT
+CLASS="command"
+>tar</TT
+> odczytuje dane sekwencyjnie co
+    przy du¿ych archiwach jest wolne. Taka metoda dzia³ania wynika z
+    budowy ta¶m ( i innych mediów sekwencyjnych ).
+	</P
+><P
+>  <TT
+CLASS="command"
+>tar</TT
+> nie obs³uguje skasowanych plików:
+    je¿eli pe³na kopia zawiera plik, natomiast kopia ró¿nicowa
+    nie, plik po odtworzeniu danych bêdzie istnia³. W przypadku
+    niektórych plików mo¿e to stanowiæ powa¿ny problem.
+	</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x2135.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x2227.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Wybór programu</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="backups.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Kopie wielopoziomowe</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

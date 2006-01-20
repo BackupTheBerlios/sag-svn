@@ -1,0 +1,421 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Przegl±d struktury katalogów</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Podstawowe us³ugi w systemie UNIX"
+HREF="x119.html"><LINK
+REL="NEXT"
+TITLE="G³ówny system plików"
+HREF="x286.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x119.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x286.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="dir-tree-overview"
+></A
+>Chapter 3. Przegl±d struktury katalogów</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>3.1. <A
+HREF="dir-tree-overview.html#AEN242"
+>Wstêp</A
+></DT
+><DT
+>3.2. <A
+HREF="x286.html"
+>G³ówny system plików</A
+></DT
+><DT
+>3.3. <A
+HREF="x355.html"
+>Katalog <TT
+CLASS="filename"
+>/etc</TT
+></A
+></DT
+><DT
+>3.4. <A
+HREF="x478.html"
+>Katalog <TT
+CLASS="filename"
+>/dev</TT
+></A
+></DT
+><DT
+>3.5. <A
+HREF="x488.html"
+>System plików <TT
+CLASS="filename"
+>/usr</TT
+></A
+></DT
+><DT
+>3.6. <A
+HREF="x547.html"
+>System plików <TT
+CLASS="filename"
+>/var</TT
+></A
+></DT
+><DT
+>3.7. <A
+HREF="x608.html"
+>System plików <TT
+CLASS="filename"
+>/proc</TT
+></A
+></DT
+></DL
+></DIV
+><A
+NAME="AEN238"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+> <SPAN
+CLASS="QUOTE"
+>" Dwa dni pó¼niej  Pooh siedzia³ na swej ga³êzi i
+    macha³ nó¿kami, obok niego sta³y cztery garnki pe³ne miodu...
+	"</SPAN
+> (A.A. Milne) </P
+></BLOCKQUOTE
+><P
+> Rozdzia³ opisuje wa¿niejsze czê¶ci standardowej hierarchii
+    katalogów, która oparta jest na standardzie FSSTND.
+    Opisuje normalny sposób podzia³u na oddzielne systemy plików oraz
+    cel takiego podzia³u. Ró¿ne alternatywy s± omówione.
+	</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN242"
+>3.1. Wstêp</A
+></H1
+><P
+> Rozdzia³ powsta³ na podstawie <I
+CLASS="citetitle"
+>Standardu 
+    Systemu Plików Linuxa</I
+>, FSSTND, wersji 1.2 (zobacz
+    bibliografiê).  Standaryzacja hierarchii katalogów ma na celu
+    u³atwienie ¿ycia administratorom i programistom - ³atwiej co¶ znale¼æ
+    je¿eli jest umieszczone w odpowiednim miejscu. U¿ywanie standardu
+    nie jest przez nikogo wymagane, jednak wiêkszo¶æ dystrybucji tworzona
+    jest zgodnie z nim. FSSTND definiuje podobn± hierarchiê jak w innych
+    systemach Unix.
+	</P
+><P
+> Rozdzia³ nie zawiera szczegó³ów, po nie siêgnij do FSSTND.
+	Administrator powinien rozumieæ i znaæ ten standard.
+    </P
+><P
+> Ca³e drzewo stworzone jest w sposób u³atwiaj±cy roz³o¿enie
+    go na kilku dyskach, lub partycjach. G³ównymi czê¶ciami s±:
+	katalog g³ówny, <TT
+CLASS="filename"
+>/usr</TT
+>, <TT
+CLASS="filename"
+>/var</TT
+>,
+	<TT
+CLASS="filename"
+>/home</TT
+> (zobacz
+	<A
+HREF="dir-tree-overview.html#fstree"
+>Figure 3-1</A
+>).  Ka¿da z czê¶ci ma inne przeznaczenie.
+	Niektóre z czê¶ci mog± znajdowaæ siê w sieci, na urz±dzeniach wy³±cznie
+    odczytywalnych.
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="fstree"
+></A
+><P
+><B
+>Figure 3-1. Czê¶ci drzewa katalogów Unixa. Linie oznaczaj± limity partycji.</B
+></P
+><P
+><IMG
+SRC="fstree.png"></P
+></DIV
+><P
+> Poni¿ej znajduje siê opis przeznaczenia danej czê¶ci.
+
+	<P
+></P
+></P><UL
+><LI
+><P
+> G³ówny system plików jest specyficzny dla ka¿dej
+        z maszyn (generalnie znajduje siê na poszczególnych maszynach,
+        choæ mo¿e byæ montowany z sieci, itd.), zawiera pliki
+        niezbêdne do uruchomienia systemu i zamontowania innych
+        systemów plików. Zawarto¶æ powinna byæ wystarczaj±ca do uruchomienia
+        systemu w trybie jednego u¿ytkownika, naprawy pozosta³ych
+        systemów plików oraz odtwarzania kopii zapasowych.
+		</P
+></LI
+><LI
+><P
+>  <TT
+CLASS="filename"
+>/usr</TT
+> zawiera wszelkie
+        polecenia, biblioteki, strony podrêcznika i inne niezmieniaj±ce
+        siê dane potrzebne podczas normalnej pracy.
+		Pliki w <TT
+CLASS="filename"
+>/usr</TT
+> nie powinny byæ zale¿ne od architektury
+        komputera, nie powinny byæ zmieniane podczas pracy systemu.
+		Umo¿liwia to dzielenie plików poprzez sieæ, co mo¿e byæ okazaæ 
+        siê bardzo ekonomiczne - oszczêdza przestrzeñ dyskow± (katalog
+        ten mo¿e zajmowaæ kilkaset megabajtów) i ³atwe do administracji
+        (wystarczy uaktualniæ/zainstalowaæ program na jednym dysku)
+		Nawet, je¿eli system plików znajduje siê na lokalnym dysku mo¿e
+        byæ montowany wy³±cznie do odczytu - zmniejsza to szansê wyst±pienia
+        b³êdów po padzie systemu.</P
+></LI
+><LI
+><P
+> Katalog <TT
+CLASS="filename"
+>/var</TT
+>
+		zawiera pliki, które zmieniaj± siê, np. wszelkie kolejki
+        (poczty, newsów, drukarek, etc. ), logi, sformatowane pliki
+        podrêcznika oraz pliki tymczasowe. Tradycyjnie wszystko co
+        znajduje siê w <TT
+CLASS="filename"
+>/var</TT
+> by³o umieszczane w
+        <TT
+CLASS="filename"
+>/usr</TT
+>, jednak to uniemo¿liwia zamontowanie
+        <TT
+CLASS="filename"
+>/usr</TT
+> wy³±cznie do odczytu.</P
+></LI
+><LI
+><P
+>  System plików <TT
+CLASS="filename"
+>/home</TT
+>
+		zawiera katalogi domowe u¿ytkowników - wszystkie ich dane.
+        Odseparowanie danych u¿ytkownika u³atwia ich archiwizacjê;
+        najczê¶ciej nie trzeba archiwizowaæ pozosta³ych danych, 
+        lub mo¿na to robiæ rzadziej (nie s± tak czêsto zmieniane).
+        Wielki <TT
+CLASS="filename"
+>/home</TT
+> mo¿e zostaæ podzielony na kilka
+        dysków, mo¿liwe jest to przez dodanie poziomu po¶redniego, np.
+        podzia³u <TT
+CLASS="filename"
+>/home/students</TT
+>, <TT
+CLASS="filename"
+>/home/staff</TT
+>;
+        lub tworzenia katalogów zwi±zanych z pierwsz± liter± nazwy
+        u¿ytkownika a dopiero w nim katalogu domowego.
+		</P
+></LI
+></UL
+><P> </P
+><P
+> Wszystkie te czê¶ci mog± znajdowaæ siê fizycznie na jednym systemie
+    plików. Je¿eli jest to komputer domowy nie ma potrzeby stosowaæ
+    takiego podzia³u, jednak w wiêkszych systemach unikniêcie go jest 
+    niemo¿liwe. Wa¿ne jest aby wszystkie te <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>nazwy</I
+></SPAN
+>
+    dzia³a³y; np. powiedzmy, ¿e <TT
+CLASS="filename"
+>/var</TT
+> i
+    <TT
+CLASS="filename"
+>/usr</TT
+> s± aktualnie na tej samej partycji,
+	¶cie¿ka <TT
+CLASS="filename"
+>/usr/lib/libc.a</TT
+> i <TT
+CLASS="filename"
+>/var/log/messages</TT
+>
+    musi dzia³aæ, w tym przyk³adzie mo¿naby przenie¶æ <TT
+CLASS="filename"
+>/var</TT
+>
+    do <TT
+CLASS="filename"
+>/usr/var</TT
+> i utworzyæ odpowiednie ³±cze symboliczne -
+	<TT
+CLASS="filename"
+>/var</TT
+> -&#62; <TT
+CLASS="filename"
+>/usr/var</TT
+>.</P
+><P
+> Hierarchia katalogów w Uniksie grupuje pliki odpowiednio do
+    ich przeznaczenia - wszystkie polecenia s± w jednym miejscu,
+    dane w innym, itd. Alternatywnie mo¿naby tworzyæ katalogi dla poszczególnych
+    programów. Drugie podej¶cie ma kilka wad - trudno dzieliæ
+    pliki (programy czêsto zawieraj± czê¶ci statyczne i wykonywalne),
+    znalezienie programu mo¿e staæ siê trudne (np. zmuszenie
+    programu man do zagl±dania w odpowiednich katalogach mo¿e staæ
+    siê koszmarem).
+    </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x119.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x286.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Podstawowe us³ugi w systemie UNIX</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>G³ówny system plików</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

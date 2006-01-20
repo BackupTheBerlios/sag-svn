@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Wybór programu</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Kopie zapasowe"
+HREF="backups.html"><LINK
+REL="PREVIOUS"
+TITLE="Wybór medium na kopiê zapasow±"
+HREF="x2126.html"><LINK
+REL="NEXT"
+TITLE="Proste kopie zapasowe"
+HREF="x2159.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x2126.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 10. Kopie zapasowe</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x2159.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN2135"
+>10.3. Wybór programu</A
+></H1
+><P
+>  Istnieje wiele programów do tworzenia kopii zapasowych.
+	Tradycyjnymi programami do tego przeznaczonymi s±:
+	<TT
+CLASS="command"
+>tar</TT
+>, <TT
+CLASS="command"
+>cpio</TT
+>,
+	<TT
+CLASS="command"
+>dump</TT
+>. Wybór narzêdzia mo¿e byæ podyktowany 
+    wybranym medium.
+	</P
+><P
+>  <TT
+CLASS="command"
+>tar</TT
+> i <TT
+CLASS="command"
+>cpio</TT
+> s±
+    podobne. Oba programy potrafi± zapisywaæ i odczytywaæ dane
+    z ta¶m, do tego potrafi± obs³u¿yæ ka¿de medium, z którym
+    potrafi sobie poradziæ j±dro.
+	Niektóre Unixowe wersje <TT
+CLASS="command"
+>tara</TT
+> i
+	<TT
+CLASS="command"
+>cpio</TT
+> mog± mieæ problemy z dziwnymi plikami 
+    ( dowi±zaniami symbolicznymi, plikami urz±dzeñ, itp. ), jednak
+    Linuxowe wersje poradz± sobie z ka¿dym plikiem.
+	</P
+><P
+>  <TT
+CLASS="command"
+>dump</TT
+> pracuje w sposób nieco odmienny
+    ni¿ powy¿sze programy - odczytuje pliki bezpo¶rednio z urz±dzenia,
+    bez po¶rednictwa systemu plików. Program zosta³ specjalnie
+    napisany do tworzenia kopii zapasowych,
+	<TT
+CLASS="command"
+>tar</TT
+> i <TT
+CLASS="command"
+>cpio</TT
+> powsta³y w celu archiwizowania
+    danych.
+	</P
+><P
+>  Bezpo¶rednie odczytywanie systemu plików ma pewne zalety -
+    umo¿liwia odczytywanie plików bez zmiany ich znaczników czasowych;
+    u¿ywaj±c <TT
+CLASS="command"
+>tara</TT
+>, lub <TT
+CLASS="command"
+>cpio</TT
+>
+    musia³by¶ zamontowaæ system w trybie wy³±cznie do odczytu.
+    Bezpo¶rednie odczytywanie systemu plików jest wydajniejsze przy
+    kopiowaniu wszystkiego. G³ówn± wad± takiego podej¶cia jest 
+    ograniczenie programu do jednego systemu plików;
+	Linuxowy <TT
+CLASS="command"
+>dump</TT
+> rozumie tylko i wy³±cznie ext2.
+	</P
+><P
+>  <TT
+CLASS="command"
+>dump</TT
+> ma wbudowan± obs³ugê poziomów
+    kopiowania (omówimy je w dalszej czê¶ci); 
+	<TT
+CLASS="command"
+>tar</TT
+> i <TT
+CLASS="command"
+>cpio</TT
+> wymagaj± do tego
+    dodatkowych narzêdzi.
+	</P
+><P
+>  Porównanie niestandardowych programów przekracza ramy tej
+    ksi±¿ki. 
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x2126.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x2159.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Wybór medium na kopiê zapasow±</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="backups.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Proste kopie zapasowe</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

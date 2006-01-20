@@ -1,0 +1,434 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Dyski twarde</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Korzystanie z ró¿nych medii przechowuj±cych dane"
+HREF="c712.html"><LINK
+REL="PREVIOUS"
+TITLE="Korzystanie z ró¿nych medii przechowuj±cych dane"
+HREF="c712.html"><LINK
+REL="NEXT"
+TITLE="Dyskietki"
+HREF="x795.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c712.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Korzystanie z ró¿nych medii przechowuj±cych dane</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x795.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN756"
+>4.2. Dyski twarde</A
+></H1
+><P
+> Sekcja wprowadza terminologiê zwi±zan± z dyskami twardymi.
+	Je¿eli znasz te terminy mo¿esz opu¶ciæ j±.
+	</P
+><P
+> Zobacz <A
+HREF="x756.html#hd-schematic"
+>Figure 4-1</A
+> aby poznaæ schematyczny
+    obraz najwa¿niejszych czê¶ci dysku twardego. Dysk sk³ada siê
+    z jednego lub kilku cylindrycznych talerzy,
+	
+		<A
+NAME="AEN761"
+HREF="#FTN.AEN761"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	których jedna lub obie <I
+CLASS="glossterm"
+>powierzchnie</I
+> posiadaj±
+    naniesion± substancjê czynn± magnetycznie. Dla ka¿dej powierzchni
+    istnieje <I
+CLASS="glossterm"
+>g³owica zapisuj±co-czytaj±ca</I
+>.
+    Talerze maj± wspóln± o¶ obrotu, standardowo obracaj± siê ~5000 razy
+    w ci±gu minuty (mo¿na zakupiæ dyski z 10000 RPM - rotacjami na minutê).
+	G³owice poruszaj± siê nad powierzchni± talerzy, wzd³u¿ promienia - dziêki
+    ruchom g³owic i rotacji talerzy mo¿na otrzymaæ dostêp do ka¿dego obszaru
+    powierzchni.
+	</P
+><P
+> Procesor (CPU) i dysk komunikuj± siê poprzez
+	<I
+CLASS="glossterm"
+>kontroler dysku</I
+>. Tylko ta czê¶æ musi
+    wiedzieæ w jaki sposób komunikowaæ siê z dyskiem twardym, do tego
+    kontrolery maj± wspólny interfejs programowy umo¿liwiaj±c prosty
+    dostêp do dysku - komputer mówi "dawaj czego chcê", zamiast wykonywaæ
+    serii skomplikowanych przetworzeñ sygna³ów elektrycznych (w gruncie
+    rzeczy komunikacja z kontrolerem jest równie¿ skomplikowana, ale
+    takie podej¶cie znacz±co u³atwia wspó³pracê komputer-dysk).
+    Wiêkszo¶æ nowoczesnych kontrolerów nie poprzestaje na tym -
+    czê¶æ z nich buforuje dane, zastêpuje z³e sektory, itd.
+	</P
+><P
+> Zazwyczaj powy¿sze informacje wystarczaj± '¶miertelnikowi',
+    jednak istnieje kilka innych elementów: silnik poruszaj±cy talerzami,
+    mechanizm pozycjonowania g³owic, elektronika dysku, których nie trzeba
+    znaæ aby zrozumieæ dzia³anie dysku twardego.
+	</P
+><P
+> Zazwyczaj talerze podzielone s± na koncentryczne pier¶cienie
+    nazywane <I
+CLASS="glossterm"
+>¶cie¿kami</I
+>, te z kolei podzielone s±
+    na <I
+CLASS="glossterm"
+>sektory</I
+>. Podzia³ ten s³u¿y do okre¶lania
+    po³o¿enia danych oraz allokowania miejsca dla plików.
+    Aby znale¼æ odpowiednie miejsce mo¿na wskazaæ:
+    "powierzchnia 3, ¶cie¿ka 5, sektor 7". Zazwyczaj liczba sektorów
+    jest sta³a dla ka¿dej ze ¶cie¿ek, jednak zdarza siê, ¿e na
+    zewnêtrznych ¶cie¿ka znajduje siê wiêcej sektorów (wszystkie
+    sektory s± takiego samego rozmiaru). Zazwyczaj sektor ma 512 bajtów,
+    nie istnieje mo¿liwo¶æ zapisu na dysku mniejszej porcji danych.
+	</P
+><DIV
+CLASS="figure"
+><A
+NAME="hd-schematic"
+></A
+><P
+><B
+>Figure 4-1. Schematyczny obraz dysku twardego.</B
+></P
+><P
+><IMG
+SRC="hd-schematic.png"></P
+></DIV
+><P
+> Ka¿da powierzchnia podzielona w ten sam sposób na ¶cie¿ki
+    i sektory. Oznacza to, ¿e gdy g³owica znajduje siê na danej
+    ¶cie¿ce inne g³owice równie¿ s± na odpowiadaj±cych jej ¶cie¿kach.
+    Wszystkie odpowiadaj±ce sobie ¶cie¿ki nazywane s±
+	<I
+CLASS="glossterm"
+>cylindrem</I
+>. Przesuwanie g³owic jest czasoch³onne
+    (na inn± ¶cie¿kê) - umieszczanie danych na jednym cylindrze jest
+    optymalnym rozwi±zaniem. Jednak¿e nie jest to zawsze mo¿liwe -
+    czasami plik trzeba roz³o¿yæ w kilku ró¿nych miejscach, mówi siê
+    wtedy, ¿e dosz³o do
+	<I
+CLASS="glossterm"
+>fragmentacji</I
+> pliku.</P
+><P
+> Liczba powierzchni (lub g³owic, co jest tym samym),
+    cylindrów i sektorów zmienia siê z ka¿dym dyskiem;
+    warto¶ci okre¶laj±ce te liczby nazywa siê 
+    <I
+CLASS="glossterm"
+>geometri±</I
+> dysku twardego. Geometria przechowywana
+    jest zazwyczaj w zasilanej bateryjnie pamiêci zwanej
+	<I
+CLASS="glossterm"
+>CMOS RAM</I
+>, stamt±d odczytuje j± system operacyjny.
+	</P
+><P
+> Niestety BIOS
+	
+		<A
+NAME="AEN781"
+HREF="#FTN.AEN781"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>
+		
+	posiada ograniczenia, które uniemo¿liwiaj± wprowadzenie liczby ¶cie¿ek
+    wiêkszej od 1024 do CMOS RAM, dla dzisiejszych dysków jest to za ma³o.
+    Aby to obej¶æ kontroler dysku twardego podaje nieprawdziwe
+    informacje o geometrii dysku, po czym <I
+CLASS="glossterm"
+>t³umaczy adresy</I
+>
+    podane przez komputer do postaci rzeczywistej. 
+    Dla przyk³adu powiedzmy, ¿e mamy dysk posiadaj±cy 8 g³owic,
+    2048 ¶cie¿ek i 35 sektorów w danej ¶cie¿ce.
+	
+		<A
+NAME="AEN784"
+HREF="#FTN.AEN784"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+>
+		
+	Kontroler móg³by podaæ, ¿e dysk posiada 16 g³owic, 1024 ¶cie¿ek i 35
+    sektorów na ¶cie¿ce, dziêki temu limit nie zostaje przekroczony,
+    natomiast kontroler ma trochê wiêcej roboty. W rzeczywisto¶ci
+    matematyka mo¿e byæ bardziej zagmatwana, jednak rzeczywiste warto¶ci
+    nie s± nam potrzebne, tworzenie jednego cylindra, itp. s± niepraktyczne,
+    nie przynosz± one ¿adnego wzrostu wydajno¶ci.
+	</P
+><P
+> T³umaczenie wymagane jest w przypadków dysków IDE. Dyski
+    SCSI u¿ywaj± sekwencyjnych numerów sektorów (kontroler t³umaczy
+    poszczególne liczby: g³owica, cylinder, sektor), do tego
+    u¿ywa siê odmiennego sposobu komunikacji miêdzy CPU a kontrolerem -
+    problem nie istnieje. Zauwa¿, ¿e komputer czêsto nie zna
+    prawdziwej geometrii dysku, nie jest mu ona potrzebna.
+	</P
+><P
+> Poniewa¿ Linux czêsto nie zna prawdziwej geometrii 
+    dysku nie stara siê tworzyæ plików na jednym cylindrze.
+    Zamiennie stara siê przydzielaæ plikom sekwencyjne numery
+    sektorów, co zazwyczaj daje podobn± prêdko¶æ.
+    Sprawa jest komplikowana przez bufory kontrolera, automatyczne
+    przewidywanie akcji, itd.
+	</P
+><P
+> Ka¿dy dysk twardy reprezentowany jest przez pojedynczy
+    plik urz±dzenia. Pliki takie mog± nazywaæ siê 
+	<TT
+CLASS="filename"
+>/dev/hda</TT
+>, <TT
+CLASS="filename"
+>/dev/hdb</TT
+>, <TT
+CLASS="filename"
+>/dev/hdc</TT
+>,
+	i <TT
+CLASS="filename"
+>/dev/hdd</TT
+>dla IDE. Dyski SCSI
+	znane jest pod nazw± <TT
+CLASS="filename"
+>/dev/sda</TT
+>,
+	<TT
+CLASS="filename"
+>/dev/sdb</TT
+>, itd. Podobne konwencje nazewnictwa
+    obowi±zuj± inne dyski twarde; zobacz listê urz±dzeñ.
+	Zapamiêtaj, ¿e plik dysku odnosi siê do ca³ej zawarto¶ci - nie obowi±zuje
+    podzia³ na partycje, itd., urz±dzenie takie u¿ywane jest najczê¶ciej
+    w czasie modyfikacji MBR.
+	</P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN761"
+HREF="x756.html#AEN761"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Talerze wykonane s± z twardej substancji - np.
+        aluminium, st±d pochodzi nazwa.
+		</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN781"
+HREF="x756.html#AEN781"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> BIOS (Basic Input/Output System - system podstawowego we/wy)
+        jest wbudowanym oprogramowaniem przechowywanym w pamiêci ROM
+        p³yty g³ównej. Zajmuje siê m.in. pocz±tkow± faz± uruchamiania 
+        komputera.
+		</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN784"
+HREF="x756.html#AEN784"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> S± to zmy¶lone liczby.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c712.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x795.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Korzystanie z ró¿nych medii przechowuj±cych dane</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c712.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Dyskietki</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Zarz±dzanie pamiêci±</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Allokowanie przestrzeni dyskowej"
+HREF="x1372.html"><LINK
+REL="NEXT"
+TITLE="Tworzenie obszaru wymiany"
+HREF="x1454.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="chapter"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1372.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1454.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="chapter"
+><H1
+><A
+NAME="memory-management"
+></A
+>Chapter 5. Zarz±dzanie pamiêci±</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+>5.1. <A
+HREF="memory-management.html#AEN1444"
+>Czym jest pamiêæ wirtualna?</A
+></DT
+><DT
+>5.2. <A
+HREF="x1454.html"
+>Tworzenie obszaru wymiany</A
+></DT
+><DT
+>5.3. <A
+HREF="x1483.html"
+>U¿ywanie obszaru wymiany</A
+></DT
+><DT
+>5.4. <A
+HREF="x1516.html"
+>Dzielenie obszaru wymiany miêdzy systemami operacyjnymi</A
+></DT
+><DT
+>5.5. <A
+HREF="swap-allocation.html"
+>Allokowanie obszaru wymiany</A
+></DT
+><DT
+>5.6. <A
+HREF="buffer-cache.html"
+>Bufor</A
+></DT
+></DL
+></DIV
+><A
+NAME="AEN1440"
+></A
+><BLOCKQUOTE
+CLASS="BLOCKQUOTE"
+><P
+> <SPAN
+CLASS="QUOTE"
+>"Minnet, jag har tappat mitt minne,
+	är jag svensk eller finne, kommer inte ihåg..."</SPAN
+>
+	(Bosse Österberg)
+	</P
+></BLOCKQUOTE
+><P
+> Sekcja opisuje zarz±dzanie pamiêci± w Linuksie, m.in. 
+    pamiêæ wirtualn± i system buforowania urz±dzeñ blokowych.
+	</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1444"
+>5.1. Czym jest pamiêæ wirtualna?</A
+></H1
+><P
+> Linux obs³uguje <I
+CLASS="glossterm"
+>pamiêæ wirtualn±</I
+> -
+    wykorzystuje cze¶æ dysku jako rozszerzenie fizycznej pamiêci.
+    J±dro zapisuje zawarto¶æ nieu¿ywanych bloków pamiêci fizycznej
+    na dysku, umo¿liwiaj±c tym samym wykorzystanie ich do innych celów.
+    Je¿eli oryginalna zawarto¶æ jest potrzebna nastêpuje proces odwrotny.
+    Wszystko to odbywa siê niewidocznie dla u¿ytkownika;
+    dzia³aj±ce programy równie¿ nie dostrzegaj± ró¿nicy. Oczywi¶cie
+    operacje dyskowe s± znacznie wolniejsze (tysi±ce razy) ni¿
+    analogiczne dzia³ania na fizycznej pamiêci, programy zwalniaj±.
+    Czê¶æ dysku twardego wykorzystywana jako pamiêæ wirtualna
+    nosi nazwê <I
+CLASS="glossterm"
+>obszaru wymiany</I
+>.</P
+><P
+> Linux potrafi wykorzystywaæ zwyk³y plik na systemie plików,
+    lub oddzieln± partycjê jako obszar wymiany. Partycja wymiany jest
+    szybsza, jednak trudniej zmieniæ jej rozmiar, ni¿ w wypadku pliku.
+    Mo¿esz w celach testowych stworzyæ plik wymiany, a gdy ju¿ bêdziesz
+    pewnien co do potrzebnego rozmiaru stworzyæ osobn± partycjê.
+	</P
+><P
+> Powiniene¶ wiedzieæ, ¿e Linux pozwala u¿ywaæ
+    kilku partycji/plików wymiany jednocze¶nie. Dziêki temu mo¿esz
+    dynamicznie regulowaæ wielko¶æ swapu, np. stworzyæ partycjê 
+    o odpowiednim rozmiarze (takim aby siê nie marnowa³a), a przy
+    specjalnych okazjach wykorzystywaæ dodatkow± partycjê/plik, itp.
+	</P
+><P
+> Krótka lekcja terminologii komputerowej:
+    komputerowi naukowcy najczê¶ciej rozró¿niaj± 
+    swapowanie (zapisywanie ca³ego procesu na dysku) od
+    stronicowania (zapisywanie czê¶ci o sta³ym rozmiarze,
+    zazwyczaj kilku kilobajtów). Stronicowanie jest zazwyczaj szybsze,
+    dlatego Linux go u¿ywa, pomimo tego tradycyjna terminiologia Linuxa
+    mówi o swapowaniu.
+	
+		<A
+NAME="AEN1452"
+HREF="#FTN.AEN1452"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+	</P
+></DIV
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1452"
+HREF="memory-management.html#AEN1452"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> 
+        Zatem ca³kiem niepotrzebnie denerwuj±ca rzesza komputerowych
+        naukowców jest straszna.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1372.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1454.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Allokowanie przestrzeni dyskowej</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Tworzenie obszaru wymiany</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

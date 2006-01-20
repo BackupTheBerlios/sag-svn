@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Zegary sprzêtowe i programowe</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Utrzymywanie aktualnego czasu"
+HREF="c2341.html"><LINK
+REL="PREVIOUS"
+TITLE="Utrzymywanie aktualnego czasu"
+HREF="c2341.html"><LINK
+REL="NEXT"
+TITLE="Wy¶wietlanie i zmienianie czasu"
+HREF="x2366.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="c2341.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 11. Utrzymywanie aktualnego czasu</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x2366.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN2360"
+>11.2. Zegary sprzêtowe i programowe</A
+></H1
+><P
+>  Komputer osobisty posiada podtrzymywany bateryjnie zegar
+    sprzêtowy. Bateria zapewnia ci±g³o¶æ trwania takiego zegara;
+    za pomoc± BIOS-u lub systemu operacyjnego mo¿na go zmieniæ.
+	</P
+><P
+>  J±dro Linuxa utrzymuje swój w³asny, niezale¿ny
+    zegar. Podczas startu systemu jest on ustawiany wed³ug
+    wskazañ zegara sprzêtowego, po czym oba zegary dzia³aj± niezale¿nie.
+    Linux utrzymuje swój w³asny zegar poniewa¿ ci±g³e odpytywanie
+    sprzêtu jest wolne i skomplikowane.
+	</P
+><P
+>  Zegar j±dra zawsze wskazuje uniwersalny czas. W ten sposób
+    j±dro nie musi wiedzieæ co to strefa czasowa. Zwiêksza to pewno¶æ
+    dzia³ania zegara i upraszcza zmianê strefy czasowej. Ka¿dy
+    proces zajmuje siê osobno konwersj± czasu (u¿ywaj±c standardowych
+    narzêdzi rozprowadzanych wraz z informacjami o strefach).
+	</P
+><P
+>  Sprzêtowy zegar mo¿e byæ ustawiony wed³ug czasu lokalnego
+    lub uniwersalnego. Lepiej jest ustawiæ go na czas uniwersalny,
+    w ten sposób nie musisz przejmowaæ siê przej¶ciami na
+    czas letni, lub zimowy (UTC nie posiada podzia³u "Daylight Savings Time").
+    
+	Niestety, niektóre systemy operacyjne (MS-DOS, Windows, OS/2) zak³adaj±,
+    ¿e czas przechowywany przez BIOS jest czasem lokalnym.
+    Linux obs³uguje oba przypadki, przy czym je¿eli zegar BIOS-u wskazuje
+    czas lokalny musisz samodzielnie przechodziæ z czasu letniego na
+    zimowy (i odwrotnie).
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="c2341.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x2366.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Utrzymywanie aktualnego czasu</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="c2341.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Wy¶wietlanie i zmienianie czasu</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

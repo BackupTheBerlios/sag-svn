@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Plik /etc/inittab</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="init"
+HREF="init.html"><LINK
+REL="PREVIOUS"
+TITLE="init"
+HREF="init.html"><LINK
+REL="NEXT"
+TITLE="Poziomy pracy"
+HREF="x1764.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="init.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 7. <TT
+CLASS="command"
+>init</TT
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1764.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1712"
+>7.2. Plik <TT
+CLASS="filename"
+>/etc/inittab</TT
+></A
+></H1
+><P
+> Startuj±c <TT
+CLASS="command"
+>init</TT
+> odczytuje plik <TT
+CLASS="filename"
+>/etc/inittab</TT
+>.
+    Odczytuje go ponownie po otrzymaniu sygna³u SIGHUP,
+	
+		<A
+NAME="AEN1718"
+HREF="#FTN.AEN1718"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+		
+	co eliminuje konieczno¶æ restartowania systemu po zmianie tego¿
+    pliku.
+	</P
+><P
+> Plik <TT
+CLASS="filename"
+>/etc/inittab</TT
+> mo¿e wydawaæ siê nieco skomplikowanym
+    jednak szybko go poznasz. Zaczniemy od omówienia sposobu w³±czenia
+	oczekuj±cych <TT
+CLASS="command"
+>getty</TT
+>. Linia w pliku <TT
+CLASS="filename"
+>/etc/inittab</TT
+>
+    ma nastêpuj±c± postaæ:
+
+</P><PRE
+CLASS="screen"
+>&#13;id:poziomy_pracy:akcja:proces
+</PRE
+><P>
+
+	Dodatkowo plik mo¿e zawieraæ linie: puste i zaczynaj±ce siê znakiem hash
+    (`<VAR
+CLASS="literal"
+>#</VAR
+>'); obie s± ignorowane.
+	
+	<DIV
+CLASS="glosslist"
+><DL
+><DT
+><B
+>id</B
+></DT
+><DD
+><P
+> 
+		Identyfikator linii. W przypadku 
+		<TT
+CLASS="command"
+>getty</TT
+> najczê¶ciej okre¶la numer terminala, na którym
+        program powinien nas³uchiwaæ
+		(znak po <TT
+CLASS="filename"
+>/dev/tty</TT
+>). Powinien byæ unikalny i mieæ
+        okre¶lony rozmiar, nic wiêcej.
+		</P
+></DD
+><DT
+><B
+>poziomy_pracy</B
+></DT
+><DD
+><P
+> 
+        Poziomy pracy, na których powinno siê wykonaæ zawarto¶æ linijki.
+        Podaje siê je jako liczby bez ¿adnych separatorów (np. 345).
+		(poziomy pracy omówione s± w nastêpnej sekcji.)
+		</P
+></DD
+><DT
+><B
+>akcja</B
+></DT
+><DD
+><P
+> 
+		<VAR
+CLASS="literal"
+>respawn</VAR
+> oznacza, ¿e program powinien byæ restartowany,
+        <VAR
+CLASS="literal"
+>once</VAR
+> oznacza pojedyñcze uruchomienie programu.
+		</P
+></DD
+><DT
+><B
+>proces</B
+></DT
+><DD
+><P
+> 
+		Polecenie do wykonania.
+		</P
+></DD
+></DL
+></DIV
+>
+
+	Aby uruchomiæ <TT
+CLASS="command"
+>getty</TT
+> na pierwszym wirtualnym terminalu
+    (<TT
+CLASS="filename"
+>/dev/tty1</TT
+>) we wszystkich trybach dostêpnych dla
+    u¿ytkowników (2-5) powinni¶my wstawiæ:
+
+</P><PRE
+CLASS="screen"
+>&#13;1:2345:respawn:/sbin/getty 9600 tty1
+</PRE
+><P>
+
+	Pierwsze pole mówi, ¿e proces pracuje na <TT
+CLASS="filename"
+>/dev/tty1</TT
+>.
+    Drugie oznacza, ¿e robi to na poziomach pracy 2, 3, 4, 5.
+    Trzecie nakazuje restart polecenia po zakoñczeniu dzia³ania.
+    Ostatnie pole jest poleceniem do wykonania.
+	
+		<A
+NAME="AEN1752"
+HREF="#FTN.AEN1752"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>
+	</P
+><P
+> Chc±c dodaæ wiêcej terminali lub linii dial-in 
+    (logowanie siê przez modem) zmieñ odpowiednio 
+	<TT
+CLASS="filename"
+>/etc/inittab</TT
+>. Sprawd¼ strony podrêcznika
+    dotycz±ce: <TT
+CLASS="command"
+>init</TT
+>, <TT
+CLASS="filename"
+>inittab</TT
+>,
+	<TT
+CLASS="command"
+>getty</TT
+>.</P
+><P
+> Je¿eli nie uda³o siê uruchomiæ polecenia, a
+    <TT
+CLASS="command"
+>init</TT
+> zosta³ skonfigurowany do 
+	<VAR
+CLASS="literal"
+>restartowania</VAR
+> go system zostanie powa¿nie obci±¿ony
+    niekoñcz±cymi siê restartami. Aby temu zapobiec
+	<TT
+CLASS="command"
+>init</TT
+> zapisuje informacje o czêstotliwo¶ci restartowania
+    programu, je¿eli odbywa siê to zbyt czêsto program poczeka
+    5 minut przed kolejn± prób±.
+	</P
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1718"
+HREF="x1712.html#AEN1718"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Mo¿esz go wys³aæ wydaj±c polecenie <TT
+CLASS="command"
+>kill -HUP
+		1</TT
+>(bêd±c rootem oczywi¶cie)</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN1752"
+HREF="x1712.html#AEN1752"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+> Ró¿ne wersje <TT
+CLASS="command"
+>getty</TT
+> 
+        wymagaj± ró¿nych opcji. Szukaj±c szczegó³ów zajrzyj do
+        strony podrêcznika.
+		</P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="init.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1764.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><TT
+CLASS="command"
+>init</TT
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="init.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Poziomy pracy</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>

@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>U¿ywanie obszaru wymiany</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="HOME"
+TITLE="The Linux System Administrators' Guide"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Zarz±dzanie pamiêci±"
+HREF="memory-management.html"><LINK
+REL="PREVIOUS"
+TITLE="Tworzenie obszaru wymiany"
+HREF="x1454.html"><LINK
+REL="NEXT"
+TITLE="Dzielenie obszaru wymiany miêdzy systemami operacyjnymi"
+HREF="x1516.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+NAME="creation"
+CONTENT="2006-01-20T20:05:44"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-2"></HEAD
+><BODY
+CLASS="sect1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>The Linux System Administrators' Guide: Wersja 0.6.2</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="x1454.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 5. Zarz±dzanie pamiêci±</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="x1516.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="AEN1483"
+>5.3. U¿ywanie obszaru wymiany</A
+></H1
+><P
+> Zainicjowany swap nale¿y aktywowaæ za pomoc± 
+	<TT
+CLASS="command"
+>swapon</TT
+>. Program ten powiadamia j±dro, ¿e mo¿na
+    u¿ywaæ tego obszaru jako swap. Nasz plik wymiany mo¿emy aktywowaæ
+    za pomoc± takiego polecenia:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>swapon /extra-swap</KBD
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Obszary wymiany mo¿na aktywowaæ automatycznie - wystarcz± odpowiednie
+    wpisy w <TT
+CLASS="filename"
+>/etc/fstab</TT
+>:
+
+</P><PRE
+CLASS="screen"
+>&#13;/dev/hda8        none        swap        sw     0     0
+/swapfile        none        swap        sw     0     0
+</PRE
+><P>
+
+	Skrypty startowe wywo³uj± <TT
+CLASS="command"
+>swapon -a</TT
+> co powoduje
+    aktywacjê wszystkich obszarów wymiany wyliczonych w 
+	<TT
+CLASS="command"
+>/etc/fstab</TT
+>. 
+	</P
+><P
+> Wykorzystanie swapu mo¿esz nadzorowaæ za pomoc±  programu
+	<TT
+CLASS="command"
+>free</TT
+>, który wypisze aktualne zu¿ycie pamiêci:
+
+</P><PRE
+CLASS="screen"
+>&#13;<SAMP
+CLASS="prompt"
+>$</SAMP
+> <KBD
+CLASS="userinput"
+>free</KBD
+>
+<SAMP
+CLASS="computeroutput"
+>             total       used       free     shared    buffers
+Mem:         15152      14896        256      12404       2528
+-/+ buffers:            12368       2784
+Swap:        32452       6684      25768</SAMP
+>
+<SAMP
+CLASS="prompt"
+>$</SAMP
+>
+</PRE
+><P>
+
+	Pierwsza linia (<VAR
+CLASS="literal"
+>Mem:</VAR
+>) zawiera ilo¶æ fizycznej
+    pamiêci. Kolumna total pokazuje pamiêæ dostêpn± dla systemu (ilo¶æ
+    fizycznej pamiêci odj±æ pamiêæ wykorzystywan± przez j±dro).
+
+	Kolumna used pokazuje ilo¶æ pamiêci aktualnie wykorzystywanej
+    (druga linia odlicza bufory). Kolumna free pokazuje ca³kowicie
+    nie u¿ywan± pamiêæ. Kolumna shared pokazuje ilo¶æ pamiêci dzielonej
+    przez kilka procesów. Kolumna buffers pokazuje aktualny rozmiar
+    buforów dla operacji na urz±dzeniach blokowych.
+    </P
+><P
+> Ostatnia linia (<VAR
+CLASS="literal"
+>Swap:</VAR
+>) pokazuje podobne
+    informacje odno¶nie obszarów wymiany. Je¿eli linia zawiera same
+    zera swap nie zosta³ aktywowany.
+	</P
+><P
+> Te same informacje dostêpne s± via
+	<TT
+CLASS="command"
+>top</TT
+>, <TT
+CLASS="filename"
+>/proc/meminfo</TT
+>.  
+    Aby otrzymaæ informacje odno¶nie wykorzystania poszczególnych
+    obszarów swap zajrzyj do pliku <TT
+CLASS="filename"
+>/proc/swaps</TT
+>.
+	</P
+><P
+> Obszar wymiany mo¿na wy³±czyæ za pomoc± 
+	<TT
+CLASS="command"
+>swapoff</TT
+>. Wszelkie dane zapisane na danym
+    swapie s± najpierw wczytywane do pamiêci, je¿eli nie ma miejsca
+    zostaj± wypisane na inne miejsce. Je¿eli brakuje wirtualnej pamiêci
+    Linux zacznie d³awiæ siê; po do¶æ d³ugim okresie powinien wyj¶æ z 
+    tego, w miêdzyczasie system bêdzie bezu¿yteczny, dlatego
+    przed wy³±czeniem obszaru wymiany powiniene¶ sprawdziæ czy istnieje
+    wystarczaj±ca ilo¶æ nieu¿ywanej pamiêci.
+	</P
+><P
+> Wszystkie obszary wymiany s± automatycznie aktywowane za
+    pomoc± <TT
+CLASS="command"
+>swapon -a</TT
+>, deaktywowane przy pomocy
+    <TT
+CLASS="command"
+>swapoff -a</TT
+>; informacje o obszarach wymiany
+    pobierane s± z pliku
+	<TT
+CLASS="filename"
+>/etc/fstab</TT
+>. Wszystkie rêcznie aktywowane 
+    obszary zostan± w u¿ycie.</P
+><P
+> Czasami swap jest u¿ywany pomimo wolnej pamiêci. Dzieje siê
+    tak po usuniêciu pamiêcio¿ernego procesu. Dane znajduj±ce
+    siê w swapie nie zostan± za³adowane a¿ do ¿±dania ich.
+    W ten sposób zmniejsza siê ilo¶æ operacji dyskowych i przy¶piesza
+    pracê systemu - nastêpny program mo¿na szybko uruchomiæ, gdy¿
+    istnieje nie u¿ywana pamiêæ. Nie powiniene¶ siê tym martwiæ,
+    ale powiniene¶ wiedzieæ.
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="x1454.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="x1516.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Tworzenie obszaru wymiany</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="memory-management.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Dzielenie obszaru wymiany miêdzy systemami operacyjnymi</TD
+></TR
+></TABLE
+></DIV
+><DIV id="hosted">Hosted by: <a href="http://developer.berlios.de"><img src="http://developer.berlios.de/bslogo.php?group_id=5324" width="124" height="32" border="0" alt="BerliOS Logo" /></a></DIV>
+</BODY
+></HTML
+>
