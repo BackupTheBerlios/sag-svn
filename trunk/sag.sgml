@@ -1,10 +1,9 @@
-<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
-]>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.2//EN">
 
 <book>
   <bookinfo>
    <date>$Date: 1999/07/29 07:49:53 $</date>
-<!--   <graphic fileref="gwiazda">The Linux System Administrators' Guide</graphic> -->
+    <graphic fileref="gwiazda"/>
 	<title>The Linux System Administrators' Guide</title>
     <subtitle>Wersja 0.6.2</subtitle>
     <author>
@@ -71,19 +70,22 @@
 </preface>
 
 <preface>
-<Title>Od t³umacza</title>
+<title>Od t³umacza, linki do plików</title>
 <para>
-    T³umaczenia dokona³ Pawe³ Niewiadomski (<ulink url="mailto:new@linuxpl.org">new@linuxpl.org</ulink>).
+    T³umaczenia dokona³ Pawe³ Niewiadomski (new (at) foo (kreska) baz (kropka) com).
 </para>
 <para>
-    Je¿eli zarabiasz na tym t³umaczeniu chcê dzia³kê, je¿eli rozprowadzasz je
-    jako dodatek do komercyjnego pisma (np. na p³ycie) chcê o tym wiedzieæ.
+	Rób z tym t³umaczeniem cokolwiek chcesz tak d³ugo jak spe³nione s±
+	oryginalne warunki postawione przez autora. Je¿eli jeste¶ na tyle
+	mi³y daj mi znaæ o swoich poczynaniach.
 </para>
 <para>
     T³umaczenie nie bêdzie przeze mnie rozwijane, czy uaktualniane, dlatego je¿eli
-    masz czas, chêci i wiedzê (najwa¿niejsze s± chêci i czas :-) mo¿esz je ode 
-    mnie przej±æ i rozwijaæ, uaktualniaæ. Je¿eli podejmniesz tak± decyzjê 
-    skontaktuj siê ze mn±.
+    masz czas, chêci i wiedzê (najwa¿niejsze s± chêci i czas :-) mo¿esz 
+	utworzyæ konto na serwerze <ulink url="http://developer.berlios.de">http://developer.berlios.de</ulink>
+	i zacz±æ modyfikowaæ znajduj±ce siê tam ¼ród³a (t³umaczenie trzymane
+	jest w repozytorium, ka¿dy kto zechce dostanie do niego dostêp, tak samo
+	do strony, itp.).
 </para>
 <para>
     Dziêki tym panom parê b³êdów przesta³o istnieæ:
@@ -97,7 +99,11 @@
 	</itemizedlist>
 </para>
 <para>
-    <ulink url="http://iidea.pl/~paweln/"><emphasis>Pliki do ¶ci±gniêcia.</emphasis></ulink>
+	<emphasis>
+	Pod nastêpuj±cym adresem mo¿na ¶ci±gn±æ ¼ród³a, wersjê HTML oraz
+	wersjê RTF:
+    <ulink url="https://developer.berlios.de/project/showfiles.php?group_id=5324">https://developer.berlios.de/project/showfiles.php?group_id=5324</ulink>
+	</emphasis>
 </para>
 </preface>
 
@@ -291,7 +297,7 @@ oraz za wiele artuku³ów w dziale "administracja systemem" Linux Journal.
 	J±dro jest sercem systemu operacyjnego.
 	
 		<footnote><para> Czêsto jest ono b³êdnie nazywane systemem operacyjnym.
-        System operacyjny udostêpnia du¿o wiêcej us³ug ni¿ samo j±dro.
+        System operacyjny udostêpnia du¿o wiêcej us³ug ni¿ samo j±dro.</para>
 		</footnote>
 		
 	To ono wyszukuje pliki na dysku, uruchamia programy i rozdziela
@@ -301,7 +307,7 @@ oraz za wiele artuku³ów w dziale "administracja systemem" Linux Journal.
     dostêp do sprzêtu, zmuszaj±c wszystkich do u¿ywania dostarczonych
     funkcji. W ten sposób j±dro do pewnego stopnia chroni jednego u¿ytkownika przed drugim.
     J±dro udostêpnia swe funkcje poprzez mechanizm <glossterm>wywo³añ 
-    systemowych<glossterm>; zobacz strony podrêcznika z sekcji 2.</para>
+    systemowych</glossterm>; zobacz strony podrêcznika z sekcji 2.</para>
 
 	<para> Programy systemowe u¿ywaj± narzêdzi dostarczonych przez 
     j±dro w celu implementacji ró¿nych wymaganych przez system operacyjny
@@ -332,7 +338,7 @@ Procesor tekstu jest aplikacj±; <command>telnet</command> jest
 	<para> J±dro Linuksa zawiera kilka podstawowych czê¶ci: zarz±dzanie
     procesami, pamiêci±, sterowniki urz±dzeñ, obs³uga systemu plików,
     zarz±dzanie sieci± i wiele innych.
-	<xref linkend="kerneloverview">
+	<xref linkend="kerneloverview"/>
 	pokazuje je.</para>
 
 		<figure id="kerneloverview" float="1">
@@ -640,7 +646,7 @@ Procesor tekstu jest aplikacj±; <command>telnet</command> jest
     lub wielu, itd.
 	</para>
 
-	<para> <xref linkend="dir-tree-overview"> zawiera wiêcej szczegó³ów;
+	<para> <xref linkend="dir-tree-overview"/> zawiera wiêcej szczegó³ów;
     wyczerpuj±ce informacje znajduj± siê w: Linux Filesystem Standard.
 	</para>
 
@@ -685,7 +691,7 @@ Procesor tekstu jest aplikacj±; <command>telnet</command> jest
     go na kilku dyskach, lub partycjach. G³ównymi czê¶ciami s±:
 	katalog g³ówny, <filename>/usr</filename>, <filename>/var</filename>,
 	<filename>/home</filename> (zobacz
-	<xref linkend="fstree">).  Ka¿da z czê¶ci ma inne przeznaczenie.
+	<xref linkend="fstree"/>).  Ka¿da z czê¶ci ma inne przeznaczenie.
 	Niektóre z czê¶ci mog± znajdowaæ siê w sieci, na urz±dzeniach wy³±cznie
     odczytywalnych.
 	</para>
@@ -727,7 +733,7 @@ Procesor tekstu jest aplikacj±; <command>telnet</command> jest
         podrêcznika oraz pliki tymczasowe. Tradycyjnie wszystko co
         znajduje siê w <filename>/var</filename> by³o umieszczane w
         <filename>/usr</filename>, jednak to uniemo¿liwia zamontowanie
-        <filename>/usr</filename> wy³±cznie do odczytu.<para> </listitem>
+        <filename>/usr</filename> wy³±cznie do odczytu.</para> </listitem>
 
 		<listitem> <para>  System plików <filename>/home</filename>
 		zawiera katalogi domowe u¿ytkowników - wszystkie ich dane.
@@ -893,7 +899,7 @@ Dok³adniejszy opis znajduje siê na stronie podrêcznika dotycz±cej <command>passw
         (wywo³ywanego w <filename>/etc/rc</filename> lub inny skrypt startowy
 		).  Pod Linuxem zawiera informacje o swapie u¿ywanym automatycznie
         po poleceniu <command>swapon -a</command>. 
-        Zobacz <xref linkend="mount-and-umount">, oraz stronê podrêcznika
+        Zobacz <xref linkend="mount-and-umount"/>, oraz stronê podrêcznika
         polecenia <command>mount</command>.
 		</para></glossdef></glossentry>
 	
@@ -1372,12 +1378,10 @@ zawiera informacje na temat drukarek. Odmienna sk³adnia.
         etap ten jest jednokrotny, za wyj±tkiem pracy z dyskietkami.
         Bêdziesz musia³ powróciæ do tego rozdzia³u w przypadku nowego
         dysku lub optymalizacji operacji dyskowych.
-        <para> 
+        </para> 
 
-        <para> Podstawowe obowi±zki:
-
+    <para> Podstawowe obowi±zki:</para>
 	<itemizedlist>
-
 	<listitem><para> 
         Sformatowaæ dysk. Oznacza to wszelkie rzeczy przygotowuj±ce
         dysk do pracy, sprawdzenie wystêpowania z³ych sektorów
@@ -1408,7 +1412,7 @@ zawiera informacje na temat drukarek. Odmienna sk³adnia.
 
 	</itemizedlist>
 
-	<para> <xref linkend="memory-management"> zawiera informacje
+	<para> <xref linkend="memory-management"/> zawiera informacje
     o wirtualnej pamiêci i buforowaniu operacji dyskowych - o czym
     powiniene¶ pomy¶leæ.
 	</para>
@@ -1476,7 +1480,7 @@ zawiera informacje na temat drukarek. Odmienna sk³adnia.
 	Je¿eli znasz te terminy mo¿esz opu¶ciæ j±.
 	</para>
 
-	<para> Zobacz <xref linkend="hd-schematic"> aby poznaæ schematyczny
+	<para> Zobacz <xref linkend="hd-schematic"/> aby poznaæ schematyczny
     obraz najwa¿niejszych czê¶ci dysku twardego. Dysk sk³ada siê
     z jednego lub kilku cylindrycznych talerzy,
 	
@@ -1919,6 +1923,7 @@ zawiera informacje na temat drukarek. Odmienna sk³adnia.
 	Zepsuta tablica partycji mo¿e zostaæ naprawiona programem
 	<command>fdisk</command>. Oto informacje o partycjach uzyskane poleceniem
     <command>fdisk -l</command>:
+	</para>
 
 <screen>
 <prompt>$</prompt> <userinput>fdisk -l /dev/hda</userinput>
@@ -1963,7 +1968,7 @@ zawiera informacje na temat drukarek. Odmienna sk³adnia.
 	</para>
 
 	<para> Struktura partycji mog³aby wygl±daæ nastêpuj±co 
-	<xref linkend="hard-disk-layout">. Dysk podzielony jest na trzy
+	<xref linkend="hard-disk-layout"/>. Dysk podzielony jest na trzy
     partycje podstawowe, druga partycja jest podzielona na dwa dyski
     logiczne. Czê¶æ dysku nie jest podzielona.
 	Dysk oraz ka¿da z partycji posiada rekord ³aduj±cy.</para>
@@ -1990,13 +1995,13 @@ zawiera informacje na temat drukarek. Odmienna sk³adnia.
 
 	<para> Nie istnieje standard zawieraj±cy informacje o dok³adnym znaczeniu
     poszczególnych warto¶ci, czê¶æ z powszechnie akceptowanych
-	zawarta jest w <xref linkend="partition-ids">. T± sam± list±
+	zawarta jest w <xref linkend="partition-ids"/>. T± sam± list±
     pos³uguje siê program <command>fdisk</command>.</para>
 
 	<table id="partition-ids">
 	<title>Typy partycji (z Linuksowego programu <command>fdisk</command>).</title>
 	
-	<tgroup cols=6>
+	<tgroup cols="6">
 	<tbody>
 	
 	<row>
@@ -2262,7 +2267,7 @@ zawiera informacje na temat drukarek. Odmienna sk³adnia.
         szybko¶æ operacji na du¿ej ilo¶ci plików, oraz algorytmy obs³uguj±ce,
         które pozwalaj± na samoczynne naprawianie siê systemu w czasie
         pracy.
-        </para></glossdef</glossentry>
+        </para></glossdef></glossentry>
     
 	</glosslist>
 	</para>
@@ -2368,7 +2373,7 @@ dr-xr-xr-x   4 root     root            0 Jan 31 20:37 self
     dla niego ¿adnego miejsca (oprócz miejsca na katalog /proc),
     niektóre z plików posiadaj± rozmiar ró¿ny od zera, jest fikcyjny tak
     samo jak ca³y system plików - stanowi czê¶æ informacji dostarczanej przez 
-    j±dro, ¿aden bajt dysku nie jest u¿yty.
+    j±dro, ¿aden bajt dysku nie jest u¿yty.</para>
 </sect2>
 
 <sect2>
@@ -2441,13 +2446,16 @@ Writing inode tables: done
 Writing superblocks and filesystem accounting information: done</computeroutput>
 <prompt>$</prompt>
 </screen>
+	</para>
 
+	<para>
 	Najpierw sformatowano dyskietkê ( opcja <option>-n</option> wy³±cza
     sprawdzanie wystêpowania z³ych bloków ), pó¼niej sprawdzili¶my
     czy dyskietka nie posiada zepsutych obszarów za pomoc± programu
     <command>badblocks</command>, wyj¶cie skierowali¶my do pliku.
     Ostatecznie stworzyli¶my system plików, zainicjowali¶my listê
     z³ych bloków zawarto¶ci± pliku.
+	</para>
 
 	<para> Mo¿na by³o u¿yæ opcji <option>-c</option> programu
 	<command>mkfs</command>, zamiast uruchamiaæ program <command>badblocks</command>
@@ -2491,12 +2499,12 @@ Writing superblocks and filesystem accounting information: done</computeroutput>
     katalogu.
 	</para>
 
-	<para> Dla przyk³adu: <xref linkend="hd-mount-root"> pokazuje systemy plików,
+	<para> Dla przyk³adu: <xref linkend="hd-mount-root"/> pokazuje systemy plików,
     ich katalogi g³ówne zosta³y zaznaczone.
 	Montuj±c ostatnie dwa systemy plików odpowiednio w katalogu
     <filename>/home</filename> i <filename>/usr</filename>, wszystko to
     na pierwszym systemie plików, otrzymamy spójne drzewo katalogów:
-	<xref linkend="hd-mount-all">.</para>
+	<xref linkend="hd-mount-all"/>.</para>
 
 		<figure id="hd-mount-root" float="1">
 		<title>Trzy osobne systemy plików.</title>
@@ -2589,14 +2597,15 @@ Writing superblocks and filesystem accounting information: done</computeroutput>
     <command>fsck</command> mo¿e go zmieniaæ, operacja
     przemontowywania usunie z pamiêci wszelkie poczynione zmiany i
     nie dojdzie do uszkodzenia systemu plików.
-    
+    </para>
+
 	<para> W wielu systemach u¿ywa siê kilku systemów plików, które
     powinny zostaæ zamontowane automatycznie podczas startu systemu.
 	Podaje je siê w pliku <filename>/etc/fstab</filename> (zobacz
     stronê odpowiedni± stronê podrêcznika).
     Dok³adne szczegó³y dotycz±ce tego procesu mog± siê ró¿niæ - s±
     zale¿ne od administratora, zobacz sekcjê 
-    <xref linkend="boots-and-shutdowns">.</para>
+    <xref linkend="boots-and-shutdowns"/>.</para>
 
 	<para> Je¿eli system plików nie jest ju¿ potrzeby nale¿y go odmontowaæ
     poleceniem <command>umount</command>.
@@ -2604,7 +2613,7 @@ Writing superblocks and filesystem accounting information: done</computeroutput>
 		<footnote><para> Oczywi¶cie powinno byæ 
 		<command>unmount</command>, jednak¿e n zniknê³o w latach 70 i nie
         powróci³o od tamtego czasu. Znalezione proszê zwróciæ 
-        Laboratoriom Bella, NJ.
+        Laboratoriom Bella, NJ.</para>
 		</footnote>
 		
 	<command>umount</command> potrzebuje jednego argumentu -
@@ -2653,7 +2662,7 @@ Writing superblocks and filesystem accounting information: done</computeroutput>
 	</para></listitem>
 
 	<listitem><para> Wstawiæ odpowiednie wpisy do pliku
-	<filename>/etc/fstab</filename>.
+	<filename>/etc/fstab</filename>.</para></listitem>
 
 	</itemizedlist>
 
@@ -2835,7 +2844,7 @@ Pass 5: Checking group summary information.
 	</para>
 
 	<para> <command>sync</command> wymusza zapisanie buforowanych
-    danych (zobacz <xref linkend="buffer-cache">).  
+    danych (zobacz <xref linkend="buffer-cache"/>).  
     Zazwyczaj nie trzeba go rêcznie uruchamiaæ -
 	demon <command>update</command> robi to automatycznie.
 	Program mo¿e byæ przydatny po katastrofie, w której
@@ -2879,7 +2888,7 @@ Pass 5: Checking group summary information.
 
 	<para> <command>dumpe2fs</command> pokazuje informacje o
     systemie plików ext2, wiêkszo¶æ z nich odczytana zostaje z superbloku.
-	<xref linkend="dumpe2fs-output"> zawiera przyk³adowe wyj¶cie programu.
+	<xref linkend="dumpe2fs-output"/> zawiera przyk³adowe wyj¶cie programu.
     Niektóre informacje s± techniczne i wymagaj± zrozumienia sposobu
     dzia³ania systemu plików (zobacz dodatek XXX ext2fspaper), jednak
     wiêkszo¶æ jest zrozumia³a dla ka¿dego (nawet adminlamera ;-).
@@ -2934,7 +2943,7 @@ Group 0:
     mog± zostaæ u¿yte do utworzenia kopii zapasowej i odtworzenia systemu
     plików. S± to standardowe wersje znane z innych Unixów przeznaczone
     do wspó³pracy z ext2.
-	Zobacz <xref linkend="backups">.</para>
+	Zobacz <xref linkend="backups"/>.</para>
 
 </sect2>
 
@@ -3068,7 +3077,7 @@ Group 0:
 	</para>
 
 	<para> Allokacja miejsca dla partycji swap zosta³a omówiona w <xref
-	linkend="swap-allocation">.</para>
+	linkend="swap-allocation"/>.</para>
 
 </sect2>
 
@@ -3098,7 +3107,7 @@ Group 0:
 	<para> Dysk 330 MB podzieli³em na kilka partycji w nastêpuj±cy sposób:
 
 		<informaltable>
-		<tgroup cols=2>
+		<tgroup cols="2">
 		<tbody>
 		<row> <entry>5 MB</entry> <entry>g³ówny system plików</entry> </row>
 	 	<row> <entry> 10 MB</entry> <entry>swap</entry> </row>
@@ -3262,7 +3271,7 @@ Group 0:
     ostro¿ny - program nie wykonuje ¿adnych testów przed stworzeniem
     sygnatury.
 	<emphasis>Mo¿e ³atwo nadpisaæ wa¿ne dane za pomoc± 
-	<command>mkswap</command>!</emphasis>
+	<command>mkswap</command>!</emphasis></para>
 
 	<para> Mechanizm zarz±dzania pamiêci± limituje rozmiar pojedynczego
     obszaru wymiany do 127 MB, oraz mo¿e ich byæ maxymalnie 8 (co daje 1 GB).
@@ -3300,6 +3309,7 @@ Group 0:
 	Skrypty startowe wywo³uj± <command>swapon -a</command> co powoduje
     aktywacjê wszystkich obszarów wymiany wyliczonych w 
 	<command>/etc/fstab</command>. 
+	</para>
 	
 	<para> Wykorzystanie swapu mo¿esz nadzorowaæ za pomoc±  programu
 	<command>free</command>, który wypisze aktualne zu¿ycie pamiêci:
@@ -3443,6 +3453,8 @@ Swap:        32452       6684      25768</computeroutput>
     spadek wydajno¶ci.
 	</para>
 
+	</listitem>
+
 	</itemizedlist>
     </para>
 
@@ -3479,6 +3491,7 @@ Swap:        32452       6684      25768</computeroutput>
     u¿ytkownikami. Zapisywanie danych odczytanych z dysku przy¶piesza kolejne
     odwo³ania. Proces taki zwany jest <glossterm>buforowaniem dysków
 	</glossterm>.
+	</para>
 
 	<para> Poniewa¿ pamiêæ jest, niestety, skoñczona bufor musi mieæ
     ograniczon± wielko¶æ (czasami nie mo¿e pomie¶ciæ na raz wymaganych
@@ -3509,7 +3522,7 @@ Swap:        32452       6684      25768</computeroutput>
 	
 	<para> Dlatego, nigdy nie powiniene¶ wy³±czaæ komputera przed
     poprawnym wykonaniem procedury wy³±czenia systemu operacyjnego
-    (zobacz <xref linkend="boots-and-shutdowns">), oraz zmieniaæ 
+    (zobacz <xref linkend="boots-and-shutdowns"/>), oraz zmieniaæ 
     dyskietek przed ich odmontowaniem.
 	Program <command>sync</command> <glossterm>flushes (opró¿nia)</glossterm>
 	bufor - wymusza zapisanie wszelkich danych znajduj±cych siê w nim.
@@ -3550,7 +3563,7 @@ Swap:        32452       6684      25768</computeroutput>
     bufora, wszystko zachodzi automatycznie. Jedyne co musisz robiæ to
     poprawnie uruchamiaæ i zamykaæ system.
     </para>
-
+</sect1>
 </chapter>
 
 <chapter id="boots-and-shutdowns">
@@ -3580,8 +3593,8 @@ Ah... start it up, never, never, never
 		<footnote><para> W pierwszych komputerach nie wystarczy³o w³±czyæ
         urz±dzenia, trzeba by³o rêcznie za³adowaæ system operacyjny.
 	    </para></footnote>
-		
 	nazywany jest <glossterm>bootowaniem (³adowaniem)</glossterm>.
+	</para>
 
 	<para> Na pocz±tku komputer wykonuje 
     <glossterm>program ³aduj±cy</glossterm>, którego zadaniem
@@ -3743,7 +3756,7 @@ Linux version 0.99.pl9-1 (root@haven) 05/01/93 14:12:20
 	<filename>/sbin/init</filename>) w tle (proces zawsze ma id = 1 ).
 	<command>init</command> odpowiedzialny jest za wiele rzeczy,
     czê¶æ z nich podlega kontroli administratora; zobacz
-	<xref linkend="init">. 
+	<xref linkend="init"/>. 
 	</para></listitem>
 
 	<listitem><para> <command>init</command> odpowiedzialny jest za uruchamianie
@@ -3890,7 +3903,7 @@ The system is going DOWN for system halt in 10 minutes !!
     mo¿na stworzyæ w³asne -	<citetitle>Bootdisk HOWTO</citetitle> Grahama Chapmana
     opisuje proces ich tworzenia.
 	</para>
-
+</sect1>
 </chapter>
 
 <chapter id="init">
@@ -3900,6 +3913,8 @@ The system is going DOWN for system halt in 10 minutes !!
 
 	<blockquote><para> <quote>Uuno on numero yksi</quote>
 	(slogan serii fiñskich filmów.)</para></blockquote>
+
+	</para>
 
 	<para> Rozdzia³ opisuje dzia³anie procesu <command>init</command>,
     który jest jedynym programem uruchamianym automatycznie przez
@@ -3931,7 +3946,7 @@ The system is going DOWN for system halt in 10 minutes !!
     odpowiedzialne za sprawdzenie i zamontowanie systemów plików,
     wyczyszczenie <filename>/tmp</filename>, uruchomienie
     demonów oraz <command>getty</command> na odpowiednich terminalach.
-	(zobacz <xref linkend="log-in-and-out">).</para>
+	(zobacz <xref linkend="log-in-and-out"/>).</para>
 	
 	<para> W czasie dzia³ania systemu <command>init</command>
     restartuje <command>getty</command> na terminalu, z którego u¿ytkownik
@@ -4050,7 +4065,7 @@ id:poziomy_pracy:akcja:proces
 	<para> <glossterm>Poziom pracy</glossterm> to stan programu
 	<command>init</command>, oraz ca³ego systemu definiuj±cy
     dzia³aj±ce us³ugi. Poziomy pracy identyfikowane s± poprzez liczby,
-    zobacz <xref linkend="run-levels">. Nie istniej± definicje
+    zobacz <xref linkend="run-levels"/>. Nie istniej± definicje
     poziomów pracy konfigurowalnych przez u¿ytkownika (2-5).
     Niektórzy administratorzy systemów u¿ywaj± ich do definiowania
     dzia³aj±cych podsystemów, np.: dzia³aj±ca sieæ, X, itd.
@@ -4060,7 +4075,7 @@ id:poziomy_pracy:akcja:proces
 	
 		<table id="run-levels">
 		<title>Poziomy pracy w liczbach</title>
-		<tgroup cols=2>
+		<tgroup cols="2">
 		<tbody>
 		<row> <entry>0</entry> <entry>Zatrzymanie systemu.</entry> </row>
 		<row> <entry>1</entry> <entry>Tryb jednego u¿ytkownika (dla specjalnej administracji).</entry> </row>
@@ -4185,7 +4200,7 @@ id:2:initdefault:
     wadê - w przypadku uszkodzenia <filename>/etc/passwd</filename> 
     (<filename>/etc/shadow</filename>) zalogowanie siê bêdzie niemo¿liwe.
 	</para>
-
+</sect1>
 </chapter>
 
 <chapter id="log-in-and-out">
@@ -4203,7 +4218,7 @@ id:2:initdefault:
 <sect1>
 <title>Logowanie siê via terminal</title>
 
-	<para> <xref linkend="terminal-logins"> obrazuje zachodz±ce procesy.
+	<para> <xref linkend="terminal-logins"/> obrazuje zachodz±ce procesy.
     Najpierw <command>init</command> uruchamia dla odpowiedniego
     terminala program <command>getty</command>. <command>getty</command> 
     oczekuje powiadomienia od u¿ytkownika (oznacza to, ¿e u¿ytkownik
@@ -4394,7 +4409,7 @@ id:2:initdefault:
     administrator, u¿ytkownik mo¿e ustawiæ ró¿ne zmienne (np. PATH), wykonaæ
     jakie¶ programy, itd.
 	</para>
-
+</sect1>
 </chapter>
 
 
@@ -4456,7 +4471,7 @@ id:2:initdefault:
 	<para> Wiêkszo¶æ dystrybucji posiada w³a¶ciwe sobie programy, np.
     pracuj±ce w ¶rodowisku graficznym.
     Zazwyczaj ogólnie rozprowadzanymi s±: <command>adduser</command>
-    i <command>useradd</command>. <xref linkend="manual-adduser">
+    i <command>useradd</command>. <xref linkend="manual-adduser"/>
     opisuje rêczne dodawanie u¿ytkowników.
 	</para>
 	
@@ -5136,7 +5151,7 @@ usr/src/linux-1.2.10-includes/include/linux/kernel.h
     wszystkich plików, jednak to co mo¿emy odzyskaæ jest czêsto wystarczaj±ce.
 	</para>
 
-	<para> <xref linkend="backup-history-timeline"> pokazuje, który
+	<para> <xref linkend="backup-history-timeline"/> pokazuje, który
     poziom powinien byæ u¿yty w danym dniu, oraz z których kopii mo¿na
     odzyskaæ dane pod koniec miesi±ca.
 	</para>
@@ -5169,7 +5184,7 @@ usr/src/linux-1.2.10-includes/include/linux/kernel.h
 
 <table id="efficient-backup-levels">
 <title>Efektywny schemat tworzenia wielopoziomowych kopii zapasowych</title>
-<tgroup cols=4>
+<tgroup cols="4">
 <thead>
 <row><entry>Ta¶ma</entry> <entry>Poziom</entry> <entry>Kopiowanie (dni)</entry> <entry>Ilo¶æ ta¶m niezbêdnych do odtworzenia</entry></row>
 </thead>

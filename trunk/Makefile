@@ -6,7 +6,8 @@ figs = overview-kernel.fig backup-timeline.fig fstree.fig hd-layout.fig \
 # You should not need to touch anything below this.
 JADE = openjade
 JADETEX = jadetex
-HTML_DSL = /usr/local/share/sgml/openjade/builtins.dsl
+HTML_DSL = stylesheet.dsl
+HTML_DCL = /usr/share/sgml/openjade/xml.dcl
 TEX_DSL = $(HTML_DSL)
 
 .sgml.html:
@@ -14,9 +15,17 @@ TEX_DSL = $(HTML_DSL)
 	mkdir $@
 	sed 's/graphic fileref="[^"]*/&.png/' $< > temp.sgml
 	cp gwiazda.png $@
-	(set -e; cd $@ && $(JADE) -t sgml -d $(HTML_DSL) ../temp.sgml && \
-		ln -s book1.html index.html) || rm -rf $@
+	(set -e; cd $@ && SP_ENCODING=ISO-8859-2 $(JADE) -t sgml -i output-html \
+		-d ../$(HTML_DSL) $(HTML_DCL) ../temp.sgml; ../logo-add.pl *.html ) || rm -rf $@
 	rm -f temp.sgml
+
+.sgml.rtf:
+	sed 's/graphic fileref="[^"]*/&.png/' $< > temp.sgml
+	cp gwiazda.png $@
+	SP_ENCODING=ISO-8859-2 $(JADE) -t rtf -i output-print \
+		-d $(HTML_DSL) $(HTML_DCL) temp.sgml
+	rm -f temp.sgml
+	mv temp.rtf sag.rtf
 
 .sgml.ps:
 	sed 's/graphic fileref="[^"]*/&.ps/' sag.sgml > temp.sgml
@@ -34,19 +43,25 @@ TEX_DSL = $(HTML_DSL)
 .fig.ps:
 	fig2dev -Lps $< $@
 
-.SUFFIXES: $(SUFFIXES) .sgml .html .tex .ps .dvi .png .fig
+.SUFFIXES: $(SUFFIXES) .sgml .html .tex .ps .dvi .png .fig .rtf
 
 docsps = $(docs:.sgml=.ps)
 docshtml = $(docs:.sgml=.html)
+docsrtf = $(docs:.sgml=.rtf)
 docstex = $(docs:.sgml=.tex) $(docs:.sgml=.log) $(docs:.sgml=.dvi) \
 	  $(docs:.sgml=.aux)
 
-pngs = $(figs:.fig=.png)
-psfigs = $(figs:.fig=.ps)
+pngs = $(figs:.fig=.png) gwiazda.png
+psfigs = $(figs:.fig=.ps) gwiazda.png
 
-all: html ps
+all: html rtf
 html: $(pngs) $(docshtml)
-	for dir in $(docshtml); do cp $(pngs) $$dir/.; done
+	for dir in $(docshtml); do \
+		cp $(pngs) *.css $$dir; \
+	done
+
+rtf: $(pngs) $(docsrtf)
+
 ps: $(psfigs) $(docsps)
 
 sag-png.sgml: sag.sgml
