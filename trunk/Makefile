@@ -60,6 +60,9 @@ html: $(pngs) $(docshtml)
 		cp $(pngs) *.css $$dir; \
 	done
 
+pkg-html: html
+	tar czf sag.html{.tar.gz,}
+
 rtf: $(pngs) $(docsrtf)
 
 ps: $(psfigs) $(docsps)
@@ -71,3 +74,6 @@ sag-ps.sgml: sag.sgml
 
 clean:
 	rm -rf $(docsps) $(docshtml) $(docstex) $(pngs) $(psfigs)
+
+mirror:
+	rsync -vCr --delete --rsh "ssh -l paweln" sag.html/* shell.berlios.de:/home/groups/sag/htdocs/
