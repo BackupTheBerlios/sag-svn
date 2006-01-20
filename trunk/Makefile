@@ -16,7 +16,7 @@ TEX_DSL = $(HTML_DSL)
 	sed 's/graphic fileref="[^"]*/&.png/' $< > temp.sgml
 	cp gwiazda.png $@
 	(set -e; cd $@ && SP_ENCODING=ISO-8859-2 $(JADE) -t sgml -i output-html \
-		-d ../$(HTML_DSL) $(HTML_DCL) ../temp.sgml; ../logo-add.pl *.html ) || rm -rf $@
+		-d ../$(HTML_DSL) $(HTML_DCL) ../temp.sgml; ../logo-add.pl *.html; chmod a+r *.* ) || rm -rf $@
 	rm -f temp.sgml
 
 .sgml.rtf:
